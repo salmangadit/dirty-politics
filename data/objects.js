@@ -1,0 +1,24 @@
+var objects = 
+{
+	"0":{
+		"id":"-",
+		"type":"nothing",
+		"src":"",
+		"width":"",
+		"height":""
+	},
+	"1":{
+		"id":"-",
+		"type":"player",
+		"src":"images/hero_32x32.png",
+		"width":"32",
+		"height":"32"
+	},
+	"2":{
+		"id":"-",
+		"type":"collidable",
+		"src":"images/wall.png",
+		"width":"30",
+		"height":"30"
+	}
+}
