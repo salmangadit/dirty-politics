@@ -26,8 +26,7 @@ function heroObject()
 
     this.render = function()
     {
-        context.drawImage(this.image, this.whichSprite, 0, this.width, this.height, 
-            Math.floor(this.x), Math.floor(this.y), this.width, this.height);
+        context.drawImage(this.image, this.whichSprite, 0, this.width, this.height, Math.floor(this.x), Math.floor(this.y), this.width, this.height);
     };
 
     this.checkCollision = function(obj)
@@ -67,76 +66,76 @@ function heroObject()
         // key
         switch (this.keys[this.keys.length - 1])
         {
-            case 37:
-                // move the hero left on the screen
-                this.lastMovedDirection = 37;
-                this.x -= this.moveSpeed * 1;
-                //if (this.x%32 == 0){
-                    this.gridX = parseInt(this.x/this.width);
-                    if (this.x%32 != 0 || this.y%32 !=0){
-                        this.keepMoving = true;
-                    } else {
-                        this.keepMoving = false;
-                        if (this.keys.indexOf(37) > -1) 
-                            this.keys.splice(hero.keys.indexOf(37), 1);
-                    }
+             case 37:
+                    this.lastMovedDirection = 37;
+                    this.x -= this.moveSpeed * 1;
+                    //if (this.x%32 == 0){
+                        this.gridX = parseInt(this.x/this.width);
+                        if (this.x%32 != 0 || this.y%32 !=0){
+                            this.keepMoving = true;
+                        } else {
+                            this.keepMoving = false;
+                            if (this.keys.indexOf(37) > -1) 
+                                this.keys.splice(hero.keys.indexOf(37), 1);
+                        }
+
                 // Check if the animation timer has elapsed or if we aren't using one of the
                 // two valid sprites for this direction
                 if (delta > this.animSpeed 
                     || (this.whichSprite != this.width * 4 && this.whichSprite != this.width * 5 
                         && this.whichSprite != this.width * 6 && this.whichSprite != this.width * 7))
+                {
+                    // The sprites for moving left are the 4th - 7th sprites in the image (0 based index)
+                    //this.whichSprite = this.whichSprite == this.width * 2 ? this.width * 3 : this.width * 2;
+                    if (this.whichSprite == this.width * 4)
                     {
-                        // The sprites for moving left are the 4th - 7th sprites in the image (0 based index)
-                        //this.whichSprite = this.whichSprite == this.width * 2 ? this.width * 3 : this.width * 2;
-                        if (this.whichSprite == this.width * 4)
-                        {
-                            this.whichSprite = this.width * 5;
-                        } else if (this.whichSprite == this.width * 5) {
-                            this.whichSprite = this.width * 6;
-                        } else if (this.whichSprite == this.width * 6) {
-                            this.whichSprite = this.width * 7;
-                        } else {
-                            this.whichSprite = this.width * 4;
-                        }
-
-                        this.lastRender = now;
-                        this.facingWhichDirection = "left";
+                        this.whichSprite = this.width * 5;
+                    } else if (this.whichSprite == this.width * 5) {
+                        this.whichSprite = this.width * 6;
+                    } else if (this.whichSprite == this.width * 6) {
+                        this.whichSprite = this.width * 7;
+                    } else {
+                        this.whichSprite = this.width * 4;
                     }
+
+                    this.lastRender = now;
+                    this.facingWhichDirection = "left";
+                }
                 break;
             case 38:
                 // move the hero up on the screen
-                this.lastMovedDirection = 38;
-                this.y -= this.moveSpeed * 1;
-                this.gridY = parseInt(this.y/this.height);
+                    this.lastMovedDirection = 38;
+                    this.y -= this.moveSpeed * 1;
+                    this.gridY = parseInt(this.y/this.height);
 
-                if (this.x%32 != 0 || this.y%32 !=0){
-                    this.keepMoving = true;
-                } else {
-                    this.keepMoving = false;
-                    if (this.keys.indexOf(38) > -1) 
-                        this.keys.splice(hero.keys.indexOf(38), 1);
-                }
+                    if (this.x%32 != 0 || this.y%32 !=0){
+                        this.keepMoving = true;
+                    } else {
+                        this.keepMoving = false;
+                        if (this.keys.indexOf(38) > -1) 
+                            this.keys.splice(hero.keys.indexOf(38), 1);
+                    }
             
                 // Check if the animation timer has elapsed or if we aren't using one of the
                 // two valid sprites for this direction
                 if (delta > this.animSpeed 
                     || (this.whichSprite != this.width * 12 && this.whichSprite != this.width * 13 
                         && this.whichSprite != this.width * 14 && this.whichSprite != this.width * 15-1))
+                {
+                    if (this.whichSprite == this.width * 12)
                     {
-                        if (this.whichSprite == this.width * 12)
-                        {
-                            this.whichSprite = this.width * 13;
-                        } else if (this.whichSprite == this.width * 13) {
-                            this.whichSprite = this.width * 14;
-                        } else if (this.whichSprite == this.width * 14) {
-                            this.whichSprite = this.width * 15 - 1;
-                        } else {
-                            this.whichSprite = this.width * 12;
-                        }
-
-                        this.lastRender = now;
-                        this.facingWhichDirection = "up";
+                        this.whichSprite = this.width * 13;
+                    } else if (this.whichSprite == this.width * 13) {
+                        this.whichSprite = this.width * 14;
+                    } else if (this.whichSprite == this.width * 14) {
+                        this.whichSprite = this.width * 15 - 1;
+                    } else {
+                        this.whichSprite = this.width * 12;
                     }
+
+                    this.lastRender = now;
+                    this.facingWhichDirection = "up";
+                }
                 break;
             case 39:
                 // move the hero right on the screen
@@ -157,21 +156,21 @@ function heroObject()
                 if (delta > this.animSpeed 
                     || (this.whichSprite != this.width * 8 && this.whichSprite != this.width * 9 
                         && this.whichSprite != this.width * 10 && this.whichSprite != this.width * 11))
+                {
+                    if (this.whichSprite == this.width * 8)
                     {
-                        if (this.whichSprite == this.width * 8)
-                        {
-                            this.whichSprite = this.width * 9;
-                        } else if (this.whichSprite == this.width * 9) {
-                            this.whichSprite = this.width * 10;
-                        } else if (this.whichSprite == this.width * 10) {
-                            this.whichSprite = this.width * 11;
-                        } else {
-                            this.whichSprite = this.width * 8;
-                        }
-
-                        this.lastRender = now;
-                        this.facingWhichDirection = "right";
+                        this.whichSprite = this.width * 9;
+                    } else if (this.whichSprite == this.width * 9) {
+                        this.whichSprite = this.width * 10;
+                    } else if (this.whichSprite == this.width * 10) {
+                        this.whichSprite = this.width * 11;
+                    } else {
+                        this.whichSprite = this.width * 8;
                     }
+
+                    this.lastRender = now;
+                    this.facingWhichDirection = "right";
+                }
                 break;
             case 40:
                 // move the hero down on the screen
@@ -192,21 +191,21 @@ function heroObject()
                 if (delta > this.animSpeed 
                     || (this.whichSprite != this.width * 0 && this.whichSprite != this.width * 1 
                         && this.whichSprite != this.width * 2 && this.whichSprite != this.width * 3))
+                {
+                    if (this.whichSprite == this.width * 0)
                     {
-                        if (this.whichSprite == this.width * 0)
-                        {
-                            this.whichSprite = this.width * 1;
-                        } else if (this.whichSprite == this.width * 1) {
-                            this.whichSprite = this.width * 2;
-                        } else if (this.whichSprite == this.width * 2) {
-                            this.whichSprite = this.width * 3;
-                        } else {
-                            this.whichSprite = this.width * 0;
-                        }
-
-                        this.lastRender = now;
-                        this.facingWhichDirection = "down";
+                        this.whichSprite = this.width * 1;
+                    } else if (this.whichSprite == this.width * 1) {
+                        this.whichSprite = this.width * 2;
+                    } else if (this.whichSprite == this.width * 2) {
+                        this.whichSprite = this.width * 3;
+                    } else {
+                        this.whichSprite = this.width * 0;
                     }
+
+                    this.lastRender = now;
+                    this.facingWhichDirection = "down";
+                }
                 break;
         }
 
