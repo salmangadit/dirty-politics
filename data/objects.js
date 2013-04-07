@@ -8,14 +8,14 @@ var objects =
 		"height":""
 	},
 	"1":{
-		"id":"-",
+		"id":"H",
 		"type":"player",
 		"src":"images/hero_32x32.png",
 		"width":"32",
 		"height":"32"
 	},
 	"2":{
-		"id":"-",
+		"id":"W",
 		"type":"collidable",
 		"src":"images/wall.png",
 		"width":"30",

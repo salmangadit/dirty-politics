@@ -7,13 +7,23 @@ var baseCanvas;
 var baseContext;
 
 var gameObjects = null;
+var hero = null
+var collidables = new Array();
+var scenery = new Array();
+
+var gameW;
+var gameH;
 
 var debugMode = false;
 var grid = new Array();
+var lastUpdate = null;
+
+var mapGen = new MapGenerator();
 
 function init() {
+	mapGen.generate("house");
 
-	//setInterval(gameLoop, screenUpdateTime);
+	setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 
 	document.addEventListener('keydown', function(event) {
@@ -53,11 +63,21 @@ function init() {
 }
 
 function gameLoop() {
-	//gameOverContext.clearRect(0,0,gameOverCanvas.width, gameOverCanvas.height);
 	// To get the frame rate
 	requestAnimFrame(gameLoop);
+
+	var now = Date.now();
+	// calculate how long as passed since our last iteration
+	var elapsed = now - lastUpdate;
+
 	canvas.width = gameW;
 	canvas.height = gameH;
+
+	// Update the hero based upon how long it took for the game loop
+	hero.update(elapsed / screenUpdateTime);
+	hero.render();
+	lastUpdate = now;
+
 }
 
 // For the windows request animation frame thing
@@ -72,34 +92,3 @@ window.requestAnimFrame = (function(){
 				window.setTimeout(callback, 1000 / 30);
 			};
 })();
-
-
-// For the rendering, but how to call this function?
-
-/*
-(function() {
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelRequestAnimationFrame = window[vendors[x]+
-          'CancelRequestAnimationFrame'];
-    }
-    if(!window.requestAnimationFrame)
-        window.requestAnimationFrame = 
-    		function(callback, element) {
-            	var currTime = new Date().getTime();
-            	var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            	var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-              		timeToCall);
-            	lastTime = currTime + timeToCall;
-            	return id;
-    		};
-
-    if(!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = 
-    		function(id) {
-            	clearTimeout(id);
-        	};
-}());
-*/

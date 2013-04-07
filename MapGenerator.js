@@ -1,9 +1,4 @@
 function MapGenerator(){
-	initGameBoard();
-
-	//Current map properties
-	this.gameW = 800;
-	this.gameH = 600;
 	this.tileSize = 0;
 	this.baseColor = "";
 
@@ -11,33 +6,28 @@ function MapGenerator(){
 	this.rows = 0;
 	this.columns = 0;
 
-	// array to hold all of the collidable objects we have
-	var collidables = new Array();
-	// array to hold all the non-collidable objects we have
-	var scenery = new Array();
-
 	this.generate = function(mapName){
-		initCanvas(mapName);
-		initGameTiles();
-	}
+		this.initGameBoard();
+		this.initCanvas(mapName);
+		this.initGameTiles();
+	};
 
-	function initGameBoard() {
-		curItem = null;
+	this.initGameBoard = function() {
 		gameObjects = new Array();
 
-		for (var i = 0; i<objects.length; i++) {
-			var index = objects[i].id;
+ 		for (var obj in objects){
+ 			var index = objects[obj].id;
 			// create a new game object to hold the details
 			gameObjects[index] = new gameObject();
-			gameObjects[index].width = parseInt(objects[i].width);
-			gameObjects[index].height = parseInt(objects[i].height);
-			gameObjects[index].imageSrc = objects[i].src;
-			gameObjects[index].type = objects[i].type;
-		}
-	}
+			gameObjects[index].width = parseInt(objects[obj].width);
+			gameObjects[index].height = parseInt(objects[obj].height);
+			gameObjects[index].imageSrc = objects[obj].src;
+			gameObjects[index].type = objects[obj].type;
+ 		}
+	};
 
-	function initCanvas(mapName) {
-		initGrid(mapName);
+	this.initCanvas = function(mapName) {
+		this.initGrid(mapName);
 
 		canvas = document.getElementById("mainCanvas");
 		context = canvas.getContext("2d");
@@ -46,40 +36,40 @@ function MapGenerator(){
 		baseContext = baseCanvas.getContext("2d");
 		
 		// set the width and height of the canvas
-		canvas.width = this.gameW;
-		canvas.height = this.gameH;
+		canvas.width = gameW;
+		canvas.height = gameH;
 
 		// set the width and height of the baseCanvas
-		baseCanvas.width = this.gameW;
-		baseCanvas.height = this.gameH;
+		baseCanvas.width = gameW;
+		baseCanvas.height = gameH;
 		
-		baseContext.fillStyle = baseColor;
+		baseContext.fillStyle = this.baseColor;
 
 		// fill the entire baseContext with the color
-		baseContext.fillRect(0, 0, this.gameW, this.gameH);
-	}	
+		baseContext.fillRect(0, 0, gameW, gameH);
+	};
 
-	function initGrid(mapName){
-		map = maps[mapName];
-		this.tileSize = parseInt(map.attributes.tileSize);
-		this.gameW = parseInt(map.attributes.width) * this.tileSize;
-		this.gameH = parseInt(map.attributes.height) * this.tileSize;
-		this.baseColor = map.attributes.baseColor;
-	}
+	this.initGrid = function(mapName){
+		this.map = maps[mapName];
+		this.tileSize = parseInt(this.map.attributes.tileSize);
+		gameW = parseInt(this.map.attributes.width) * this.tileSize;
+		gameH = parseInt(this.map.attributes.height) * this.tileSize;
+		this.baseColor = this.map.attributes.baseColor;
+	};
 
-	function initGameTiles(mapName) {
+	this.initGameTiles = function(mapName) {
 
 		var collidableCount = 0;
 		var enemyCount = 0;
 		var sceneryCount = 0;
 
 		//Load in grid rows
-		for (var i=0; i<map.grid.length; i++){
+		for (var i=0; i<parseInt(this.map.attributes.height); i++){
 			//Load row by row
 			grid[i] = new Array();
-			for (var j=0; j<map.grid[j].length; j++){
-				var objIndex = map.grid[j];
-				this.columns = map.grid[j].length;
+			for (var j=0; j<this.map.grid[i].length; j++){
+				var objIndex = this.map.grid[i][j];
+				this.columns = this.map.grid[i].length;
 				if (gameObjects[objIndex].type == "collidable") {
 					grid[i][j] = 1;
 				} else {
@@ -93,8 +83,8 @@ function MapGenerator(){
 					collidables[collidableCount].width = gameObjects[objIndex].width;
 					collidables[collidableCount].height = gameObjects[objIndex].height;
 					// position it based upon where we are in the grid
-					collidables[collidableCount].x = (j * tileSize) + 2;
-					collidables[collidableCount].y = (i * tileSize) + 2;
+					collidables[collidableCount].x = (j * this.tileSize) + 2;
+					collidables[collidableCount].y = (i * this.tileSize) + 2;
 					collidables[collidableCount].gridX = j;
 					collidables[collidableCount].gridY = i;
 					// set up the image to use the value loaded from the XML
@@ -114,8 +104,8 @@ function MapGenerator(){
 					scenery[sceneryCount].width = gameObjects[objIndex].width;
 					scenery[sceneryCount].height = gameObjects[objIndex].height;
 					// position it based upon where we are in the grid
-					scenery[sceneryCount].x = j * tileSize;
-					scenery[sceneryCount].y = i * tileSize;
+					scenery[sceneryCount].x = j * this.tileSize;
+					scenery[sceneryCount].y = i * this.tileSize;
 
 					// set up the image to use the value loaded from the XML
 					scenery[sceneryCount].image = new Image();
@@ -128,12 +118,11 @@ function MapGenerator(){
 					};
 					sceneryCount++;
 				} else if (gameObjects[objIndex].type == "player") {
-					//0 is for mainCharacter
-					hero = new heroObject();
+					hero = new heroObject(0);
 					hero.width = gameObjects[objIndex].width;
 					hero.height = gameObjects[objIndex].height;
-					hero.x = j * tileSize;
-					hero.y = i * tileSize;
+					hero.x = j * this.tileSize;
+					hero.y = i * this.tileSize;
 					hero.gridX = hero.x / hero.width;
 					hero.gridY = hero.y / hero.height;
 					hero.image = new Image();
@@ -142,9 +131,11 @@ function MapGenerator(){
 					// once the image has completed loading, render it to the screen
 					hero.image.onload = function() {
 						hero.render();
+						//hero.render();
 					};
 				}
 			}
 		}
-	}
+		this.rows = grid.length;
+	};
 }
