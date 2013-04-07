@@ -10,6 +10,9 @@ function heroObject()
     this.gridX = parseInt(this.x/this.width);
     this.gridY = parseInt(this.y/this.height);
 
+    this.previousX;
+    this.previousY;
+
     this.keys = new Array();
     this.lastRender = Date.now();
     this.animSpeed = 250;
@@ -268,5 +271,41 @@ function heroObject()
                 }
             }
         }
+
+        for (iter in scenery)
+        {
+            // if we already have a collision there's no need to continue
+            // checking the other rocks
+            if (this.collision)
+            {
+                break;
+            }
+            else
+            {
+                // check to see if we have a collision event with the
+                // current rock
+                if (this.checkCollision(scenery[iter]))
+                {
+                        //Clear the map and generate new map
+                        if (scenery[iter].type == "door"){
+                            var name = mapGen.parentMapName;
+                            mapGen.parentMapName = "";
+
+                            mapGen.generate(name);
+                        }
+                        else{
+                            mapGen.parentMapName = mapGen.currMapName;
+                            mapGen.parentPosX = prevX;
+                            mapGen.parentPosY = prevY;
+                            mapGen.generate(scenery[iter].type);
+                        }
+
+                        //this.internalY = this.y;
+                        this.collision = true;
+                }
+            }
+        }
+
+
     };
 };

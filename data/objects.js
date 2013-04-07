@@ -8,7 +8,7 @@ var objects =
 		"height":""
 	},
 	"1":{
-		"id":"H",
+		"id":"P",
 		"type":"player",
 		"src":"images/hero_32x32.png",
 		"width":"32",
@@ -18,6 +18,20 @@ var objects =
 		"id":"W",
 		"type":"collidable",
 		"src":"images/wall.png",
+		"width":"30",
+		"height":"30"
+	},
+	"3":{
+		"id":"H",
+		"type":"scenery",
+		"src":"images/vendor.png",
+		"width":"30",
+		"height":"30"
+	},
+	"4":{
+		"id":"D",
+		"type":"scenery",
+		"src":"images/door.jpg",
 		"width":"30",
 		"height":"30"
 	}

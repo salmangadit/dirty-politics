@@ -5,8 +5,15 @@ function MapGenerator(){
 	this.map = null;
 	this.rows = 0;
 	this.columns = 0;
+	this.parentMapName = "";
+	this.parentPosX = -1;
+	this.parentPosY = -1;
+	this.currMapName = "";
 
 	this.generate = function(mapName){
+		this.currMapName = mapName; 
+		collidables = [];
+		scenery = [];
 		this.initGameBoard();
 		this.initCanvas(mapName);
 		this.initGameTiles();
@@ -58,7 +65,6 @@ function MapGenerator(){
 	};
 
 	this.initGameTiles = function(mapName) {
-
 		var collidableCount = 0;
 		var enemyCount = 0;
 		var sceneryCount = 0;
@@ -116,7 +122,22 @@ function MapGenerator(){
 					scenery[sceneryCount].image.onload = function() {
 						scenery[this.index].render();
 					};
+
+					var sceneryType = "";
+					switch(objIndex){
+						case "H":
+							sceneryType = "house";
+							break;
+						case "D":
+							sceneryType = "door";
+							break;
+						default:
+							break;
+					}
+
+					scenery[sceneryCount].type = sceneryType;
 					sceneryCount++;
+
 				} else if (gameObjects[objIndex].type == "player") {
 					hero = new heroObject(0);
 					hero.width = gameObjects[objIndex].width;
@@ -133,6 +154,14 @@ function MapGenerator(){
 						hero.render();
 						//hero.render();
 					};
+
+					if ((this.parentPosX >= 0 || this.parentPosY >= 0)&&(this.currMapName.indexOf("city") != -1)){
+						hero.x = this.parentPosX;
+						hero.y = this.parentPosY;
+
+						this.parentPosX = -1;
+						this.parentPosY = -1;
+					}
 				}
 			}
 		}

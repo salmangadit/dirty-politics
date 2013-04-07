@@ -5,6 +5,7 @@ function staticObject()
     this.x = this.width * Math.floor(Math.random() * ((gameW - this.width * 2) / this.width)) + this.width;
     this.y = this.height * Math.floor(Math.random() * ((gameH - this.height * 2) / this.height)) + this.height;
     this.image;
+    this.type;
 
     // Do we have a collision event?
     this.collision = false;

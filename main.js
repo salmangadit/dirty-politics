@@ -21,7 +21,7 @@ var lastUpdate = null;
 var mapGen = new MapGenerator();
 
 function init() {
-	mapGen.generate("house");
+	mapGen.generate("cityA");
 
 	setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
@@ -77,7 +77,6 @@ function gameLoop() {
 	hero.update(elapsed / screenUpdateTime);
 	hero.render();
 	lastUpdate = now;
-
 }
 
 // For the windows request animation frame thing
