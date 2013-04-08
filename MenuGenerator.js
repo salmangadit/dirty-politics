@@ -1,13 +1,14 @@
 function MenuGenerator(){
+		var xPos = 120;
+		var yPos = 30;
+		
 	this.init = function(){
-		menuCanvas = document.getElementById("menuCanvas");
-		menuContext = menuCanvas.getContext("2d");
-		menuCanvas.width = 400;
-		menuCanvas.height = 100;
+		// menuCanvas = document.getElementById("menuCanvas");
+		// menuContext = menuCanvas.getContext("2d");
+		// menuCanvas.width = 300;
+		// menuCanvas.height = 400;
 
-		var xPos = 0;
-		var yPos = 0;
-		menuContext.font="30px Consolas";
-		menuContext.fillText("Menu",300,0);
+		// menuContext.font = "30px Consolas";
+		// menuContext.fillText("Menu",xPos,yPos);
 	}
 }
