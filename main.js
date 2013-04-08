@@ -5,6 +5,8 @@ var canvas;
 var context;
 var baseCanvas;
 var baseContext;
+var menuCanvas;
+var menuContext;
 
 var gameObjects = null;
 var hero = null
@@ -19,9 +21,10 @@ var grid = new Array();
 var lastUpdate = null;
 
 var mapGen = new MapGenerator();
-
+var menu = new MenuGenerator();
 function init() {
 	mapGen.generate("cityA");
+	menu.init();
 
 	setInterval(gameLoop, screenUpdateTime);
 	gameLoop();

@@ -9,6 +9,7 @@
 	<script type="text/javascript" language="javascript" src="GameObject.js"></script>
 	<script type="text/javascript" language="javascript" src="HeroObject.js"></script>
 	<script type="text/javascript" language="javascript" src="StaticObject.js"></script>
+	<script type="text/javascript" language="javascript" src="MenuGenerator.js"></script>
 	<script type="text/javascript" language="javascript" src="MapGenerator.js"></script>
 	<script type="text/javascript" language="javascript" src="main.js"></script>
 	
@@ -23,9 +24,14 @@
 	{
 		position:relative;
 	}
-	#canvasWrapper canvas
+	#canvasWrapper
 	{
 		position:absolute;
+	}
+	#menuCanvas
+	{
+		z-index:3;
+		margin-left: 250px;
 	}
 	#baseCanvas
 	{
@@ -54,6 +60,7 @@
 		<canvas id="baseCanvas">Your browser does not support HTML5</canvas>
 		<canvas id="mainCanvas">Your browser does not support HTML5</canvas>
 	</div> 
+	<canvas id="menuCanvas">Your browser does not support HTML5</canvas>
 	<br />
 
 	<!-- <input type='button' onclick='clearLog()' value="Clear"/>
