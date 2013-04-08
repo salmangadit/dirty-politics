@@ -29,11 +29,10 @@ function heroObject()
 
     this.render = function()
     {
-
         context.drawImage(this.image, this.whichSprite, 0, this.width, this.height, Math.floor(this.x), Math.floor(this.y), this.width, this.height);
 		var wrapper = document.getElementById('canvasWrapper');
-		wrapper.scrollTop = this.y - 128;
-		wrapper.scrollLeft = this.x - 128;
+		wrapper.scrollTop = this.y - MAX_SCREEN_WIDTH;
+		wrapper.scrollLeft = this.x - MAX_SCREEN_HEIGHT;
     };
 
     this.checkCollision = function(obj)

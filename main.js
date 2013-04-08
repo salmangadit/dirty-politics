@@ -7,6 +7,8 @@ var baseCanvas;
 var baseContext;
 var menuCanvas;
 var menuContext;
+var messageCanvas;
+var messageContext;
 
 var gameObjects = null;
 var hero = null
@@ -22,9 +24,15 @@ var lastUpdate = null;
 
 var mapGen = new MapGenerator();
 var menu = new MenuGenerator();
+var message = new Messager();
+
+var MAX_SCREEN_WIDTH = 256;
+var MAX_SCREEN_HEIGHT = 256;
+
 function init() {
 	mapGen.generate("cityA");
 	menu.init();
+	message.flash('Very long and tedious Message');
 
 	setInterval(gameLoop, screenUpdateTime);
 	gameLoop();

@@ -41,7 +41,10 @@ function MapGenerator(){
 
 		baseCanvas = document.getElementById("baseCanvas");
 		baseContext = baseCanvas.getContext("2d");
-		
+
+		messageCanvas = document.getElementById("messageCanvas");
+		messageContext = messageCanvas.getContext("2d");
+
 		// set the width and height of the canvas
 		canvas.width = gameW;
 		canvas.height = gameH;
@@ -49,6 +52,9 @@ function MapGenerator(){
 		// set the width and height of the baseCanvas
 		baseCanvas.width = gameW;
 		baseCanvas.height = gameH;
+
+		messageCanvas.width = (gameW > MAX_SCREEN_WIDTH ? MAX_SCREEN_WIDTH : gameW);
+		messageCanvas.height = (gameH > MAX_SCREEN_HEIGHT ? MAX_SCREEN_HEIGHT : gameH);
 		
 		baseContext.fillStyle = this.baseColor;
 
