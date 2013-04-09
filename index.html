@@ -59,13 +59,14 @@
 	<style type="text/css">
 	canvas { border: 1px solid black; }
 	.logger { border: 1px solid black; }
+	.noborder { border: 0px solid black; }
 	#canvasWrapper { border: 1px solid black; }
 	</style>
 
 </head>
 <BODY onload="javascript:if (typeof(init) != 'undefined') init();">
 	<div id="canvasWrapper" style='width: 256px; height: 256px; overflow: hidden'>
-		<canvas id="messageCanvas">Your browser does not support HTML5</canvas>
+		<canvas id="messageCanvas" class="noborder">Your browser does not support HTML5</canvas>
 		<canvas id="baseCanvas">Your browser does not support HTML5</canvas>
 		<canvas id="mainCanvas">Your browser does not support HTML5</canvas>
 	</div> 
