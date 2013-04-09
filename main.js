@@ -32,7 +32,7 @@ var MAX_SCREEN_HEIGHT = 256;
 function init() {
 	mapGen.generate("cityA");
 	menu.init();
-	message.flash('Very long and tedious Message');
+	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
 
 	setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
