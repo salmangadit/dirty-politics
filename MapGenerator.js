@@ -134,6 +134,27 @@ function MapGenerator(){
 						case "H":
 							sceneryType = "house";
 							break;
+						case "n": //media center
+							sceneryType = "house";
+							break;
+						case "c": //church
+							sceneryType = "house";
+							break;
+						case "s": //shopping mall
+							sceneryType = "house";
+							break;
+						case "a": //plane to cityA
+							sceneryType = "cityA";
+							break;
+						case "b": //plane to cityB
+							sceneryType = "cityB";
+							break;
+						case "d": //plane to cityC
+							sceneryType = "cityC";
+							break;
+						case "e": //community center
+							sceneryType = "house";
+							break;
 						case "D":
 							sceneryType = "door";
 							break;

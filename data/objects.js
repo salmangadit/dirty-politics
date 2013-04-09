@@ -24,7 +24,7 @@ var objects =
 	"3":{
 		"id":"H",
 		"type":"scenery",
-		"src":"images/vendor.png",
+		"src":"images/house.png",
 		"width":"30",
 		"height":"30"
 	},
@@ -32,6 +32,62 @@ var objects =
 		"id":"D",
 		"type":"scenery",
 		"src":"images/door.jpg",
+		"width":"30",
+		"height":"30"
+	},
+	"5":{
+		"id":"m",
+		"type":"collidable",
+		"src":"images/mediatop.png",
+		"width":"30",
+		"height":"30"
+	},
+	"6":{
+		"id":"n",
+		"type":"scenery",
+		"src":"images/mediabottom.png",
+		"width":"30",
+		"height":"30"
+	},
+	"7":{
+		"id":"c",
+		"type":"scenery",
+		"src":"images/church.png",
+		"width":"30",
+		"height":"30"
+	},
+	"8":{
+		"id":"s",
+		"type":"scenery",
+		"src":"images/mall.png",
+		"width":"30",
+		"height":"30"
+	},
+	"9":{
+		"id":"a",	//airplane to cityA
+		"type":"scenery",
+		"src":"images/airplane.png",
+		"width":"30",
+		"height":"30"
+	},
+	"10":{
+		"id":"b",	//airplane to cityB
+		"type":"scenery",
+		"src":"images/airplane.png",
+		"width":"30",
+		"height":"30"
+	},
+	"11":{
+		"id":"d",	//airplane to cityC
+		"type":"scenery",
+		"src":"images/airplane.png",
+		"width":"30",
+		"height":"30"
+	},
+	"12":{
+		"id":"e",	//community center building
+		"type":"scenery",
+		"src":"images/cc.png",
 		"width":"30",
 		"height":"30"
 	}
