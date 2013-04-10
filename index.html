@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Dirty Politics</title>
+	 <LINK href="style.css" rel="stylesheet" type="text/css">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
 	<link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" language="javascript" src="data/maps.js"></script>
@@ -15,7 +16,7 @@
 	<script type="text/javascript" language="javascript" src="MenuGenerator.js"></script>
 	<script type="text/javascript" language="javascript" src="MapGenerator.js"></script>
 	<script type="text/javascript" language="javascript" src="main.js"></script>
-	
+	<script type="text/javascript" language="javascript" src="countdown.js"></script>
 	<script type="text/javascript">
 	function clearLog(){
 		logDiv.innerHTML = "<div><b>Logger<b></div>";
@@ -33,9 +34,9 @@
 	}
 	#menuCanvas
 	{
-		z-index:3;
-		margin-left: 500px;
-		margin-top: -480px;
+		z-index:-1;
+		background: transparent;
+		
 	}
 	#messageCanvas
 	{
@@ -61,21 +62,38 @@
 	.logger { border: 1px solid black; }
 	.noborder { border: 0px solid black; }
 	#canvasWrapper { border: 1px solid black; }
+
 	</style>
 
 </head>
-<BODY onload="javascript:if (typeof(init) != 'undefined') init();">
+<BODY onload="javascript:if (typeof(init) != 'undefined') init();"  >
 	<div id="canvasWrapper" style='width: 480px; height: 480px; overflow: hidden'>
 		<canvas id="messageCanvas" class="noborder">Your browser does not support HTML5</canvas>
 		<canvas id="baseCanvas">Your browser does not support HTML5</canvas>
 		<canvas id="mainCanvas">Your browser does not support HTML5</canvas>
 	</div> 
+	<div id="Hudbase" class="stamp" >
+	 
+ 	
+	<h1> Politcal Trend</h1>
 	<canvas id="menuCanvas">Your browser does not support HTML5</canvas>
+ 
+   
+    <h1> Countdown to Election</h1>
+	
+    </div>
+	
 	<br />
 
 	<!-- <input type='button' onclick='clearLog()' value="Clear"/>
 	<div id="logger" class="logger" style="font-family: 'Iceland', cursive;">
 		<div><b>Logger</b></div>
 	</div> -->
+
+
+
 </body>
 </html>
+
+   
+

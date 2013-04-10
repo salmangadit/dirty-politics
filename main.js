@@ -36,6 +36,8 @@ function init() {
 	menu.init();
 	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
 
+    canvasPieTimer.init(100, "countdownCanvas","Hudbase");
+    
 	setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 

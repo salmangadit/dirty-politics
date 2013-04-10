@@ -10,21 +10,21 @@ function MenuGenerator(){
 	var dataPoints2 = [0,1,2.5,1,5,7,8,10,9,4,2,1.1];
 
 	this.init = function(){
-		menuCanvas = document.getElementById("menuCanvas");
-		menuContext = menuCanvas.getContext("2d");
-		menuCanvas.width = 300;
-		menuCanvas.height = 600;
+        menuCanvas = document.getElementById("menuCanvas");
+        menuContext = menuCanvas.getContext("2d");
+        menuCanvas.width = 300;
+        menuCanvas.height = 600;
 
-		menuContext.font = "30px Consolas";
-		menuContext.fillText("Menu",xPos,yPos);
-		yPos += 40;
+        menuContext.font = "30px Consolas";
+        menuContext.fillText("Menu",xPos,yPos);
+        yPos += 40;
 
-		var items = ["item 1", "item 2"];
-		this.drawMenu(items);
+        var items = ["item 1", "item 2"];
+        this.drawMenu(items);
 
-		this.drawGraph();
-		this.drawMap();
-	}
+        this.drawGraph();
+        this.drawMap();
+    }
 
 	this.drawGraph = function(){
 		var HORIZ_LOW = 50;
