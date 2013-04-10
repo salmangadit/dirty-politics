@@ -138,10 +138,10 @@ function MapGenerator(){
 							sceneryType = "house";
 							break;
 						case "c": //church
-							sceneryType = "house";
+							sceneryType = "church";
 							break;
 						case "s": //shopping mall
-							sceneryType = "house";
+							sceneryType = "mall";
 							break;
 						case "a": //plane to cityA
 							sceneryType = "cityA";

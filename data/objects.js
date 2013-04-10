@@ -211,9 +211,9 @@ var objects =
 		"height":"32"
 	},
 	"30":{
-		"id":"z",	//chair(B)
+		"id":"z",	//chair(BL)
 		"type":"scenery",
-		"src":"images/chair(B).png",
+		"src":"images/chair(BL).png",
 		"width":"32",
 		"height":"32"
 	},
@@ -249,6 +249,13 @@ var objects =
 		"id":"T",	//table
 		"type":"scenery",
 		"src":"images/table.png",
+		"width":"32",
+		"height":"32"
+	},
+	"36":{
+		"id":"Z",	//chair(BR)
+		"type":"scenery",
+		"src":"images/chair(BR).png",
 		"width":"32",
 		"height":"32"
 	}
