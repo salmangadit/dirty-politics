@@ -52,9 +52,11 @@ function MapGenerator(){
 		// set the width and height of the baseCanvas
 		baseCanvas.width = gameW;
 		baseCanvas.height = gameH;
+		
+		var wrapper = document.getElementById('canvasWrapper');
 
-		messageCanvas.width = (gameW > MAX_SCREEN_WIDTH ? MAX_SCREEN_WIDTH : gameW);
-		messageCanvas.height = (gameH > MAX_SCREEN_HEIGHT ? MAX_SCREEN_HEIGHT : gameH);
+		messageCanvas.width = (gameW > wrapper.clientWidth ? wrapper.clientWidth : gameW);
+		messageCanvas.height = (gameH > wrapper.clientHeight ? wrapper.clientHeight : gameH);
 		
 		baseContext.fillStyle = this.baseColor;
 
