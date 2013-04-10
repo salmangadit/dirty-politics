@@ -9,6 +9,8 @@ var menuCanvas;
 var menuContext;
 var messageCanvas;
 var messageContext;
+var locationCanvas;
+var locationContext;
 
 var gameObjects = null;
 var hero = null
@@ -26,8 +28,8 @@ var mapGen = new MapGenerator();
 var menu = new MenuGenerator();
 var message = new Messager();
 
-var MAX_SCREEN_WIDTH = 256;
-var MAX_SCREEN_HEIGHT = 256;
+var MAX_SCREEN_WIDTH = 480;
+var MAX_SCREEN_HEIGHT = 480;
 
 function init() {
 	mapGen.generate("cityA");

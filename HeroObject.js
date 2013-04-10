@@ -31,8 +31,10 @@ function heroObject()
     {
         context.drawImage(this.image, this.whichSprite, 0, this.width, this.height, Math.floor(this.x), Math.floor(this.y), this.width, this.height);
 		var wrapper = document.getElementById('canvasWrapper');
-		wrapper.scrollTop = this.y - MAX_SCREEN_WIDTH;
-		wrapper.scrollLeft = this.x - MAX_SCREEN_HEIGHT;
+		wrapper.scrollTop = this.y - MAX_SCREEN_WIDTH/2 - 16;
+		wrapper.scrollLeft = this.x - MAX_SCREEN_HEIGHT/2 - 16;
+		context.font = "10px Consolas";
+		context.fillText("In " + mapGen.currMapName,wrapper.scrollLeft + 5,wrapper.scrollTop + 10);
     };
 
     this.checkCollision = function(obj)
