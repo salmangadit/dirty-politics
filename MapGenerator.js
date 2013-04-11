@@ -45,6 +45,9 @@ function MapGenerator(){
 		messageCanvas = document.getElementById("messageCanvas");
 		messageContext = messageCanvas.getContext("2d");
 
+		perceptionCanvas = document.getElementById("perceptionCanvas");
+		perceptionContext = perceptionCanvas.getContext("2d");
+
 		// set the width and height of the canvas
 		canvas.width = gameW;
 		canvas.height = gameH;
@@ -57,6 +60,11 @@ function MapGenerator(){
 
 		messageCanvas.width = (gameW > wrapper.clientWidth ? wrapper.clientWidth : gameW);
 		messageCanvas.height = (gameH > wrapper.clientHeight ? wrapper.clientHeight : gameH);
+
+		perceptionCanvas.width = gameW;
+		perceptionCanvas.height = gameH;
+		perceptionImage = new Image();
+		perceptionImage.src = 'images/perceptionBubble.png';
 		
 		baseContext.fillStyle = this.baseColor;
 
@@ -74,7 +82,7 @@ function MapGenerator(){
 
 	this.initGameTiles = function(mapName) {
 		var collidableCount = 0;
-		var enemyCount = 0;
+		var npcCount = 0;
 		var sceneryCount = 0;
 		var utilsCount = 0;
 
@@ -167,7 +175,7 @@ function MapGenerator(){
 					}
 
 					scenery[sceneryCount].type = sceneryType;
-					sceneryCount++;
+					sceneryCount++;	
 
 				} else if (gameObjects[objIndex].type == "utilities") {
 					// Create a new static object
@@ -192,6 +200,27 @@ function MapGenerator(){
 
 					utilsCount++;
 
+				} else if (gameObjects[objIndex].type == "npc") {
+					
+					npc[npcCount] = new heroObject();
+				
+					npc[npcCount].width = gameObjects[objIndex].width;
+					npc[npcCount].height = gameObjects[objIndex].height;
+					npc[npcCount].x = j * this.tileSize;
+					npc[npcCount].y = i * this.tileSize;
+					npc[npcCount].gridX = npc[npcCount].x / npc[npcCount].width;
+					npc[npcCount].gridY = npc[npcCount].y / npc[npcCount].height;
+
+					npc[npcCount].image = new Image();
+					npc[npcCount].image.src = gameObjects[objIndex].imageSrc;
+					npc[npcCount].image.index = npcCount;
+					npc[npcCount].image.onload = function() {
+						npc[this.index].render();
+					};
+
+					npc[npcCount].type = "npc";
+					npcCount++;
+
 				} else if (gameObjects[objIndex].type == "player") {
 					hero = new heroObject(0);
 					hero.width = gameObjects[objIndex].width;
@@ -208,6 +237,8 @@ function MapGenerator(){
 						hero.render();
 						//hero.render();
 					};
+
+					hero.type = "player";
 
 					if ((this.parentPosX >= 0 || this.parentPosY >= 0)&&(this.currMapName.indexOf("city") != -1)){
 						hero.x = this.parentPosX;

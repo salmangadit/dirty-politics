@@ -293,5 +293,12 @@ var objects =
 		"src":"images/stairs(RC).png",
 		"width":"32",
 		"height":"32"
+	},
+	"37":{			//neutral male NPC
+		"id":"Y",
+		"type":"npc",
+		"src":"images/characters/greenMan32x32.png",
+		"width":"32",
+		"height":"32"
 	}
 }

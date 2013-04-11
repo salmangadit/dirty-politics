@@ -3,12 +3,11 @@ function heroObject()
     // The width and height of the sprites for our hero
     this.width = 32;
     this.height = 32;
+    this.type;
 
     // Traits - will only be useful for enemies
-    this.perception = 0; //the alma mater of this game!
+    this.perception = -10; //the alma mater of this game!
     
-
-
     // Change this to use the render height and width
     this.x;
     this.y;
@@ -35,9 +34,11 @@ function heroObject()
     this.render = function()
     {
         context.drawImage(this.image, this.whichSprite, 0, this.width, this.height, Math.floor(this.x), Math.floor(this.y), this.width, this.height);
-		var wrapper = document.getElementById('canvasWrapper');
-		wrapper.scrollTop = this.y - MAX_SCREEN_WIDTH/2 - 16;
-		wrapper.scrollLeft = this.x - MAX_SCREEN_HEIGHT/2 - 16;
+		if (this.type == "player"){
+            var wrapper = document.getElementById('canvasWrapper');
+    		wrapper.scrollTop = this.y - MAX_SCREEN_WIDTH/2 - 16;
+    		wrapper.scrollLeft = this.x - MAX_SCREEN_HEIGHT/2 - 16;
+        }
 		// context.font = "10px Consolas";
 		// context.fillText("In " + mapGen.currMapName,wrapper.scrollLeft + 5,wrapper.scrollTop + 10);
     };
