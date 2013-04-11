@@ -3,6 +3,20 @@ function NormalDist(){
 	this.mean;
 	this.variance;
 
+	this.getValueWithConfidence = function(confidence){
+		var range = this.getConfidenceIntervalValues(confidence);
+		var value = Math.random() * (range[1] - range[0]) + range[0];
+
+		return value.toFixed(2);
+	}
+	this.getConfidenceIntervalValues = function(ci){
+		var range = (100 - ci)/2;
+		var lower = this.getValueByProbability(range/100);
+		var higher = this.getValueByProbability((1 - range)/100);
+
+		return new Array(lower, higher);
+	}
+
 	this.getValueByProbability = function(p){
 		this.mean = this.getMean();
 		this.variance = Math.sqrt(this.getVarianceSquared());
