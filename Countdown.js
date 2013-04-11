@@ -6,8 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
-
 var canvasPieTimer = {
 
     // int: the canvas size (also used for circle radius and positioning)
@@ -38,13 +36,10 @@ var canvasPieTimer = {
     // string : the colours with which to fill the pie
     fillColour : "red",
     bgColour : "green",
-
-
-
     /*
      * start the process
      */
-    init: function(canvasSize, canvasId, parentId){
+    init: function(canvasSize, canvasId){
 
         // not fully supported in IE as yet, so don't proceed on this occasion...
         if(window.attachEvent) {
@@ -58,8 +53,8 @@ var canvasPieTimer = {
         this.canvas = this.createCanvas(canvasId, this.canvasSize);
 
         // Add it to the document
-        var parent = document.getElementById(parentId);
-        parent.appendChild(this.canvas);
+       //var parent = document.getElementById(parentId);
+        //parent.appendChild(this.canvas);
 
     
         this.wedgeSize = (this.timeInterval / this.timeLimit) * Math.PI * 2;
@@ -73,21 +68,18 @@ var canvasPieTimer = {
     createCanvas: function(id, canvasSize) {
 
         // create the canvas
-        var canvas = document.createElement("canvas");
+        var canvas = document.getElementById("hudCanvas");
         canvas.id = id;
         canvas.width = canvasSize;
         canvas.height = canvasSize;
-
+     
+        canvas.style.border = "none";
         // get the size of the outer circle
         var drawX = drawY = radius = this.canvasSize / 2;
 
         // draw the outer circle
         var draw = canvas.getContext("2d");
-        var draw1 = canvas.getContext("2d");
-        draw1.fillStyle  = "#00000";
-        draw1.font = '40px san-serif';
-        draw1.textBaseline = 'bottom';
-        draw1.strokeText('1', 300, 100);
+      
 
         draw.globalAlpha = 1;
         draw.beginPath();
