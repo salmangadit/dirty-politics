@@ -116,6 +116,7 @@ function MapGenerator(){
 					// Create a new static object
 					scenery[sceneryCount] = new staticObject();
 					// load in the width and height
+					scenery[sceneryCount].id = sceneryCount;
 					scenery[sceneryCount].width = gameObjects[objIndex].width;
 					scenery[sceneryCount].height = gameObjects[objIndex].height;
 					// position it based upon where we are in the grid
@@ -172,6 +173,7 @@ function MapGenerator(){
 					// Create a new static object
 					utilities[utilsCount] = new staticObject();
 					// load in the width and height
+					utilities[utilsCount].id = utilsCount;
 					utilities[utilsCount].width = gameObjects[objIndex].width;
 					utilities[utilsCount].height = gameObjects[objIndex].height;
 					// position it based upon where we are in the grid

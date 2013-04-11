@@ -4,6 +4,11 @@ function heroObject()
     this.width = 32;
     this.height = 32;
 
+    // Traits - will only be useful for enemies
+    this.perception = 0; //the alma mater of this game!
+    
+
+
     // Change this to use the render height and width
     this.x;
     this.y;
@@ -33,8 +38,8 @@ function heroObject()
 		var wrapper = document.getElementById('canvasWrapper');
 		wrapper.scrollTop = this.y - MAX_SCREEN_WIDTH/2 - 16;
 		wrapper.scrollLeft = this.x - MAX_SCREEN_HEIGHT/2 - 16;
-		context.font = "10px Consolas";
-		context.fillText("In " + mapGen.currMapName,wrapper.scrollLeft + 5,wrapper.scrollTop + 10);
+		// context.font = "10px Consolas";
+		// context.fillText("In " + mapGen.currMapName,wrapper.scrollLeft + 5,wrapper.scrollTop + 10);
     };
 
     this.checkCollision = function(obj)

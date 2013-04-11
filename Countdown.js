@@ -25,7 +25,7 @@ var canvasPieTimer = {
 
     // int : the timeLimit on which to trigger a refresh
     // Total number of days
-    timeLimit : 60000,
+    timeLimit : 600000,
 
     // angle to start the wedge from
     startAngle : -Math.PI/2,
@@ -107,15 +107,24 @@ var canvasPieTimer = {
 
         // Calculate the end angle
         var endAngle = this.startAngle + this.wedgeSize;
+        
 
         // add current wedge
         var draw = this.canvas.getContext("2d");
+        draw.clearRect(0,0,100,100);
         draw.beginPath();
         draw.moveTo(drawX,drawY);
         draw.arc(drawX, drawY, radius, this.startAngle, endAngle, false);
         draw.closePath();
         draw.fillStyle = this.fillColour;
         draw.fill();
+
+        draw.fillStyle = 'black';
+        draw.font = "30px Consolas";
+        draw.fillText(Math.floor(60-(this.timeElapsed/10000)),25,50);
+        draw.fillStyle = 'black';
+        draw.font = "10px Consolas";
+        draw.fillText("Days to election",15,60);
 
         // increment elapsed time
         this.timeElapsed = this.timeElapsed + this.timeInterval;

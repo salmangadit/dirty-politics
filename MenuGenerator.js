@@ -5,6 +5,7 @@ function MenuGenerator(){
 	var currItemNum = 1;
 	var menuMax;
 	var itemsStored;
+	var items = ["item 1", "item 2"];
 
 	this.init = function(){
         menuCanvas = document.getElementById("menuCanvas");
@@ -15,8 +16,7 @@ function MenuGenerator(){
         menuContext.font = "30px Consolas";
         menuContext.fillText("Menu",xPos,yPos);
         yPos += 40;
-
-        var items = ["item 1", "item 2"];
+        
         this.drawMenu(items);
     }
 
