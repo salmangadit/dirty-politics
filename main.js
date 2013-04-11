@@ -16,6 +16,7 @@ var gameObjects = null;
 var hero = null
 var collidables = new Array();
 var scenery = new Array();
+var utilities = new Array();
 
 var gameW;
 var gameH;

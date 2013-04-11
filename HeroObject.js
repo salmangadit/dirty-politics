@@ -90,21 +90,20 @@ function heroObject()
                 // Check if the animation timer has elapsed or if we aren't using one of the
                 // two valid sprites for this direction
                 if (delta > this.animSpeed 
-                    || (this.whichSprite != this.width * spriteInterface.left[0] && this.whichSprite != this.width * spriteInterface.left[1] 
-                        && this.whichSprite != this.width * spriteInterface.left[2] && this.whichSprite != this.width * spriteInterface.left[3]))
+                    || (this.whichSprite != this.width * parseInt(spriteInterface.left[0]) 
+                        && this.whichSprite != this.width * parseInt(spriteInterface.left[1]) 
+                        && this.whichSprite != this.width * parseInt(spriteInterface.left[2])))
                 {
                     // The sprites for moving left are the 4th - 7th sprites in the image (0 based index)
                     //this.whichSprite = this.whichSprite == this.width * 2 ? this.width * 3 : this.width * 2;
-                    if (this.whichSprite == this.width * 4)
+                    if (this.whichSprite == this.width * parseInt(spriteInterface.left[0]))
                     {
-                        this.whichSprite = this.width * 5;
-                    } else if (this.whichSprite == this.width * 5) {
-                        this.whichSprite = this.width * 6;
-                    } else if (this.whichSprite == this.width * 6) {
-                        this.whichSprite = this.width * 7;
+                        this.whichSprite =this.width * parseInt(spriteInterface.left[1]);
+                    } else if (this.whichSprite == this.width * parseInt(spriteInterface.left[1])) {
+                        this.whichSprite = this.width * parseInt(spriteInterface.left[2]);
                     } else {
-                        this.whichSprite = this.width * 4;
-                    }
+                        this.whichSprite =this.width * parseInt(spriteInterface.left[0]);
+                    } 
 
                     this.lastRender = now;
                     this.facingWhichDirection = "left";
@@ -127,19 +126,18 @@ function heroObject()
                 // Check if the animation timer has elapsed or if we aren't using one of the
                 // two valid sprites for this direction
                 if (delta > this.animSpeed 
-                    || (this.whichSprite != this.width * spriteInterface.up[0] && this.whichSprite != this.width * spriteInterface.up[1] 
-                        && this.whichSprite != this.width * spriteInterface.up[2] && this.whichSprite != this.width * spriteInterface.up[3]-1))
+                    || (this.whichSprite != this.width * parseInt(spriteInterface.up[0]) 
+                        && this.whichSprite != this.width * parseInt(spriteInterface.up[1]) 
+                        && this.whichSprite != this.width * parseInt(spriteInterface.up[2])))
                 {
-                    if (this.whichSprite == this.width * 12)
+                     if (this.whichSprite == this.width * parseInt(spriteInterface.up[0]))
                     {
-                        this.whichSprite = this.width * 13;
-                    } else if (this.whichSprite == this.width * 13) {
-                        this.whichSprite = this.width * 14;
-                    } else if (this.whichSprite == this.width * 14) {
-                        this.whichSprite = this.width * 15 - 1;
+                        this.whichSprite =this.width * parseInt(spriteInterface.up[1]);
+                    } else if (this.whichSprite == this.width * parseInt(spriteInterface.up[1])) {
+                        this.whichSprite = this.width * parseInt(spriteInterface.up[2]);
                     } else {
-                        this.whichSprite = this.width * 12;
-                    }
+                        this.whichSprite =this.width * parseInt(spriteInterface.up[0]);
+                    } 
 
                     this.lastRender = now;
                     this.facingWhichDirection = "up";
@@ -162,19 +160,18 @@ function heroObject()
                 // Check if the animation timer has elapsed or if we aren't using one of the
                 // two valid sprites for this direction
                 if (delta > this.animSpeed 
-                    || (this.whichSprite != this.width * spriteInterface.right[0] && this.whichSprite != this.width * spriteInterface.right[1] 
-                        && this.whichSprite != this.width * spriteInterface.right[2] && this.whichSprite != this.width * spriteInterface.right[3]))
+                    || (this.whichSprite != this.width * parseInt(spriteInterface.right[0]) 
+                        && this.whichSprite != this.width * parseInt(spriteInterface.right[1]) 
+                        && this.whichSprite != this.width * parseInt(spriteInterface.right[2])))
                 {
-                    if (this.whichSprite == this.width * 8)
+                    if (this.whichSprite == this.width * parseInt(spriteInterface.right[0]))
                     {
-                        this.whichSprite = this.width * 9;
-                    } else if (this.whichSprite == this.width * 9) {
-                        this.whichSprite = this.width * 10;
-                    } else if (this.whichSprite == this.width * 10) {
-                        this.whichSprite = this.width * 11;
+                        this.whichSprite =this.width * parseInt(spriteInterface.right[1]);
+                    } else if (this.whichSprite == this.width * parseInt(spriteInterface.right[1])) {
+                        this.whichSprite = this.width * parseInt(spriteInterface.right[2]);
                     } else {
-                        this.whichSprite = this.width * 8;
-                    }
+                        this.whichSprite =this.width * parseInt(spriteInterface.right[0]);
+                    } 
 
                     this.lastRender = now;
                     this.facingWhichDirection = "right";
@@ -197,18 +194,17 @@ function heroObject()
                 // Check if the animation timer has elapsed or if we aren't using one of the
                 // two valid sprites for this direction
                 if (delta > this.animSpeed 
-                    || (this.whichSprite != this.width * spriteInterface.down[0] && this.whichSprite != this.width * spriteInterface.down[1] 
-                        && this.whichSprite != this.width * spriteInterface.down[2] && this.whichSprite != this.width * spriteInterface.down[3]))
+                    || (this.whichSprite != this.width * parseInt(spriteInterface.down[0]) 
+                        && this.whichSprite != this.width * parseInt(spriteInterface.down[1]) 
+                        && this.whichSprite != this.width * parseInt(spriteInterface.down[2])))
                 {
-                    if (this.whichSprite == this.width * 0)
+                    if (this.whichSprite == this.width * parseInt(spriteInterface.down[0]))
                     {
-                        this.whichSprite = this.width * 1;
-                    } else if (this.whichSprite == this.width * 1) {
-                        this.whichSprite = this.width * 2;
-                    } else if (this.whichSprite == this.width * 2) {
-                        this.whichSprite = this.width * 3;
+                        this.whichSprite =this.width * parseInt(spriteInterface.down[1]);
+                    } else if (this.whichSprite == this.width * parseInt(spriteInterface.down[1])) {
+                        this.whichSprite = this.width * parseInt(spriteInterface.down[2]);
                     } else {
-                        this.whichSprite = this.width * 0;
+                        this.whichSprite =this.width * parseInt(spriteInterface.down[0]);
                     }
 
                     this.lastRender = now;

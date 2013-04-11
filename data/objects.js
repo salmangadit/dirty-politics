@@ -10,7 +10,7 @@ var objects =
 	"1":{
 		"id":"P",
 		"type":"player",
-		"src":"images/hero_32x32.png",
+		"src":"images/characters/player32x32.png",
 		"width":"32",
 		"height":"32"
 	},
@@ -93,168 +93,168 @@ var objects =
 	},
 	"13":{
 		"id":"f",	//closet
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/closet.png",
 		"width":"32",
 		"height":"32"
 	},
 	"14":{
 		"id":"g",	//grass
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/grass.png",
 		"width":"32",
 		"height":"32"
 	},
 	"15":{
 		"id":"h",	//cross
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/cross.png",
 		"width":"32",
 		"height":"32"
 	},
 	"16":{
 		"id":"i",	//drums
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/drums.png",
 		"width":"32",
 		"height":"32"
 	},
 	"17":{
 		"id":"j",	//radio
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/radio.png",
 		"width":"32",
 		"height":"32"
 	},
 	"18":{
 		"id":"k",	//sink
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/sink.png",
 		"width":"32",
 		"height":"32"
 	},
 	"19":{
 		"id":"l",	//pulpit
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/pulpit.png",
 		"width":"32",
 		"height":"32"
 	},
 	"20":{
 		"id":"o",	//toys
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/toys.png",
 		"width":"32",
 		"height":"32"
 	},
 	"21":{
 		"id":"p",	//plant
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/plant.png",
 		"width":"32",
 		"height":"32"
 	},
 	"22":{
 		"id":"q",	//piano
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/piano.png",
 		"width":"32",
 		"height":"32"
 	},
 	"23":{
 		"id":"r",	//refrigerator
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/refrigerator.png",
 		"width":"32",
 		"height":"32"
 	},
 	"24":{
 		"id":"t",	//toilet bowl
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/toiletBowl.png",
 		"width":"32",
 		"height":"32"
 	},
 	"25":{
 		"id":"u",	//stove
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/stove.png",
 		"width":"32",
 		"height":"32"
 	},
 	"26":{
 		"id":"v",	//TV
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/tv.png",
 		"width":"32",
 		"height":"32"
 	},
 	"27":{
 		"id":"w",	//women clothes
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/womenClothes.png",
 		"width":"32",
 		"height":"32"
 	},
 	"28":{
 		"id":"x",	//chair(L)
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/chair(L).png",
 		"width":"32",
 		"height":"32"
 	},
 	"29":{
 		"id":"y",	//chair(R)
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/chair(R).png",
 		"width":"32",
 		"height":"32"
 	},
 	"30":{
 		"id":"z",	//chair(BL)
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/chair(BL).png",
 		"width":"32",
 		"height":"32"
 	},
 	"31":{
 		"id":"B",	//bed
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/bed.png",
 		"width":"32",
 		"height":"32"
 	},
 	"32":{
 		"id":"C",	//cash register
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/cashRegister.png",
 		"width":"32",
 		"height":"32"
 	},
 	"33":{
 		"id":"M",	//men clothes
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/menClothes.png",
 		"width":"32",
 		"height":"32"
 	},
 	"34":{
 		"id":"S",	//shoes
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/shoes.png",
 		"width":"32",
 		"height":"32"
 	},
 	"35":{
 		"id":"T",	//table
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/table.png",
 		"width":"32",
 		"height":"32"
 	},
 	"36":{
 		"id":"Z",	//chair(BR)
-		"type":"scenery",
+		"type":"utilities",
 		"src":"images/chair(BR).png",
 		"width":"32",
 		"height":"32"

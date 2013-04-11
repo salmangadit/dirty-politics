@@ -76,6 +76,7 @@ function MapGenerator(){
 		var collidableCount = 0;
 		var enemyCount = 0;
 		var sceneryCount = 0;
+		var utilsCount = 0;
 
 		//Load in grid rows
 		for (var i=0; i<parseInt(this.map.attributes.height); i++){
@@ -166,6 +167,28 @@ function MapGenerator(){
 
 					scenery[sceneryCount].type = sceneryType;
 					sceneryCount++;
+
+				} else if (gameObjects[objIndex].type == "utilities") {
+					// Create a new static object
+					utilities[utilsCount] = new staticObject();
+					// load in the width and height
+					utilities[utilsCount].width = gameObjects[objIndex].width;
+					utilities[utilsCount].height = gameObjects[objIndex].height;
+					// position it based upon where we are in the grid
+					utilities[utilsCount].x = j * this.tileSize;
+					utilities[utilsCount].y = i * this.tileSize;
+
+					// set up the image to use the value loaded from the XML
+					utilities[utilsCount].image = new Image();
+					utilities[utilsCount].image.src = gameObjects[objIndex].imageSrc;
+					// we are storing out the index of this object, to make sure we can
+					// render it once it has loaded
+					utilities[utilsCount].image.index = utilsCount;
+					utilities[utilsCount].image.onload = function() {
+						utilities[this.index].render();
+					};
+
+					utilsCount++;
 
 				} else if (gameObjects[objIndex].type == "player") {
 					hero = new heroObject(0);
