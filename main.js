@@ -24,6 +24,9 @@ var scenery = new Array();
 var utilities = new Array();
 var npc = new Array();
 
+var abstract3;
+var abstract2;
+
 var gameW;
 var gameH;
 

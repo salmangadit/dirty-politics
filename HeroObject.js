@@ -15,6 +15,8 @@ function heroObject()
 
     // Special
     this.specialMenu = [];
+
+    this.prevPerception = 0;
     
     // Change this to use the render height and width
     this.x;
@@ -76,7 +78,7 @@ function heroObject()
             this.keys[0] = this.lastMovedDirection;
         }
 
-        if (this.type == "npc"){
+        if (this.type == "npc" && this.prevPerception != this.perception){
             if (this.perception < -2){
                 if (this.isMale){
                     this.image.src = 'images/characters/redMan32x32.png';
@@ -97,6 +99,8 @@ function heroObject()
                 }
             }
         }
+
+        this.prevPerception = this.perception;
 
         // reset the collision property
         this.collision = false;
