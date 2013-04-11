@@ -11,6 +11,8 @@ var messageCanvas;
 var messageContext;
 var locationCanvas;
 var locationContext;
+var hudCanvas;
+var hudContext;
 
 var gameObjects = null;
 var hero = null
@@ -39,10 +41,8 @@ function init() {
 	menu.init();
 	graph.init();
 	minimap.init();
-
 	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
     canvasPieTimer.init(100,"hudCanvas");
-
 
 	setInterval(gameLoop, screenUpdateTime);
 	gameLoop();

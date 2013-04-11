@@ -70,8 +70,8 @@ var canvasPieTimer = {
         // create the canvas
         var canvas = document.getElementById("hudCanvas");
         canvas.id = id;
-        canvas.width = canvasSize;
-        canvas.height = canvasSize;
+        // canvas.width = canvasSize;
+        // canvas.height = canvasSize;
      
         canvas.style.border = "none";
         // get the size of the outer circle

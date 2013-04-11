@@ -27,7 +27,7 @@
 	<style type="text/css">
 	#canvasWrapper
 	{
-		position:relative;
+		position:absolute;
 	}
 	#canvasWrapper canvas
 	{
@@ -36,10 +36,15 @@
 	#menuCanvas
 	{
 		z-index:3;
-		background: transparent;
 		margin-left: 500px;
-		margin-top: -480px;
+		margin-top: 0px;
 
+	}
+	#hudCanvas
+	{
+		z-index:4;
+		margin-left: 50px;
+		margin-top: 300px;
 	}
 	#messageCanvas
 	{
@@ -76,9 +81,6 @@
 		<canvas id="mainCanvas">Your browser does not support HTML5</canvas>
 	</div> 
 	<canvas id="menuCanvas">Your browser does not support HTML5</canvas>
-
-
-
  	<canvas id="hudCanvas">Your browser does not support HTML5</canvas>
    
 	

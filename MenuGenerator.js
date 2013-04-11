@@ -10,7 +10,7 @@ function MenuGenerator(){
         menuCanvas = document.getElementById("menuCanvas");
         menuContext = menuCanvas.getContext("2d");
         menuCanvas.width = 300;
-        menuCanvas.height = 600;
+        menuCanvas.height = 200;
 
         menuContext.font = "30px Consolas";
         menuContext.fillText("Menu",xPos,yPos);
