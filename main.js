@@ -27,6 +27,8 @@ var lastUpdate = null;
 var mapGen = new MapGenerator();
 var menu = new MenuGenerator();
 var message = new Messager();
+var graph = new MileageGraph();
+var minimap = new MiniMap();
 
 var MAX_SCREEN_WIDTH = 480;
 var MAX_SCREEN_HEIGHT = 480;
@@ -34,8 +36,11 @@ var MAX_SCREEN_HEIGHT = 480;
 function init() {
 	mapGen.generate("cityA");
 	menu.init();
+	graph.init();
+	minimap.init();
+
 	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
-    canvasPieTimer.init(100, "countdownCanvas","Hudbase");
+    canvasPieTimer.init(100, "countdownCanvas","hudCanvas");
 
 
 	setInterval(gameLoop, screenUpdateTime);

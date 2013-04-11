@@ -13,6 +13,7 @@
 	<script type="text/javascript" language="javascript" src="StaticObject.js"></script>
 	<script type="text/javascript" language="javascript" src="MiniMap.js"></script>
 	<script type="text/javascript" language="javascript" src="Messager.js"></script>
+	<script type="text/javascript" language="javascript" src="MileageGraph.js"></script>
 	<script type="text/javascript" language="javascript" src="MenuGenerator.js"></script>
 	<script type="text/javascript" language="javascript" src="MapGenerator.js"></script>
 	<script type="text/javascript" language="javascript" src="main.js"></script>
@@ -34,9 +35,11 @@
 	}
 	#menuCanvas
 	{
-		z-index:-1;
+		z-index:3;
 		background: transparent;
-		
+		margin-left: 500px;
+		margin-top: -480px;
+
 	}
 	#messageCanvas
 	{
@@ -72,26 +75,18 @@
 		<canvas id="baseCanvas">Your browser does not support HTML5</canvas>
 		<canvas id="mainCanvas">Your browser does not support HTML5</canvas>
 	</div> 
-	<div id="Hudbase" class="stamp" >
-	 
- 	
-	<h1> Politcal Trend</h1>
 	<canvas id="menuCanvas">Your browser does not support HTML5</canvas>
- 
-   
-    <h1> Countdown to Election</h1>
-	
-    </div>
+
+
+	<!-- <div id="Hudbase" class="stamp" > -->
+ 	<canvas id="hudCanvas">Your browser does not support HTML5</canvas>
+    <!-- </div> -->
 	
 	<br />
-
 	<!-- <input type='button' onclick='clearLog()' value="Clear"/>
 	<div id="logger" class="logger" style="font-family: 'Iceland', cursive;">
 		<div><b>Logger</b></div>
 	</div> -->
-
-
-
 </body>
 </html>
 
