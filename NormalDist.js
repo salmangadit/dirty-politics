@@ -3,6 +3,7 @@ function NormalDist(){
 	this.mean;
 	this.variance;
 
+	// Confidence should be in percentage
 	this.getValueWithConfidence = function(confidence){
 		var range = this.getConfidenceIntervalValues(confidence);
 		var value = Math.random() * (range[1] - range[0]) + range[0];
