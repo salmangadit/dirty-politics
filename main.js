@@ -158,7 +158,7 @@ function gameLoop() {
 			// if (path[index].length == 2){
 			// 	npc[curNPC].keys.splice(0, 1);
 			// }
-
+			
 			// Update the enemy based upon how long it took for the game loop
 			npc[curNPC].update(elapsed / screenUpdateTime);
 

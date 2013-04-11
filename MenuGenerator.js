@@ -3,9 +3,8 @@ function MenuGenerator(){
 	var yPos = 30;
 
 	var currItemNum = 1;
-	var menuMax;
-	var itemsStored;
-	var items = ["item 1", "item 2"];
+	var menuMax = 0;
+	var itemsStored = new Array();
 
 	this.init = function(){
         menuCanvas = document.getElementById("menuCanvas");
@@ -16,8 +15,13 @@ function MenuGenerator(){
         menuContext.font = "30px Consolas";
         menuContext.fillText("Menu",xPos,yPos);
         yPos += 40;
-        
-        this.drawMenu(items);
+    }
+
+    this.addMenuItems = function(items){
+    	menuMax += items.length;
+    	for (var i=0; i<items.length; i++){
+			itemsStored.push(items[i]);
+		}
     }
 
 	this.drawMenuItem = function(item){
@@ -27,17 +31,14 @@ function MenuGenerator(){
 		yPos += 20;
 	}
 
-	this.drawMenu = function(items){
-		menuMax = items.length;
-		itemsStored = items;
-		for (var i=0; i<items.length; i++){
-			this.drawMenuItem(items[i]);
+	this.drawMenu = function(){
+		for (var i=0; i<itemsStored.length; i++){
+			this.drawMenuItem(itemsStored[i]);
 		}
 		this.drawMenuItemPointer();
 	}
 
 	this.drawMenuItemPointer = function(){
-
 		menuContext.beginPath();
 		menuContext.arc(25, 45 + (currItemNum * 20), 5, 0, 2 * Math.PI, false);
 		menuContext.fillStyle = 'green';
@@ -78,5 +79,7 @@ function MenuGenerator(){
 
 		menuContext.font = "30px Consolas";
 		menuContext.fillText("Menu",xPos,yPos);
+
+		itemsStored = [];
 	}
 }

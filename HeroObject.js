@@ -7,6 +7,14 @@ function heroObject()
 
     // Traits - will only be useful for enemies
     this.perception = -10; //the alma mater of this game!
+    this.isMale = true;
+
+    // Menu items
+    // Global
+    this.globalMenu = [];
+
+    // Special
+    this.specialMenu = [];
     
     // Change this to use the render height and width
     this.x;
@@ -66,6 +74,28 @@ function heroObject()
 
         if (this.keepMoving){
             this.keys[0] = this.lastMovedDirection;
+        }
+
+        if (this.type == "npc"){
+            if (this.perception < -2){
+                if (this.isMale){
+                    this.image.src = 'images/characters/redMan32x32.png';
+                } else {
+                    this.image.src = 'images/characters/redWoman32x32.png';
+                }
+            } else if (this.perception >= -2 && this.perception <= 2){
+                if (this.isMale){
+                    this.image.src = 'images/characters/greenMan32x32.png';
+                } else {
+                    this.image.src = 'images/characters/greenWoman32x32.png';
+                }
+            } else {
+                if (this.isMale){
+                    this.image.src = 'images/characters/blueMan32x32.png';
+                } else {
+                    this.image.src = 'images/characters/blueWoman32x32.png';
+                }
+            }
         }
 
         // reset the collision property

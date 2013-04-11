@@ -295,7 +295,7 @@ var objects =
 		"height":"32"
 	},
 	"37":{			//neutral male NPC
-		"id":"Y",
+		"id":"1",
 		"type":"npc",
 		"src":"images/characters/greenMan32x32.png",
 		"width":"32",
