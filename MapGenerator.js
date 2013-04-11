@@ -157,7 +157,7 @@ function MapGenerator(){
 							sceneryType = "cityC";
 							break;
 						case "e": //community center
-							sceneryType = "house";
+							sceneryType = "cc";
 							break;
 						case "D":
 							sceneryType = "door";

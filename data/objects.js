@@ -93,10 +93,10 @@ var objects =
 	},
 	"13":{
 		"id":"f",	//closet
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/closet.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"14":{
 		"id":"g",	//grass
@@ -107,155 +107,190 @@ var objects =
 	},
 	"15":{
 		"id":"h",	//cross
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/cross.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"16":{
 		"id":"i",	//drums
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/drums.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"17":{
 		"id":"j",	//radio
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/radio.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"18":{
 		"id":"k",	//sink
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/sink.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"19":{
 		"id":"l",	//pulpit
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/pulpit.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"20":{
 		"id":"o",	//toys
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/toys.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"21":{
 		"id":"p",	//plant
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/plant.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"22":{
 		"id":"q",	//piano
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/piano.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"23":{
 		"id":"r",	//refrigerator
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/refrigerator.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"24":{
 		"id":"t",	//toilet bowl
 		"type":"utilities",
 		"src":"images/toiletBowl.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"25":{
 		"id":"u",	//stove
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/stove.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"26":{
 		"id":"v",	//TV
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/tv.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"27":{
 		"id":"w",	//women clothes
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/womenClothes.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"28":{
 		"id":"x",	//chair(L)
 		"type":"utilities",
 		"src":"images/chair(L).png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"29":{
 		"id":"y",	//chair(R)
 		"type":"utilities",
 		"src":"images/chair(R).png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"30":{
 		"id":"z",	//chair(BL)
 		"type":"utilities",
 		"src":"images/chair(BL).png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"31":{
 		"id":"B",	//bed
 		"type":"utilities",
 		"src":"images/bed.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"32":{
 		"id":"C",	//cash register
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/cashRegister.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"33":{
 		"id":"M",	//men clothes
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/menClothes.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"34":{
 		"id":"S",	//shoes
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/shoes.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"35":{
 		"id":"T",	//table
-		"type":"utilities",
+		"type":"collidable",
 		"src":"images/table.png",
-		"width":"32",
-		"height":"32"
+		"width":"30",
+		"height":"30"
 	},
 	"36":{
 		"id":"Z",	//chair(BR)
 		"type":"utilities",
 		"src":"images/chair(BR).png",
+		"width":"30",
+		"height":"30"
+	},
+	"37":{
+		"id":"R",	//stairs(R)
+		"type":"utilities",
+		"src":"images/stairs(R).png",
+		"width":"32",
+		"height":"32"
+	},
+	"38":{
+		"id":"U",	//stairs(L)
+		"type":"utilities",
+		"src":"images/stairs(L).png",
+		"width":"32",
+		"height":"32"
+	},
+	"39":{
+		"id":"V",	//stairs(F)
+		"type":"utilities",
+		"src":"images/stairs(F).png",
+		"width":"32",
+		"height":"32"
+	},
+	"40":{
+		"id":"X",	//stairs(LC)
+		"type":"utilities",
+		"src":"images/stairs(LC).png",
+		"width":"32",
+		"height":"32"
+	},
+	"41":{
+		"id":"Y",	//stairs(RC)
+		"type":"utilities",
+		"src":"images/stairs(RC).png",
 		"width":"32",
 		"height":"32"
 	}
