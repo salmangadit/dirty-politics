@@ -51,7 +51,7 @@ function init() {
 	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
     canvasPieTimer.init(100,"hudCanvas");
 
-	setInterval(gameLoop, screenUpdateTime);
+	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 
 	document.addEventListener('keydown', function(event) {
