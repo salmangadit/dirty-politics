@@ -27,13 +27,32 @@ function Histogram(abstraction){
 		}
 	}
 
+	/*
+	 * For decompression:
+	 * Find location:
+	 * Entering House:
+	 * - Decompression Street -> House
+	 * - This is a level 2 to 1 decompression
+	 * - Go through all neighbourhood mappings in each bin, and extract the perception data bin by bin
+	 * - use global neighbourhood counts (or from bins) to find ratio in one house
+	 * - Using the extracted data create the objects and spawn
+	 * Entering other building:
+	 * - Same as above, but mapping is now  for the individual building, making it kind of easier
+	 * Entering city from building:
+	 * - This is still a level 2 to 1 decompression
+	 * - We decompress the relevant data for the street by looking at the "city" mapping
+	 * - Create the NPC's and distribute them randomly (unless memory management rules applied)
+	 * Entering city from city:
+	 * - This is a level 3 to 2 decompression
+	 * - We decompress data mapped for the respective city, generate the relevant level 1 based on that
+	 */ 
 	this.decompressFor = function(location){
 		if (location =="cityA" || location =="cityB" || location =="cityC"){
 
 		} else if (location == "house"){
 
 		} else {
-			
+
 		}
 	}
 

@@ -40,6 +40,7 @@ function HistBin(start, end, abstractionLevel){
 			this.mapper["cc"] = 0;
 			this.mapper["mall"] = 0;
 			this.mapper["media"] = 0;
+			this.mapper["city"] = 0;
 		} else {
 			this.mapper["cityA"] = 0;
 			this.mapper["cityB"] = 0;
