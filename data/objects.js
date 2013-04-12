@@ -304,43 +304,57 @@ var objects =
 	"43":{			
 		"id":"A",	//counter(F)
 		"type":"collidable",
-		"src":"images/characters/counter(F).png",
+		"src":"images/counter(F).png",
 		"width":"30",
 		"height":"30"
 	},
 	"44":{			
 		"id":"E",	//counter(L)
 		"type":"collidable",
-		"src":"images/characters/counter(L).png",
+		"src":"images/counter(L).png",
 		"width":"30",
 		"height":"30"
 	},
 	"45":{			
 		"id":"F",	//counter(R)
 		"type":"collidable",
-		"src":"images/characters/counter(R).png",
+		"src":"images/counter(R).png",
 		"width":"30",
 		"height":"30"
 	},
 	"46":{			
 		"id":"G",	//counter(LC)
 		"type":"collidable",
-		"src":"images/characters/counter(LC).png",
+		"src":"images/counter(LC).png",
 		"width":"30",
 		"height":"30"
 	},
 	"47":{			
 		"id":"I",	//counter(RC)
 		"type":"collidable",
-		"src":"images/characters/counter(RC).png",
+		"src":"images/counter(RC).png",
 		"width":"30",
 		"height":"30"
 	},
 	"48":{			
 		"id":"J",	//drinks
 		"type":"collidable",
-		"src":"images/characters/drinks.png",
+		"src":"images/drinks.png",
 		"width":"30",
 		"height":"30"
+	},
+	"49":{
+		"id":"Q",	//gay bar
+		"type":"scenery",
+		"src":"images/bar.png",
+		"width":"30",
+		"height":"30"
+	},
+	"50":{
+		"id":"O",	//road
+		"type":"utilities",
+		"src":"images/road.png",
+		"width":"32",
+		"height":"32"
 	}
 }

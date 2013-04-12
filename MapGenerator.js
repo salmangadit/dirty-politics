@@ -168,6 +168,9 @@ function MapGenerator(){
 						case "e": //community center
 							sceneryType = "cc";
 							break;
+						case "Q": //gay bar
+							sceneryType = "bar";
+							break;
 						case "D":
 							sceneryType = "door";
 							break;
