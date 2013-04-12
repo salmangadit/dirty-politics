@@ -108,6 +108,35 @@ var maps =
 			"18":"WWWWWWWDWWWWWWW"
 		}
 	},
+	"bar":{
+		"attributes":{
+			"tileSize":"32",
+			"width":"18",
+			"height":"19",
+			"baseColor":"#FFFFFF"
+		},
+		"grid":{
+			"0":"WWWWWWWWWWWWWWWWWW",
+			"1":"W----EJJJJJJF----W",
+			"2":"W---yE------Fx---W",
+			"3":"W----GAAAAAAI----W",
+			"4":"W----ZZ-Z-zz-----W",
+			"5":"W----------------W",
+			"6":"W--x-------------W",
+			"7":"W-xTy-------y----W",
+			"8":"W--z-------xTy---W",
+			"9":"W-----------Z----W",
+			"10":"W----------------W",
+			"11":"W----------------W",
+			"12":"W----------y-----W",
+			"13":"W----x----xTy----W",
+			"14":"W---xTy----Z-----W",
+			"15":"W----z-----------W",
+			"16":"W----------------W",
+			"17":"W-------P--------W",
+			"18":"WWWWWWWWDDWWWWWWWW"
+		}
+	},
 	"cityA":{
 		"attributes":{
 			"tileSize":"32",

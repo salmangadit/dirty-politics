@@ -294,11 +294,53 @@ var objects =
 		"width":"32",
 		"height":"32"
 	},
-	"37":{			//neutral male NPC
+	"42":{			//neutral male NPC
 		"id":"1",
 		"type":"npc",
 		"src":"images/characters/greenMan32x32.png",
 		"width":"32",
 		"height":"32"
+	},
+	"43":{			
+		"id":"A",	//counter(F)
+		"type":"collidable",
+		"src":"images/characters/counter(F).png",
+		"width":"30",
+		"height":"30"
+	},
+	"44":{			
+		"id":"E",	//counter(L)
+		"type":"collidable",
+		"src":"images/characters/counter(L).png",
+		"width":"30",
+		"height":"30"
+	},
+	"45":{			
+		"id":"F",	//counter(R)
+		"type":"collidable",
+		"src":"images/characters/counter(R).png",
+		"width":"30",
+		"height":"30"
+	},
+	"46":{			
+		"id":"G",	//counter(LC)
+		"type":"collidable",
+		"src":"images/characters/counter(LC).png",
+		"width":"30",
+		"height":"30"
+	},
+	"47":{			
+		"id":"I",	//counter(RC)
+		"type":"collidable",
+		"src":"images/characters/counter(RC).png",
+		"width":"30",
+		"height":"30"
+	},
+	"48":{			
+		"id":"J",	//drinks
+		"type":"collidable",
+		"src":"images/characters/drinks.png",
+		"width":"30",
+		"height":"30"
 	}
 }
