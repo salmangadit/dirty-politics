@@ -47,9 +47,47 @@ function Histogram(abstraction){
 	 * - We decompress data mapped for the respective city, generate the relevant level 1 based on that
 	 */ 
 	this.decompressFor = function(location){
-		if (location =="cityA" || location =="cityB" || location =="cityC"){
+		var dataList = new Array();
+		if (location =="cityA" || location =="cityB" || location =="cityC"){ //Level 3
+			var newAbstract2 = new Histogram(2);
+			for (var i = 0; i < this.binsList; i++){
+				 var objectsCountInBin = this.binsList[i].mapper[location];
+				 var divisionRatio = this.binsList[i].higherCount / this.binsList[i].binHeight;
+				 var higherBinNumber = objectsCountInBin - parseInt(divisionRatio*objectsCountInBin);
+				 var end = this.binsList[i].binEnd;
+				 var start = this.binsList[i].binStart;
 
-		} else if (location == "house"){
+				 var gull = this.binsList[i].getDecompressedGullibilities(90, objectsCountInBin);
+
+				 //Create objects by ratios
+				 for (var j = 0; j < objectsCountInBin; j++){
+				 	var data = new DataObj();
+				 	//Perception
+				 	if (j > higherBinNumber -1){
+				 		data.perception = (Math.random() * end) + (end - 2) ;
+				 	} else {
+				 		data.perception = (Math.random() * (end-2)) + start;
+				 	}
+
+				 	//Gullibility
+				 	data.gullibility = gull[j];
+
+				 	//Boolean traits
+				 	data.isHonest = (Math.random() < this.binsList[i].isHonest ? true: false);
+					data.isPotStirrer = (Math.random() < this.binsList[i].isPotStirrer ? true: false);
+					data.watchesTV = (Math.random() < this.binsList[i].watchesTV ? true: false);
+					data.isReligious = (Math.random() < this.binsList[i].isReligious ? true: false);
+					data.isGay = (Math.random() < this.binsList[i].isGay ? true: false);
+					data.isTraveler: = (Math.random() < this.binsList[i].isTraveler ? true: false);
+					data.isSlut = (Math.random() < this.binsList[i].isSlut ? true: false);
+					data.isMale = (Math.random() < this.binsList[i].isMale ? true: false);
+
+				 	//Location shizz
+				 	//Figure out a way to decompress the thing by locations and/or neighbourhoods
+
+				 }
+			}
+		} else if (location == "house"){ //Level 2
 
 		} else {
 

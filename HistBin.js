@@ -10,8 +10,7 @@ function HistBin(start, end, abstractionLevel){
 	this.binAverage = (start + end)/2;
 
 	// General ratios used for decompression
-	this.higherCount;
-	this.lowerCount;
+	this.higherCount = 0;
 
 	// Trait ratios
 	this.isHonest = 0;
@@ -59,8 +58,6 @@ function HistBin(start, end, abstractionLevel){
 	this.addToBin = function(object){
 		if (object.perception > this.binAverage){
 			this.higherCount++;
-		} else {
-			this.lowerCount++;
 		}
 
 		//add the traits
