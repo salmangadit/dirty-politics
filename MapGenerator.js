@@ -14,6 +14,7 @@ function MapGenerator(){
 		this.currMapName = mapName; 
 		collidables = [];
 		scenery = [];
+		npc = [];
 		this.initGameBoard();
 		this.initCanvas(mapName);
 		this.initGameTiles();

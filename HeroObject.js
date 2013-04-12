@@ -13,7 +13,7 @@ function heroObject()
     this.watchesTV = true;
     this.isReligious = true;
     this.isGay = true;
-    this.isTraveler: = true;
+    this.isTraveler = true;
     this.isSlut = true;
 
     // Menu items
