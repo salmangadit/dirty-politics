@@ -8,6 +8,13 @@ function heroObject()
     // Traits - will only be useful for enemies
     this.perception = -10; //the alma mater of this game!
     this.isMale = true;
+    this.isHonest = true;
+    this.isPotStirrer = true;
+    this.watchesTV = true;
+    this.isReligious = true;
+    this.isGay = true;
+    this.isTraveler: = true;
+    this.isSlut = true;
 
     // Menu items
     // Global

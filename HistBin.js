@@ -1,5 +1,5 @@
-function HistBin(start, end){
-	var abstractionLevel;
+function HistBin(start, end, abstractionLevel){
+	var abstractionLevel = abstractionLevel;
 
 	// Properties
 	this.binStart = start;
@@ -14,9 +14,14 @@ function HistBin(start, end){
 	this.lowerCount;
 
 	// Trait ratios
+	this.isHonest = 0;
+	this.isPotStirrer = 0;
 	this.watchesTV = 0;
+	this.isReligious = 0;
+	this.isGay = 0;
+	this.isTraveler: = 0;
 	this.isSlut = 0;
-	//put other traits here
+	this.isMale = 0;
 
 	// Trait distribution functions
 	this.gullibility = new NormalDist();
@@ -24,14 +29,64 @@ function HistBin(start, end){
 	// Mappers
 	this.mapper = new Array();
 
-	this.addToBin = function(object){
-		//add the traits
-		this.binHeight++;
+	this.init();
 
+	this.init = function(){
+		// Initialise mappers
+		if (abstractionType == 2){
+			this.mapper["neighbourhood1"] = 0;
+			this.mapper["neighbourhood2"] = 0;
+			this.mapper["church"] = 0;
+			this.mapper["cc"] = 0;
+			this.mapper["mall"] = 0;
+			this.mapper["media"] = 0;
+		} else {
+			this.mapper["cityA"] = 0;
+			this.mapper["cityB"] = 0;
+			this.mapper["cityC"] = 0;
+		}
+	}
+
+	this.fitsInBin = function(perception){
+		if (perception >= this.binStart && perception < this.binEnd){
+			return true;
+		}
+
+		return false;
+	}	
+
+	this.addToBin = function(object){
 		if (object.perception > this.binAverage){
 			this.higherCount++;
 		} else {
 			this.lowerCount++;
+		}
+
+		//add the traits
+		var currBinHeight = this.binHeight;
+		if(object.isHonest) {
+			this.binsList[binIndex].isHonest = ((this.binsList[binIndex].isHonest * currBinHeight) + 1)/(currBinHeight +1);
+		}
+		if(object.isPotStirrer) {
+			this.binsList[binIndex].isPotStirrer = ((this.binsList[binIndex].isPotStirrer * currBinHeight) + 1)/(currBinHeight +1);
+		}
+		if(object.watchesTV) {
+			this.binsList[binIndex].watchesTV = ((this.binsList[binIndex].watchesTV * currBinHeight) + 1)/(currBinHeight +1);
+		}
+		if(object.isReligious) {
+			this.binsList[binIndex].isReligious = ((this.binsList[binIndex].isReligious * currBinHeight) + 1)/(currBinHeight +1);
+		}
+		if(object.isGay) {
+			this.binsList[binIndex].isGay = ((this.binsList[binIndex].isGay * currBinHeight) + 1)/(currBinHeight +1);
+		}
+		if(object.isTraveler) {
+			this.binsList[binIndex].isTraveler = ((this.binsList[binIndex].isTraveler * currBinHeight) + 1)/(currBinHeight +1);
+		}
+		if(object.isSlut) {
+			this.binsList[binIndex].isSlut = ((this.binsList[binIndex].isSlut * currBinHeight) + 1)/(currBinHeight +1);
+		}
+		if(object.isMale) {
+			this.binsList[binIndex].isMale = ((this.binsList[binIndex].isMale * currBinHeight) + 1)/(currBinHeight +1);
 		}
 
 		//add to distribution function
@@ -39,6 +94,9 @@ function HistBin(start, end){
 
 		//find mapper
 		this.updateMapper(object);
+
+		//add the properties
+		this.binHeight++;
 	}
 
 	this.updateMapper = function(object){
@@ -62,7 +120,7 @@ function HistBin(start, end){
 	}
 
 	this.getGullibilityValue = function(confidence){
-		return this.getValueWithConfidence(confidence);
+		return this.gullibility.getValueWithConfidence(confidence);
 	}
 
 	this.getDecompressedGullibilities = function(confidence, numberOfValues){
@@ -74,22 +132,4 @@ function HistBin(start, end){
 
 		return gull;
 	}
-
-	this.init = function(abstractionType){
-		abstractionLevel = abstractionType;
-		// Initialise mappers
-		if (abstractionType == 2){
-			this.mapper["neighbourhood1"] = 0;
-			this.mapper["neighbourhood2"] = 0;
-			this.mapper["church"] = 0;
-			this.mapper["cc"] = 0;
-			this.mapper["mall"] = 0;
-			this.mapper["media"] = 0;
-		} else {
-			this.mapper["cityA"] = 0;
-			this.mapper["cityB"] = 0;
-			this.mapper["cityC"] = 0;
-		}
-	}
-
 }
