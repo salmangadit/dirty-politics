@@ -164,10 +164,15 @@ function Histogram(abstraction){
 				 }
 			}
 			
-			// additional stuff for house to randomly generate house data
+			if (location == house){
+				// House has info for ALL the houses. Now it's time to randomise and select first x
+				this.randomizeArray(dataList);
+				var numberInHouse = Math.floor(Math.random()*5);
 
+				dataList.splice(numberInHouse, dataList.length-numberInHouse);
+			}
 
-			abstract2 = newAbstract2.createHistogramFromData(dataList);
+			return dataList;
 		}
 	}
 
