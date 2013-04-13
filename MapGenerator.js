@@ -18,6 +18,7 @@ function MapGenerator(){
 		this.initGameBoard();
 		this.initCanvas(mapName);
 		this.initGameTiles();
+		minimap.typeloc();
 	};
 
 	this.initGameBoard = function() {

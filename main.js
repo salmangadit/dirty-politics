@@ -29,6 +29,7 @@ var abstract2;
 
 var gameW;
 var gameH;
+var cityname;
 
 var debugMode = false;
 var grid = new Array();
@@ -104,7 +105,8 @@ function gameLoop() {
 	// Update the hero based upon how long it took for the game loop
 	hero.update(elapsed / screenUpdateTime);
 	hero.render();
-
+	minimap.renderloc();
+	
 	perceptionCanvas.width = gameW;
 	perceptionCanvas.height = gameH;
 

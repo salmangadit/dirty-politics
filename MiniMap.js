@@ -15,7 +15,7 @@ function MiniMap(){
 
 	this.init = function(){
         hudCanvas = document.getElementById("hudCanvas");
-        hudCanvas = hudCanvas.getContext("2d");
+        hudContext = hudCanvas.getContext("2d");
         // hudCanvas.width = 300;
         // hudCanvas.height = 600;
 
@@ -24,6 +24,60 @@ function MiniMap(){
 
     this.drawMap = function(item){
 		loadImages(0);
+	}
+	
+	this.typeloc = function() {
+	    maplocCanvas = document.getElementById("maplocCanvas");
+        maplocContext = maplocCanvas.getContext("2d");
+		maplocContext.fillStyle = "black"
+		if (mapGen.currMapName.substr(0,4) == "city") {
+			cityname = mapGen.currMapName;
+		}
+		maplocContext.clearRect(0, 0, 200, 200);
+		maplocContext.font = "15px Consolas";
+		if (mapGen.currMapName == cityname) {
+			maplocContext.fillText("In " + cityname + " - " + "Streets",20,120);
+		} 
+		else {
+			maplocContext.fillText("In " + cityname + " - " + mapGen.currMapName,20,120);
+		}
+	}
+	
+	this.renderloc = function() {
+		var renderx;
+		var rendery;
+		maplocContext.clearRect(0, 0, 150, 110);
+		switch (cityname) {
+			case "cityA":
+				renderx = (hero.x/1408 * 32) + 25;
+				rendery = (hero.y/928 * 25) + 45;
+				maplocContext.fillStyle = "green";
+				maplocContext.fillRect(renderx, rendery, 10, 10);
+				maplocContext.strokeRect(renderx, rendery, 10, 10);
+				break;
+			case "cityB":
+				renderx = (hero.x/1408 * 30) + 70;
+				rendery = (hero.y/928 * 25) + 20;
+				maplocContext.fillStyle = "green";
+				maplocContext.fillRect(renderx, rendery, 10, 10);
+				maplocContext.strokeRect(renderx, rendery, 10, 10);
+				break;
+			case "cityC":
+				renderx = (hero.x/1408 * 28) + 70;
+				rendery = (hero.y/928 * 25) + 45;
+				maplocContext.fillStyle = "green";
+				maplocContext.fillRect(renderx, rendery, 10, 10);
+				maplocContext.strokeRect(renderx, rendery, 10, 10);
+				break;
+			default:
+				renderx = (hero.x/1408 * 35) + 25;
+				rendery = (hero.y/928 * 25) + 45;
+				maplocContext.fillStyle = "green";
+				maplocContext.fillRect(renderx, rendery, 10, 10);
+				maplocContext.strokeRect(renderx, rendery, 10, 10);
+			
+		}
+
 	}
 
 	function loadImages(number){
@@ -46,11 +100,11 @@ function MiniMap(){
 		redLimit = parseInt(ratio[1])/(parseInt(ratio[0])+parseInt(ratio[1]));
 		cityAblue.src = blueSrc;
 		cityAblue.onload = function() {
-			hudCanvas.drawImage(cityAblue, 0, 0, blueLimit*cityWidth, cityHeight, startX, startY,blueLimit*cityWidth, cityHeight);
+			hudContext.drawImage(cityAblue, 0, 0, blueLimit*cityWidth, cityHeight, startX, startY,blueLimit*cityWidth, cityHeight);
 
 			cityAred.src = redSrc;
 			cityAred.onload = function() {
-				hudCanvas.drawImage(cityAred, blueLimit*cityWidth, 0, redLimit*cityWidth, cityHeight,startX+blueLimit*cityWidth, startY, redLimit*cityWidth, cityHeight);
+				hudContext.drawImage(cityAred, blueLimit*cityWidth, 0, redLimit*cityWidth, cityHeight,startX+blueLimit*cityWidth, startY, redLimit*cityWidth, cityHeight);
 				loadImages(++number);
 			};
 		};
