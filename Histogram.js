@@ -119,6 +119,7 @@ function Histogram(abstraction){
 					dataList[i].neighbourhood = Math.random() < parseInt(rawData[location].neighbourhood1count)/parseInt(rawData[location].totalHouses) ?
 					 "neighbourhood1": "neighbourhood2";
 				}
+			}
 			
 		} else if (location == "house"){ //Level 2
 
