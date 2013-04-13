@@ -148,7 +148,7 @@ function MapGenerator(){
 							sceneryType = "house";
 							break;
 						case "n": //media center
-							sceneryType = "house";
+							sceneryType = "mediastation";
 							break;
 						case "c": //church
 							sceneryType = "church";
