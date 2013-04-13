@@ -5,7 +5,7 @@ var maps =
 			"tileSize":"32",
 			"width":"11",
 			"height":"11",
-			"baseColor":"#FFFFFF"
+			"baseColor":"#11FB76"
 		},
 		"grid":{
 			"0":"WWWWWWWWWWW",
@@ -26,7 +26,7 @@ var maps =
 			"tileSize":"32",
 			"width":"18",
 			"height":"19",
-			"baseColor":"#FFFFFF"
+			"baseColor":"#EDB347"
 		},
 		"grid":{
 			"0":"WWWWWWWWWWWWWWWWWW",
@@ -55,7 +55,7 @@ var maps =
 			"tileSize":"32",
 			"width":"21",
 			"height":"19",
-			"baseColor":"#E9FDAC"
+			"baseColor":"#59ABCB"
 		},
 		"grid":{
 			"0":"WWWWWWWWWWWWWWWWWWWWW",
@@ -143,7 +143,7 @@ var maps =
             "tileSize":"32",
             "width":"25",
             "height":"19",
-            "baseColor":"#FFFFFF"
+            "baseColor":"#02566B"
         },
         "grid":{
             "0":"WWWWWWWWWWWWWWWWWWWWWWWWW",
@@ -187,7 +187,7 @@ var maps =
 			"8" :"--g---------g------g--------OO----g----------",
 			"9" :"gHggHggHggHggHggHggHggHggHggOO---------------",
 			"10":"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO------g--------",
-			"11":"-----s----------------------OO---------------",
+			"11":"-----g----------------------OO---------------",
 			"12":"--g---------------ggggggg---OO------------gg-",
 			"13":"------------------ggggggg---OO---------g---g-",
 			"14":"-------g----------ggggggg---OO--gg-----------",
@@ -198,7 +198,7 @@ var maps =
 			"19":"---------------OO--g------g------------gggg--",
 			"20":"---------------OOggHggHggHggHggHggHggHggHggHg",
 			"21":"------m--------OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-			"22":"------n--------OO-------g-----eg----------g--",
+			"22":"------n--------OO-------g-----gg----------g--",
 			"23":"------OOOOOOOOOOOggHggHggHggHggHggHggHggHggHg",
 			"24":"--------g-----gOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
 			"25":"---------------OO----g----gg------g----g-----",
@@ -228,7 +228,7 @@ var maps =
 			"7":"----H----O--------------g-------g---Om-------",
 			"8":"--g----g-O-------g------H--g--------On-------",
 			"9":"-----ggg-O-----------------g----ggg----------",
-			"10":"-g--cOOOOO------s-------g----------------g---",
+			"10":"-g--cOOOOOOOOOOOs-------g----------------g---",
 			"11":"---------O----------g------------------------",
 			"12":"---gg----O------------------gg---------------",
 			"13":"----H----O-----H--------------g--------------",
@@ -260,7 +260,7 @@ var maps =
 			"9":"---H--g-----g---O------------------",
 			"10":"-----------cOOOOO-------------g----",
 			"11":"---H------------O-----H------------",
-			"12":"--g-------------OOOOOOOO----g------",
+			"12":"--g-------------OOOOOOOOs---g------",
 			"13":"-----ggggg--H----------O-----------",
 			"14":"--------ggggg----H-----O-----------",
 			"15":"----g-------ggg--------O-----H-----",

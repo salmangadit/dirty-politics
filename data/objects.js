@@ -393,35 +393,35 @@ var objects =
         "height":"30"
     },
     "56":{
-        "id":"+",	//road
+        "id":"+",	//sofa
         "type":"collidable",
         "src":"images/mediaStation/sofa1.png",
         "width":"30",
         "height":"30"
     },
     "57":{
-        "id":"=",	//road
+        "id":"=",	//flowerstand
         "type":"collidable",
         "src":"images/mediaStation/flowerstand.png",
         "width":"30",
         "height":"30"
     },
     "58":{
-        "id":"(",	//road
+        "id":"(",	//cabinet
         "type":"collidable",
         "src":"images/mediaStation/cabinet.png",
         "width":"30",
         "height":"30"
     },
     "59":{
-        "id":"{",	//road
+        "id":"{",	//boss1
         "type":"collidable",
         "src":"images/mediaStation/boss1.png",
         "width":"30",
         "height":"30"
     },
     "60":{
-        "id":"}",	//road
+        "id":"}",	//boss2
         "type":"collidable",
         "src":"images/mediaStation/boss2.png",
         "width":"30",
