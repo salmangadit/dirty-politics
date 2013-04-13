@@ -34,7 +34,7 @@ function Initialize(){
 
 			data.location = getlocation(i);
 
-			dataSet.push(data);
+			this.dataSet.push(data);
 		}
 	}
 
