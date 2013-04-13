@@ -50,6 +50,21 @@ function Histogram(abstraction){
 		var dataList = new Array();
 		if (location =="cityA" || location =="cityB" || location =="cityC"){ //Level 3
 			var newAbstract2 = new Histogram(2);
+
+			var multiplier = 1;
+			if (location == "cityA"){
+				multiplier = parseInt(rawData["city_multiplier"]);
+			}
+
+			var locationNames = ["mall", "cc", "church", "bar", "mediastation"];
+			var capacityMap = new Array()
+			capacityMap[0] = (0, multiplier*parseInt(rawData["mall_capacity"]));
+			capacityMap[1] = (0, multiplier*parseInt(rawData["cc_capacity"]));
+			capacityMap[2] = (0, multiplier*parseInt(rawData["church_capacity"]));
+			capacityMap[3] = (0, multiplier*parseInt(rawData["bar_capacity"]));
+			capacityMap[4] = (0, multiplier*parseInt(rawData["mediastation_capacity"]));
+
+
 			for (var i = 0; i < this.binsList; i++){
 				 var objectsCountInBin = this.binsList[i].mapper[location];
 				 var divisionRatio = this.binsList[i].higherCount / this.binsList[i].binHeight;
@@ -57,7 +72,7 @@ function Histogram(abstraction){
 				 var end = this.binsList[i].binEnd;
 				 var start = this.binsList[i].binStart;
 
-				 var gull = this.binsList[i].getDecompressedGullibilities(90, objectsCountInBin);
+				 var gull = this.binsList[i].getDecompressedGullibilities(0, 1, objectsCountInBin);
 
 				 //Create objects by ratios
 				 for (var j = 0; j < objectsCountInBin; j++){
@@ -82,16 +97,46 @@ function Histogram(abstraction){
 					data.isSlut = (Math.random() < this.binsList[i].isSlut ? true: false);
 					data.isMale = (Math.random() < this.binsList[i].isMale ? true: false);
 
-				 	//Location shizz
-				 	//Figure out a way to decompress the thing by locations and/or neighbourhoods
-
+					dataList.push(data);
 				 }
 			}
+
+			this.randomizeArray(dataList);
+			var capacityIndex = 0;
+			//Set locations for the data list
+			for (var i = 0; i< dataList.length; i++){
+				if (capacityMap[capacityIndex][0] >= capacityMap[capacityIndex][0]){
+					capacityIndex++;
+				}
+
+				if (capacityIndex <= 4){
+					dataList[i].location = locationNames[capacityIndex];
+				} else {
+					dataList[i].location = Math.random() < 0.5 ? "house": "city";
+				}
+
+				if (dataList[i].location == "house"){
+					dataList[i].neighbourhood = Math.random() < parseInt(rawData[location].neighbourhood1count)/parseInt(rawData[location].totalHouses) ?
+					 "neighbourhood1": "neighbourhood2";
+				}
+			
 		} else if (location == "house"){ //Level 2
 
 		} else {
 
 		}
+	}
+
+	this.randomizeArray = function (array){
+	  	var i = array.length, j, tempi, tempj;
+	  	if ( i === 0 ) return false;
+	  	while ( --i ) {
+	  	   j = Math.floor( Math.random() * ( i + 1 ) );
+	  	   tempi = array[i];
+	  	   tempj = array[j];
+	  	   array[i] = tempj;
+	  	   array[j] = tempi;
+	  	 }
 	}
 
 	this.compressData = function(data){

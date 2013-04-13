@@ -117,15 +117,15 @@ function HistBin(start, end, abstractionLevel){
 		this.gullibility.distributionValues.push(gull);
 	}
 
-	this.getGullibilityValue = function(confidence){
-		return this.gullibility.getValueWithConfidence(confidence);
+	this.getGullibilityValue = function(lower, higher){
+		return this.gullibility.getProbabilisticValueInRange(lower, higher);
 	}
 
-	this.getDecompressedGullibilities = function(confidence, numberOfValues){
+	this.getDecompressedGullibilities = function(lower, higher, numberOfValues){
 		var gull = new Array();
 
 		for (var i = 0; i<numberOfValues; i++){
-			gull.push(this.getGullibilityValue(confidence));
+			gull.push(this.getGullibilityValue(lower, higher));
 		}
 
 		return gull;

@@ -177,6 +177,7 @@ function gameLoop() {
 			var perc_x = npc[curNPC].x;
 			var perc_y = npc[curNPC].y < npc[curNPC].height ? (npc[curNPC].y + npc[curNPC].height) : (npc[curNPC].y - npc[curNPC].height);
 			perceptionContext.drawImage(perceptionImage, perc_x, perc_y);
+			perceptionContext.fillStyle = 'white'
 			perceptionContext.font = "10px Consolas";
         	perceptionContext.fillText(npc[curNPC].perception,perc_x+7,perc_y+15);
 		}

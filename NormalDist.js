@@ -10,6 +10,23 @@ function NormalDist(){
 
 		return value.toFixed(2);
 	}
+
+	this.getProbabilisticValueInRange = function(lower,higher){
+		var range = this.getProbabilityRange(lower, higher);
+		var value = Math.random() * (range[1] - range[0]) + range[0];
+
+		var returnVal = this.getValueByProbability(value);
+
+		return returnVal;
+	}
+
+	this.getProbabilityRange = function(lower, higher){
+		var lowerProb = this.getProbabilityByValue(lower);
+		var higherProb = this.getProbabilityByValue(higher);
+
+		return new Array (lowerProb, higherProb);
+	}
+
 	this.getConfidenceIntervalValues = function(ci){
 		var range = (100 - ci)/2;
 		var lower = this.getValueByProbability(range/100);
