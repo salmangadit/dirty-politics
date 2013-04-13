@@ -37,7 +37,7 @@ var objects =
 	},
 	"5":{
 		"id":"m",
-		"type":"collidable",
+		"type":"scenery",
 		"src":"images/mediatop.png",
 		"width":"30",
 		"height":"30"
@@ -356,5 +356,75 @@ var objects =
 		"src":"images/road.png",
 		"width":"32",
 		"height":"32"
-	}
+	},
+    "51":{
+        "id":"!",	//coffetable
+        "type":"collidable",
+        "src":"images/mediaStation/coffetable.png",
+        "width":"32",
+        "height":"32"
+    },
+    "52":{
+        "id":"@",	//computer
+        "type":"collidable",
+        "src":"images/mediaStation/Computer.png",
+        "width":"32",
+        "height":"32"
+    },
+    "53":{
+        "id":"#",	//cubicle
+        "type":"collidable",
+        "src":"images/mediaStation/cubicle.png",
+        "width":"32",
+        "height":"32"
+    },
+    "54":{
+        "id":"%",	//cubicle 1
+        "type":"collidable",
+        "src":"images/mediaStation/cubicle1.png",
+        "width":"32",
+        "height":"32"
+    },
+    "55":{
+        "id":"$",	//sofa
+        "type":"collidable",
+        "src":"images/mediaStation/sofa.png",
+        "width":"32",
+        "height":"32"
+    },
+    "56":{
+        "id":"+",	//road
+        "type":"collidable",
+        "src":"images/mediaStation/sofa1.png",
+        "width":"32",
+        "height":"32"
+    },
+    "57":{
+        "id":"=",	//road
+        "type":"collidable",
+        "src":"images/mediaStation/flowerstand.png",
+        "width":"32",
+        "height":"32"
+    },
+    "58":{
+        "id":"(",	//road
+        "type":"collidable",
+        "src":"images/mediaStation/cabinet.png",
+        "width":"32",
+        "height":"32"
+    },
+    "59":{
+        "id":"{",	//road
+        "type":"collidable",
+        "src":"images/mediaStation/boss1.png",
+        "width":"32",
+        "height":"32"
+    },
+    "60":{
+        "id":"}",	//road
+        "type":"collidable",
+        "src":"images/mediaStation/boss2.png",
+        "width":"32",
+        "height":"32"
+    }
 }

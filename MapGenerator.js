@@ -150,6 +150,9 @@ function MapGenerator(){
 						case "n": //media center
 							sceneryType = "mediastation";
 							break;
+                        case "m": //media center
+                            sceneryType = "mediastation";
+                            break;
 						case "c": //church
 							sceneryType = "church";
 							break;
