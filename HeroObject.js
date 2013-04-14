@@ -18,7 +18,7 @@ function heroObject()
     this.isTraveler = true;
     this.isSlut = true;
 
-    this.location;
+    this.location = "cityA";
     this.neighbourhood;
 
     // Menu items
