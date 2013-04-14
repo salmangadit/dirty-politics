@@ -85,9 +85,9 @@ function Histogram(abstraction){
 				 	var data = new DataObj();
 				 	//Perception
 				 	if (j > higherBinNumber -1){
-				 		data.perception = (Math.random() * end) + (end - 2) ;
+				 		data.perception = (Math.random() * 2) + (end - 2) ;
 				 	} else {
-				 		data.perception = (Math.random() * (end-2)) + start;
+				 		data.perception = (Math.random() * 2) + start;
 				 	}
 
 				 	//Gullibility
@@ -145,9 +145,9 @@ function Histogram(abstraction){
 				 	var data = new DataObj();
 				 	//Perception
 				 	if (j > higherBinNumber -1){
-				 		data.perception = (Math.random() * end) + (end - 2) ;
+				 		data.perception = (Math.random()) + (end - 1) ;
 				 	} else {
-				 		data.perception = (Math.random() * (end-2)) + start;
+				 		data.perception = (Math.random()) + start;
 				 	}
 
 				 	//Gullibility

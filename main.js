@@ -182,7 +182,7 @@ function gameLoop() {
 			perceptionContext.drawImage(perceptionImage, perc_x, perc_y);
 			perceptionContext.fillStyle = 'white'
 			perceptionContext.font = "10px Consolas";
-        	perceptionContext.fillText(npc[curNPC].perception,perc_x+7,perc_y+15);
+        	perceptionContext.fillText(Math.round(npc[curNPC].perception*10)/10,perc_x+7,perc_y+15);
 		}
 
 				
