@@ -23,6 +23,7 @@ var collidables = new Array();
 var scenery = new Array();
 var utilities = new Array();
 var npc = new Array();
+var dataOnNPC;
 
 var abstract3 = new Histogram(3);
 var abstract2 = new Histogram(2);

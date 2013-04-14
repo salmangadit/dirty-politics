@@ -94,17 +94,20 @@ function Histogram(abstraction){
 				 	data.gullibility = gull[j];
 
 				 	//Boolean traits
-				 	data.isHonest = (Math.random() < this.binsList[i].isHonest/2 ? true: false);
-					data.isPotStirrer = (Math.random() < this.binsList[i].isPotStirrer/2 ? true:false);
-					data.watchesTV = (Math.random() < this.binsList[i].watchesTV/2 ? true: false);
-					data.isReligious = (Math.random() < this.binsList[i].isReligious/2 ? true: false);
-					data.isGay = (Math.random() < this.binsList[i].isGay/2 ? true: false);
-					data.isTraveler = (Math.random() < this.binsList[i].isTraveler/2 ? true: false);
-					data.isSlut = (Math.random() < this.binsList[i].isSlut/2 ? true: false);
-					data.isMale = (Math.random() < this.binsList[i].isMale/2 ? true: false);
+				 	data.isHonest = (Math.random() < this.binsList[i].isHonest ? true: false);
+					data.isPotStirrer = (Math.random() < this.binsList[i].isPotStirrer ? true:false);
+					data.watchesTV = (Math.random() < this.binsList[i].watchesTV ? true: false);
+					data.isReligious = (Math.random() < this.binsList[i].isReligious ? true: false);
+					data.isGay = (Math.random() < this.binsList[i].isGay ? true: false);
+					data.isTraveler = (Math.random() < this.binsList[i].isTraveler ? true: false);
+					data.isSlut = (Math.random() < this.binsList[i].isSlut ? true: false);
+					data.isMale = (Math.random() < this.binsList[i].isMale ? true: false);
 
 					dataList.push(data);
 				 }
+				 this.binsList[i].mapper[location] = 0;
+				 this.binsList[i].binHeight -= objectsCountInBin;
+				 this.binsList[i].higherCount -= parseInt(divisionRatio*objectsCountInBin);
 			}
 
 			this.randomizeArray(dataList);
@@ -121,40 +124,35 @@ function Histogram(abstraction){
 				} else {
 					dataList[i].location = Math.random() < 0.5 ? "house": "city";
 				}
-
-				if (dataList[i].location == "house"){
-					dataList[i].neighbourhood = Math.random() < parseInt(rawData[location].neighbourhood1count)/parseInt(rawData[location].totalHouses) ?
-					 "neighbourhood1": "neighbourhood2";
-				}
 			}
 
 			newAbstract2.createHistogramFromData(dataList);
 			abstract2 = newAbstract2;
 		} else {
 			for (var i = 0; i < this.binsList.length; i++){
-				 var objectsCountInBin = this.binsList[i].mapper[location];
-				 var divisionRatio = this.binsList[i].higherCount / this.binsList[i].binHeight;
-				 var higherBinNumber = objectsCountInBin - parseInt(divisionRatio*objectsCountInBin);
-				 var end = this.binsList[i].binEnd;
-				 var start = this.binsList[i].binStart;
+				var objectsCountInBin = this.binsList[i].mapper[location];
+				var divisionRatio = this.binsList[i].higherCount / this.binsList[i].binHeight;
+				var higherBinNumber = objectsCountInBin - parseInt(divisionRatio*objectsCountInBin);
+				var end = this.binsList[i].binEnd;
+				var start = this.binsList[i].binStart;
 
-				 var gull = this.binsList[i].getDecompressedGullibilities(0, 1, objectsCountInBin);
+				var gull = this.binsList[i].getDecompressedGullibilities(0, 1, objectsCountInBin);
 
-				 //Create objects by ratios
-				 for (var j = 0; j < objectsCountInBin; j++){
-				 	var data = new DataObj();
-				 	//Perception
-				 	if (j > higherBinNumber -1){
-				 		data.perception = (Math.random()) + (end - 1) ;
-				 	} else {
-				 		data.perception = (Math.random()) + start;
-				 	}
+				//Create objects by ratios
+				for (var j = 0; j < objectsCountInBin; j++){
+					var data = new DataObj();
+					//Perception
+					if (j > higherBinNumber -1){
+						data.perception = (Math.random()) + (end - 1) ;
+					} else {
+						data.perception = (Math.random()) + start;
+					}
 
-				 	//Gullibility
-				 	data.gullibility = gull[j];
+					//Gullibility
+					data.gullibility = gull[j];
 
-				 	//Boolean traits
-				 	data.isHonest = (Math.random() < this.binsList[i].isHonest ? true: false);
+					//Boolean traits
+					data.isHonest = (Math.random() < this.binsList[i].isHonest ? true: false);
 					data.isPotStirrer = (Math.random() < this.binsList[i].isPotStirrer ? true: false);
 					data.watchesTV = (Math.random() < this.binsList[i].watchesTV ? true: false);
 					data.isReligious = (Math.random() < this.binsList[i].isReligious ? true: false);
@@ -163,21 +161,22 @@ function Histogram(abstraction){
 					data.isSlut = (Math.random() < this.binsList[i].isSlut ? true: false);
 					data.isMale = (Math.random() < this.binsList[i].isMale ? true: false);
 
-					data.location = this.binsList[i].location;
-					
-					if (data.location == "house")
-						data.neighbourhood = this.binsList[i].location;
+					data.location = location;
 
 					dataList.push(data);
-				 }
+				}
+				this.binsList[i].mapper[location] = 0;
+				this.binsList[i].binHeight -= objectsCountInBin;
+				this.binsList[i].higherCount -= parseInt(divisionRatio*objectsCountInBin);
 			}
 			
 			if (location == "house"){
 				// House has info for ALL the houses. Now it's time to randomise and select first x
 				this.randomizeArray(dataList);
-				var numberInHouse = Math.floor(Math.random()*5);
+				var numberInHouse = Math.floor(Math.random()*4)+1;
 
-				dataList.splice(numberInHouse, dataList.length-numberInHouse);
+				var addBackToBin = dataList.splice(numberInHouse, dataList.length-numberInHouse);
+				this.compressData(addBackToBin);
 			}
 
 			return dataList;

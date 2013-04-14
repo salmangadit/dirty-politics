@@ -31,8 +31,7 @@ function HistBin(start, end, abstractionLevel){
 	this.init = function(){
 		// Initialise mappers
 		if (abstractionLevel == 2){
-			this.mapper["neighbourhood1"] = 0;
-			this.mapper["neighbourhood2"] = 0;
+			this.mapper["house"] = 0;
 			this.mapper["bar"] = 0;
 			this.mapper["church"] = 0;
 			this.mapper["cc"] = 0;
@@ -121,19 +120,7 @@ function HistBin(start, end, abstractionLevel){
 	}
 
 	this.updateMapper = function(object){
-		if (abstractionLevel == 2){
-			if (object.location == "house"){
-				if (object.neighbourhood == "A" || object.neighbourhood == "C" || object.neighbourhood == "E"){
-					this.mapper["neighbourhood1"]++;
-				} else if (object.neighbourhood == "B" || object.neighbourhood == "D"){
-					this.mapper["neighbourhood2"]++;
-				}
-			} else {
-				this.mapper[object.location]++;
-			}
-		} else {
-			this.mapper[object.location]++;
-		}
+		this.mapper[object.location]++;
 	}
 
 	this.pushGullibility = function(gull){

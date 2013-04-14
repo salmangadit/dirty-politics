@@ -17,6 +17,7 @@ function Abstractor(){
 
 	this.renderNPCsforDataSet = function(data, location){
 		npc = [];
+		dataOnNPC = data;
 
 		var locationsArray = new Array();
 

@@ -345,12 +345,43 @@ function heroObject()
                                 var name = mapGen.parentMapName;
                                 mapGen.parentMapName = "";
 
+                                 //Decompress next room info
+                                var dataToCompress = dataOnNPC;
+                                var dataSet = abstractor.decompressFromSecondLevel("city");
+                                abstractor.renderNPCsforDataSet(dataSet, name);
+
+                                //Compress this room info back
+                                abstractor.compressIntoSecondLevel(dataToCompress);
+
                                 mapGen.generate(name);
+                            } else if (scenery[iter].type == "cityA" || scenery[iter].type == "cityB" || scenery[iter].type == "cityC" ){
+                                mapGen.parentMapName = mapGen.currMapName;
+                                mapGen.parentPosX = prevX;
+                                mapGen.parentPosY = prevY;
+
+                                //Decompress next room info
+                                var dataToCompress = dataOnNPC;
+                                var dataSet = abstractor.decompressFromThirdLevel(scenery[iter].type);
+                                abstractor.renderNPCsforDataSet(dataSet, scenery[iter].type);
+
+                                //Compress this room info back
+                                abstractor.compressIntoThirdLevel(dataToCompress);
+
+                                mapGen.generate(scenery[iter].type);
                             }
                             else{
                                 mapGen.parentMapName = mapGen.currMapName;
                                 mapGen.parentPosX = prevX;
                                 mapGen.parentPosY = prevY;
+
+                                //Decompress next room info
+                                var dataToCompress = dataOnNPC;
+                                var dataSet = abstractor.decompressFromSecondLevel(scenery[iter].type);
+                                abstractor.renderNPCsforDataSet(dataSet, scenery[iter].type);
+
+                                //Compress this room info back
+                                abstractor.compressIntoSecondLevel(dataToCompress);
+
                                 mapGen.generate(scenery[iter].type);
                             }
 
