@@ -2,8 +2,7 @@
 <html>
 <head>
 	<title>Dirty Politics</title>
-	 <LINK href="style.css" rel="stylesheet" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" language="javascript" src="data/maps.js"></script>
 	<script type="text/javascript" language="javascript" src="data/objects.js"></script>
@@ -91,6 +90,32 @@
 		top: 500px;
 		border: 0px;
 	}
+    .div-table{
+        display:table;
+        float:left;
+        width:auto;
+        background-color:#fee;
+        border:1px solid  #666666;
+
+    }
+    .div-table-row{
+        display:table-row;
+        width:auto;
+        clear:both;
+    }
+    .div-table-col{
+        float:left;/*fix for  buggy browsers*/
+        display:table-column;
+        width:200px;
+
+    }
+    header h1 {
+        text-align: center;
+        margin: 50%;
+        float:left;
+        font-size: 20px;
+    }
+
 	</style>
 
 	<style type="text/css">
@@ -103,25 +128,32 @@
 
 </head>
 <BODY onload="javascript:if (typeof(init) != 'undefined') init();"  >
-	<div id="canvasWrapper" style='width: 480px; height: 480px; overflow: hidden'>
-		<canvas id="messageCanvas" class="noborder">Your browser does not support HTML5</canvas>
-		<canvas id="baseCanvas">Your browser does not support HTML5</canvas>
-		<canvas id="perceptionCanvas">Your browser does not support HTML5</canvas>
-		<canvas id="mainCanvas">Your browser does not support HTML5</canvas>
-	</div> 
-	
-	<canvas id="menuCanvas">Your browser does not support HTML5</canvas>
-<!-- 	<canvas id="debugCanvas">Your browser does not support HTML5</canvas> -->
- 	<canvas id="hudCanvas">Your browser does not support HTML5</canvas>
-	<canvas id="maplocCanvas">Your browser does not support HTML5</canvas>
-	
-   
-	
-	<br />
-	<!-- <input type='button' onclick='clearLog()' value="Clear"/>
-	<div id="logger" class="logger" style="font-family: 'Iceland', cursive;">
-		<div><b>Logger</b></div>
-	</div> -->
+
+<div class="div-table" >
+<div class="div-table-col">
+        <div id="canvasWrapper"  style='width: 480px; height: 480px;overflow: hidden'>
+          <canvas id="messageCanvas" class="noborder">Your browser does not support HTML5</canvas>
+		  <canvas id="baseCanvas">Your browser does not support HTML5</canvas>
+		  <canvas id="perceptionCanvas">Your browser does not support HTML5</canvas>
+		   <canvas id="mainCanvas">Your browser does not support HTML5</canvas>
+          </div>
+</div>
+    <div class="div-table-row">
+        <canvas id="menuCanvas">Your browser does not support HTML5</canvas>
+        <canvas id="debugCanvas">Your browser does not support HTML5</canvas>
+     </div>
+
+          <div class="div-table-col">
+              <canvas id="hudCanvas">Your browser does not support HTML5</canvas>
+              <canvas id="maplocCanvas">Your browser does not support HTML5</canvas>
+
+      </div>
+
+
+
+</div>
+</div>
+
 </body>
 </html>
 
