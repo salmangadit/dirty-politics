@@ -18,15 +18,33 @@ var canvasPieTimer = {
     canvasInterval : null,
 
     // int : the time between updates (in milliseconds)
-    timeInterval : 100,
+    timeInterval : 72000,
 
     // int : the time elapsed, (when it gets to timeLimit it triggers a refresh)
     timeElapsed : 0,
 
     // int : the timeLimit on which to trigger a refresh
     // Total number of days
-    timeLimit : 600000,
+    //3600000=1 hr in real time ,The player plays the game for 1 hour
+    //60 days=3600000
+    // 1day =72000
+    totalDays:60,
 
+    timeLimit : 3600000,
+
+    oneDay:0,
+
+    oneHour:0,
+
+    oneMinute:0,
+
+    prayStartTime:0,
+
+    prayEndTime:0,
+
+    newDay:true,
+
+    pray:false,
     // angle to start the wedge from
     startAngle : -Math.PI/2,
 
@@ -36,6 +54,7 @@ var canvasPieTimer = {
     // string : the colours with which to fill the pie
     fillColour : "red",
     bgColour : "green",
+
     /*
      * start the process
      */
@@ -46,21 +65,27 @@ var canvasPieTimer = {
             return false;
         }
 
-        // set the canvas size for the object - used again later
+        //
+        this.oneDay=this.timeLimit/this.totalDays;
+
+        this.oneHour=this.oneDay/24;
+
+        this.oneMinute=this.oneHour/60;
+
+        this.prayStartTime=11*this.oneHour;
+
+        this.prayEndTime=13*this.oneHour;
+
+            // set the canvas size for the object - used again later
         this.canvasSize = canvasSize;
 
         // Create a canvas element
         this.canvas = this.createCanvas(canvasId, this.canvasSize);
 
-        // Add it to the document
-       //var parent = document.getElementById(parentId);
-        //parent.appendChild(this.canvas);
-
-    
         this.wedgeSize = (this.timeInterval / this.timeLimit) * Math.PI * 2;
 
         // update the timer every x of a second
-      this.canvasInterval = setInterval('canvasPieTimer.updatePie()', this.timeInterval);
+      this.canvasInterval = setInterval('canvasPieTimer.updatePie()', this.oneHour);
     },
     /*
      * create a canvas element of specific size
@@ -94,49 +119,71 @@ var canvasPieTimer = {
      */
     updatePie: function() {
 
-        // check to see whether we have filled the timer - remove time interval to stop overlap
-        if (this.timeElapsed >= (this.timeLimit)) {
-            clearInterval(this.canvasInterval);
-
-            // call a function once finished
-            this.doSomething();
+        if(this.timeElapsed >= (this.timeLimit))
+        {
+            this.gameOver();
         }
-
         // point(s) to start the drawing, half the canvas size
         var drawX = drawY = radius = this.canvasSize / 2;
 
         // Calculate the end angle
         var endAngle = this.startAngle + this.wedgeSize;
-        
 
-        // add current wedge
-        var draw = this.canvas.getContext("2d");
-        draw.clearRect(0,0,100,100);
-        draw.beginPath();
-        draw.moveTo(drawX,drawY);
-        draw.arc(drawX, drawY, radius, this.startAngle, endAngle, false);
-        draw.closePath();
-        draw.fillStyle = this.fillColour;
-        draw.fill();
+        this.timeElapsed = this.timeElapsed + this.oneHour;
 
-        draw.fillStyle = 'black';
-        draw.font = "30px Consolas";
-        draw.fillText(Math.floor(60-(this.timeElapsed/10000)),25,50);
-        draw.fillStyle = 'black';
-        draw.font = "10px Consolas";
-        draw.fillText("Days to election",15,60);
 
-        // increment elapsed time
-        this.timeElapsed = this.timeElapsed + this.timeInterval;
+        if(this.timeElapsed%this.prayStartTime==0&&this.newDay==true)
+        {
+        this.pray=true;
+        this.newDay=false;
+        }
 
-        // calculate the new wedge size
+        if(this.timeElapsed%this.prayEndTime==0)
+        {this.pray=false;}
+        if(this.timeElapsed%this.oneDay==0)
+        {
+
+         var draw = this.canvas.getContext("2d");
+         draw.clearRect(0,0,100,100);
+         draw.beginPath();
+         draw.moveTo(drawX,drawY);
+         draw.arc(drawX, drawY, radius, this.startAngle, endAngle, false);
+         draw.closePath();
+         draw.fillStyle = this.fillColour;
+         draw.fill();
+
+         draw.fillStyle = 'black';
+         draw.font = "30px Consolas";
+         draw.fillText(this.totalDays-(this.timeElapsed/ this.oneDay),25,50);
+         draw.fillStyle = 'black';
+         draw.font = "10px Consolas";
+         draw.fillText("Days to election",15,60);
         this.wedgeSize = (this.timeElapsed / this.timeLimit) * Math.PI * 2;
-
+        this.newDay=true;
+        }
     },
-    /*
-     * do something once the pie is full
-     */
-    doSomething: function(){
-        //alert('finished!');
+    addanDay:function(){
+        this.timeElapsed=+this.oneDay;
+    },
+    addhalfaday:function(){
+        this.timeElapsed=+this.oneDay/2;
+    },
+    addanFifteenMinute:function(){
+        this.timeElapsed=+this.oneMinute*15;
+    },
+    addanMinute:function(){
+        this.timeElapsed=+this.oneMinute;
+    },
+    addanHour:function(){
+        this.timeElapsed=+this.oneHour;
+    },
+    addhalfanhour:function(){
+        this.timeElapsed=+this.oneHour/2;
+    },
+    isPrayTime:function(){
+        return  this.pray;
+    },
+    gameOver: function(){
+        alert('Game Over');
     }
 }
