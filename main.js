@@ -105,6 +105,7 @@ function gameLoop() {
 	var now = Date.now();
 	// calculate how long as passed since our last iteration
 	var elapsed = now - lastUpdate;
+	graph.update();
 
 	canvas.width = gameW;
 	canvas.height = gameH;

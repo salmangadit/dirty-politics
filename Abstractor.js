@@ -1,4 +1,39 @@
 function Abstractor(){
+	this.getPlayerPerception = function(){
+		var a3 = abstract3.averagePlayerPerception();
+		var a2 = abstract2.averagePlayerPerception();
+
+		var a1sum = 0;
+		var a1count = 0;
+		for (var i =0; i< dataOnNPC.length; i++){
+			if (dataOnNPC[i].perception > 2){
+				a1sum += dataOnNPC[i].perception;
+				a1count++;
+			}
+		}
+
+		var a1 = a1sum/a1count;
+
+		return (a1+a2+a3)/3;
+	}
+
+	this.getOpponentPerception = function(){
+		var a3 = abstract3.averageOpponentPerception();	
+		var a2 = abstract2.averagePlayerPerception();
+
+		var a1sum = 0;
+		var a1count = 0;
+		for (var i =0; i< dataOnNPC.length; i++){
+			if (dataOnNPC[i].perception < -2){
+				a1sum += (-1*dataOnNPC[i].perception);
+				a1count++;
+			}
+		}
+
+		var a1 = a1sum/a1count;
+		return (a1+a2+a3)/3;
+	}
+
 	this.compressIntoSecondLevel = function(data){
 		abstract2.compressData(data);
 	} 
