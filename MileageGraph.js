@@ -5,8 +5,8 @@ function MileageGraph(){
 	this.init = function(){
         hudCanvas = document.getElementById("hudCanvas");
         hudContext = hudCanvas.getContext("2d");
-        hudCanvas.width = 600;
-        hudCanvas.height = 200;
+        hudCanvas.width = 450;
+        hudCanvas.height = 100;
 
         this.drawGraph();
     }
