@@ -43,10 +43,10 @@ function NormalDist(){
 	}
 
 	this.getValueByProbability = function(p){
-		if ((typeof(this.mean) != "undefined"))
+		if ((typeof(this.mean) == "undefined"))
 			this.mean = this.getMean();
 
-		if ((typeof(this.variance) != "undefined"))
+		if ((typeof(this.variance) == "undefined"))
 			this.variance = Math.sqrt(this.getVarianceSquared());
 
 		var inverse_erf = this.getInverseERF(2*p - 1);
@@ -54,10 +54,10 @@ function NormalDist(){
 	}
 
 	this.getProbabilityByValue = function(x){
-		if ((typeof(this.mean) != "undefined"))
+		if ((typeof(this.mean) == "undefined"))
 			this.mean = this.getMean();
 
-		if ((typeof(this.variance) != "undefined"))
+		if ((typeof(this.variance) == "undefined"))
 			this.variance = Math.sqrt(this.getVarianceSquared());
 
 		var erf = this.getERF((x-this.mean)/(this.variance*Math.sqrt(2)));

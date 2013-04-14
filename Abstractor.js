@@ -16,7 +16,7 @@ function Abstractor(){
 	}
 
 	//First generation of abstractions
-	var init = Initialize();
+	var init = new Initialize();
 	abstract3.createHistogramFromData(init.dataSet);
 	this.decompressFromThirdLevel("cityA");
 

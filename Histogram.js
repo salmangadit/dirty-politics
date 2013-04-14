@@ -5,21 +5,29 @@ function Histogram(abstraction){
 
 	this.init = function(abstraction){
 		if (abstraction == 3){
-			this.binSize == 4;
+			this.binSize = 4;
 		} else {
-			this.binSize == 2;
+			this.binSize = 2;
 		}
 
 		for (var i=1; i<=(this.binSize == 4? 5 : 10); i++){
 			var binStart = (this.binSize == 4? (4*i - 14):(2*i - 12));
 			var binEnd = binStart + this.binSize;
 
-			this.binsList.push(new HistBin(binStart, binEnd));
+			this.binsList.push(new HistBin(binStart, binEnd, abstraction));
 		}
 	}
 
 	this.createHistogramFromData = function(data){
 		for (var i=0; i<data.length; i++){
+			if (data[i].perception > 10){
+				data[i].perception = 9.9;
+			}
+
+			if (data[i].perception < -10){
+				data[i].perception = -10;
+			}
+
 			var binIndex = this.findBinForPerceptionValue(data[i].perception);
 			this.binsList[binIndex].addToBin(data[i]);
 		}
@@ -56,14 +64,14 @@ function Histogram(abstraction){
 
 			var locationNames = ["mall", "cc", "church", "bar", "mediastation"];
 			var capacityMap = new Array()
-			capacityMap[0] = (0, multiplier*parseInt(rawData["mall_capacity"]));
-			capacityMap[1] = (0, multiplier*parseInt(rawData["cc_capacity"]));
-			capacityMap[2] = (0, multiplier*parseInt(rawData["church_capacity"]));
-			capacityMap[3] = (0, multiplier*parseInt(rawData["bar_capacity"]));
-			capacityMap[4] = (0, multiplier*parseInt(rawData["mediastation_capacity"]));
+			capacityMap[0] = [0, multiplier*parseInt(rawData["mall_capacity"])];
+			capacityMap[1] = [0, multiplier*parseInt(rawData["cc_capacity"])];
+			capacityMap[2] = [0, multiplier*parseInt(rawData["church_capacity"])];
+			capacityMap[3] = [0, multiplier*parseInt(rawData["bar_capacity"])];
+			capacityMap[4] = [0, multiplier*parseInt(rawData["mediastation_capacity"])];
 
 
-			for (var i = 0; i < this.binsList; i++){
+			for (var i = 0; i < this.binsList.length; i++){
 				 var objectsCountInBin = this.binsList[i].mapper[location];
 				 var divisionRatio = this.binsList[i].higherCount / this.binsList[i].binHeight;
 				 var higherBinNumber = objectsCountInBin - parseInt(divisionRatio*objectsCountInBin);
@@ -87,7 +95,7 @@ function Histogram(abstraction){
 
 				 	//Boolean traits
 				 	data.isHonest = (Math.random() < this.binsList[i].isHonest ? true: false);
-					data.isPotStirrer = (Math.random() < this.binsList[i].isPotStirrer ? true: false);
+					data.isPotStirrer = (Math.random() < this.binsList[i].isPotStirrer ? false:true );
 					data.watchesTV = (Math.random() < this.binsList[i].watchesTV ? true: false);
 					data.isReligious = (Math.random() < this.binsList[i].isReligious ? true: false);
 					data.isGay = (Math.random() < this.binsList[i].isGay ? true: false);
@@ -103,12 +111,13 @@ function Histogram(abstraction){
 			var capacityIndex = 0;
 			//Set locations for the data list
 			for (var i = 0; i< dataList.length; i++){
-				if (capacityMap[capacityIndex][0] >= capacityMap[capacityIndex][0]){
+				if ((capacityIndex <= 4) && (capacityMap[capacityIndex][0] >= capacityMap[capacityIndex][1])) {
 					capacityIndex++;
 				}
 
 				if (capacityIndex <= 4){
 					dataList[i].location = locationNames[capacityIndex];
+					capacityMap[capacityIndex][0]++;
 				} else {
 					dataList[i].location = Math.random() < 0.5 ? "house": "city";
 				}
@@ -119,9 +128,10 @@ function Histogram(abstraction){
 				}
 			}
 
-			abstract2 = newAbstract2.createHistogramFromData(dataList);
+			newAbstract2.createHistogramFromData(dataList);
+			abstract2 = newAbstract2;
 		} else {
-			for (var i = 0; i < this.binsList; i++){
+			for (var i = 0; i < this.binsList.length; i++){
 				 var objectsCountInBin = this.binsList[i].mapper[location];
 				 var divisionRatio = this.binsList[i].higherCount / this.binsList[i].binHeight;
 				 var higherBinNumber = objectsCountInBin - parseInt(divisionRatio*objectsCountInBin);
@@ -162,7 +172,7 @@ function Histogram(abstraction){
 				 }
 			}
 			
-			if (location == house){
+			if (location == "house"){
 				// House has info for ALL the houses. Now it's time to randomise and select first x
 				this.randomizeArray(dataList);
 				var numberInHouse = Math.floor(Math.random()*5);
