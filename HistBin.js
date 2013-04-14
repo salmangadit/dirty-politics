@@ -55,7 +55,7 @@ function HistBin(start, end, abstractionLevel){
 
 	this.mergeBin = function(bin, mapperPlace){
 		if (bin.binAverage > this.binAverage){
-			this.higherCount++;
+			this.higherCount+=bin.binHeight;
 		}
 
 		this.isHonest = ((this.isHonest*this.binHeight)+(bin.isHonest*bin.binHeight))/(bin.binHeight+this.binHeight);

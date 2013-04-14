@@ -359,13 +359,21 @@ function heroObject()
                                 mapGen.parentPosX = prevX;
                                 mapGen.parentPosY = prevY;
 
+                                var atomicData = dataOnNPC;
+                                //Compress street in
+                                abstractor.compressIntoSecondLevel(atomicData);
+
                                 //Decompress next room info
-                                var dataToCompress = dataOnNPC;
-                                var dataSet = abstractor.decompressFromThirdLevel(scenery[iter].type);
+                                var dataToCompress = abstract2;
+                                
+                                abstractor.decompressFromThirdLevel(scenery[iter].type);
+
+                                //Abstract 2 is now generated. Time to test one level lower.
+                                var dataSet = abstractor.decompressFromSecondLevel("city");
                                 abstractor.renderNPCsforDataSet(dataSet, scenery[iter].type);
 
                                 //Compress this room info back
-                                abstractor.compressIntoThirdLevel(dataToCompress);
+                                abstractor.compressIntoThirdLevel(dataToCompress, mapGen.parentMapName);
 
                                 mapGen.generate(scenery[iter].type);
                             }

@@ -5,8 +5,13 @@ function NormalDist(){
 
 
 	this.mergeWithNormalDistr = function(dist){
-		this.mean += dist.mean;
-		this.variance += dist.variance;
+		if ((typeof(dist.mean) == "undefined"))
+			dist.mean = 0.5;
+		if ((typeof(dist.variance) == "undefined"))
+			dist.variance = 0.33;
+		
+		this.mean = (this.mean + dist.mean)/2;
+		this.variance = Math.sqrt(((this.variance*this.variance) +(dist.variance*dist.variance))/4);
 		this.distributionValues = this.distributionValues.concat(dist.distributionValues);
 	}
 
