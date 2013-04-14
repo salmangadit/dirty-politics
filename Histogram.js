@@ -94,14 +94,14 @@ function Histogram(abstraction){
 				 	data.gullibility = gull[j];
 
 				 	//Boolean traits
-				 	data.isHonest = (Math.random() < this.binsList[i].isHonest ? true: false);
-					data.isPotStirrer = (Math.random() < this.binsList[i].isPotStirrer ? false:true );
-					data.watchesTV = (Math.random() < this.binsList[i].watchesTV ? true: false);
-					data.isReligious = (Math.random() < this.binsList[i].isReligious ? true: false);
-					data.isGay = (Math.random() < this.binsList[i].isGay ? true: false);
-					data.isTraveler = (Math.random() < this.binsList[i].isTraveler ? true: false);
-					data.isSlut = (Math.random() < this.binsList[i].isSlut ? true: false);
-					data.isMale = (Math.random() < this.binsList[i].isMale ? true: false);
+				 	data.isHonest = (Math.random() < this.binsList[i].isHonest/2 ? true: false);
+					data.isPotStirrer = (Math.random() < this.binsList[i].isPotStirrer/2 ? true:false);
+					data.watchesTV = (Math.random() < this.binsList[i].watchesTV/2 ? true: false);
+					data.isReligious = (Math.random() < this.binsList[i].isReligious/2 ? true: false);
+					data.isGay = (Math.random() < this.binsList[i].isGay/2 ? true: false);
+					data.isTraveler = (Math.random() < this.binsList[i].isTraveler/2 ? true: false);
+					data.isSlut = (Math.random() < this.binsList[i].isSlut/2 ? true: false);
+					data.isMale = (Math.random() < this.binsList[i].isMale/2 ? true: false);
 
 					dataList.push(data);
 				 }
