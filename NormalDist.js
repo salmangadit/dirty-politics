@@ -3,6 +3,13 @@ function NormalDist(){
 	this.mean;
 	this.variance;
 
+
+	this.mergeWithNormalDistr = function(dist){
+		this.mean += dist.mean;
+		this.variance += dist.variance;
+		this.distributionValues = this.distributionValues.concat(dist.distributionValues);
+	}
+
 	// Confidence should be in percentage
 	this.getValueWithConfidence = function(confidence){
 		var range = this.getConfidenceIntervalValues(confidence);
@@ -36,16 +43,22 @@ function NormalDist(){
 	}
 
 	this.getValueByProbability = function(p){
-		this.mean = this.getMean();
-		this.variance = Math.sqrt(this.getVarianceSquared());
+		if ((typeof(this.mean) != "undefined"))
+			this.mean = this.getMean();
+
+		if ((typeof(this.variance) != "undefined"))
+			this.variance = Math.sqrt(this.getVarianceSquared());
 
 		var inverse_erf = this.getInverseERF(2*p - 1);
 		return this.mean + this.variance*Math.sqrt(2)*inverse_erf;
 	}
 
 	this.getProbabilityByValue = function(x){
-		this.mean = this.getMean();
-		this.variance = Math.sqrt(this.getVarianceSquared());
+		if ((typeof(this.mean) != "undefined"))
+			this.mean = this.getMean();
+
+		if ((typeof(this.variance) != "undefined"))
+			this.variance = Math.sqrt(this.getVarianceSquared());
 
 		var erf = this.getERF((x-this.mean)/(this.variance*Math.sqrt(2)));
 
@@ -53,33 +66,33 @@ function NormalDist(){
 	}
 
 	this.getMean = function(){
-		if (distributionValues.length == 0)
+		if (this.distributionValues.length == 0)
 			return null;
 
 		var sum = 0;
-		for (var i = 0; i<distributionValues.length; i++){
-			sum += distributionValues[i];
+		for (var i = 0; i<this.distributionValues.length; i++){
+			sum += this.distributionValues[i];
 		}
 
-		return (sum/distributionValues.length);
+		return (sum/this.distributionValues.length);
 	}
 
 	this.getVarianceSquared = function(){
-		if (distributionValues.length == 0)
+		if (this.distributionValues.length == 0)
 			return null;
 
 		var sum = 0;
-		for (var i = 0; i<distributionValues.length; i++){
-			sum += Math.pow((distributionValues[i]-this.mean),2);
+		for (var i = 0; i<this.distributionValues.length; i++){
+			sum += Math.pow((this.distributionValues[i]-this.mean),2);
 		}
 
-		if (distributionValues.length <2){
+		if (this.distributionValues.length <2){
 			return 0;
-		} else if (distributionValues.length < 30){
-			return sum/(distributionValues.length - 1);
+		} else if (this.distributionValues.length < 30){
+			return sum/(this.distributionValues.length - 1);
 		}
 
-		return sum/(distributionValues.length);
+		return sum/(this.distributionValues.length);
 	}
 
 	this.getERF = function(x){

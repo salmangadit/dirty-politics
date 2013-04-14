@@ -5,7 +5,7 @@ function DataObj() {
 	this.watchesTV = false;
 	this.isReligious = false;
 	this.isGay = false;
-	this.isTraveler: = false;
+	this.isTraveler = false;
 	this.isSlut = false;
 	this.isMale = false;
 

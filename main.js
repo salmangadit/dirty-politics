@@ -24,8 +24,8 @@ var scenery = new Array();
 var utilities = new Array();
 var npc = new Array();
 
-var abstract3;
-var abstract2;
+var abstract3 = new Histogram(3);
+var abstract2 = new Histogram(2);
 
 var gameW;
 var gameH;
@@ -40,6 +40,7 @@ var menu = new MenuGenerator();
 var message = new Messager();
 var graph = new MileageGraph();
 var minimap = new MiniMap();
+var abstractor;
 
 var MAX_SCREEN_WIDTH = 480;
 var MAX_SCREEN_HEIGHT = 480;
@@ -51,6 +52,8 @@ function init() {
 	minimap.init();
 	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
     canvasPieTimer.init(100,"hudCanvas");
+
+    abstractor = new Abstractor();
 
 	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();

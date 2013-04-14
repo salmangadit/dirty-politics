@@ -18,6 +18,7 @@
 	<script type="text/javascript" language="javascript" src="HistBin.js"></script>
 	<script type="text/javascript" language="javascript" src="Histogram.js"></script>
 	<script type="text/javascript" language="javascript" src="Abstractor.js"></script>
+	<script type="text/javascript" language="javascript" src="Debugger.js"></script>
 	<script type="text/javascript" language="javascript" src="MiniMap.js"></script>
 	<script type="text/javascript" language="javascript" src="Messager.js"></script>
 	<script type="text/javascript" language="javascript" src="MileageGraph.js"></script>
@@ -44,6 +45,13 @@
 	#menuCanvas
 	{
 		z-index:3;
+		margin-left: 500px;
+		margin-top: 0px;
+
+	}
+	#debugCanvas
+	{
+		z-index:6;
 		margin-left: 500px;
 		margin-top: 0px;
 
@@ -101,9 +109,12 @@
 		<canvas id="perceptionCanvas">Your browser does not support HTML5</canvas>
 		<canvas id="mainCanvas">Your browser does not support HTML5</canvas>
 	</div> 
+	
 	<canvas id="menuCanvas">Your browser does not support HTML5</canvas>
+<!-- 	<canvas id="debugCanvas">Your browser does not support HTML5</canvas> -->
  	<canvas id="hudCanvas">Your browser does not support HTML5</canvas>
 	<canvas id="maplocCanvas">Your browser does not support HTML5</canvas>
+	
    
 	
 	<br />

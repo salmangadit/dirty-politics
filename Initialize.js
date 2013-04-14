@@ -13,8 +13,6 @@ function Initialize(){
 	gullibilityDistribution.mean = 0.5;
 	gullibilityDistribution.variance = 0.33;
 
-	this.generateData();
-
 	this.generateData = function(){
 		for (var i = 0; i< TOTAL_PEOPLE; i++){
 			var data = new DataObj();
@@ -24,7 +22,7 @@ function Initialize(){
 			data.watchesTV = (Math.random() < 0.5 ? true: false);
 			data.isReligious = (Math.random() < 0.5 ? true: false);
 			data.isGay = (Math.random() < 0.5 ? true: false);
-			data.isTraveler: = (Math.random() < 0.5 ? true: false);
+			data.isTraveler = (Math.random() < 0.5 ? true: false);
 			data.isSlut = (Math.random() < 0.5 ? true: false);
 			data.isMale = (Math.random() < 0.5 ? true: false);
 
@@ -38,7 +36,7 @@ function Initialize(){
 		}
 	}
 
-	function getlocation(val){
+	function getlocation(i){
 		if (i<parseInt(rawData["cityA"].totalHouses)*parseInt(rawData["house_capacity"])){
 			return "cityA";
 		} else if (i < (parseInt(rawData["cityA"].totalHouses)+parseInt(rawData["cityB"].totalHouses))
@@ -48,4 +46,6 @@ function Initialize(){
 			return "cityC";
 		}
 	}
+
+	this.generateData();
 }

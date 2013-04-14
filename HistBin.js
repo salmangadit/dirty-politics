@@ -15,10 +15,10 @@ function HistBin(start, end, abstractionLevel){
 	// Trait ratios
 	this.isHonest = 0;
 	this.isPotStirrer = 0;
-	this.watchesTV = 0;
+	this.watchesTV 	= 0;
 	this.isReligious = 0;
 	this.isGay = 0;
-	this.isTraveler: = 0;
+	this.isTraveler = 0;
 	this.isSlut = 0;
 	this.isMale = 0;
 
@@ -28,11 +28,9 @@ function HistBin(start, end, abstractionLevel){
 	// Mappers
 	this.mapper = new Array();
 
-	this.init();
-
 	this.init = function(){
 		// Initialise mappers
-		if (abstractionType == 2){
+		if (abstractionLevel == 2){
 			this.mapper["neighbourhood1"] = 0;
 			this.mapper["neighbourhood2"] = 0;
 			this.mapper["church"] = 0;
@@ -54,6 +52,30 @@ function HistBin(start, end, abstractionLevel){
 
 		return false;
 	}	
+
+	this.mergeBin = function(bin, mapperPlace){
+		if (bin.binAverage > this.binAverage){
+			this.higherCount++;
+		}
+
+		this.isHonest = ((this.isHonest*this.binHeight)+(bin.isHonest*bin.binHeight))/(bin.binHeight+this.binHeight);
+		this.isPotStirrer = ((this.isPotStirrer*this.binHeight)+(bin.isPotStirrer*bin.binHeight))/(bin.binHeight+this.binHeight);
+		this.watchesTV = ((this.watchesTV*this.binHeight)+(bin.watchesTV*bin.binHeight))/(bin.binHeight+this.binHeight);
+		this.isReligious = ((this.isReligious*this.binHeight)+(bin.isReligious*bin.binHeight))/(bin.binHeight+this.binHeight);
+		this.isGay = ((this.isGay*this.binHeight)+(bin.isGay*bin.binHeight))/(bin.binHeight+this.binHeight);
+		this.isTraveler = ((this.isTraveler*this.binHeight)+(bin.isTraveler*bin.binHeight))/(bin.binHeight+this.binHeight);
+		this.isSlut = ((this.isSlut*this.binHeight)+(bin.isSlut*bin.binHeight))/(bin.binHeight+this.binHeight);
+		this.isMale = ((this.isMale*this.binHeight)+(bin.isMale*bin.binHeight))/(bin.binHeight+this.binHeight);
+
+		this.gullibility.mergeWithNormalDistr(bin.gullibility);
+
+		for (var i in bin.mapper)
+		{
+		  this.mapper[mapperPlace] += bin.mapper[i];
+		}
+
+		this.binHeight += bin.binHeight;
+	}
 
 	this.addToBin = function(object){
 		if (object.perception > this.binAverage){
@@ -130,4 +152,6 @@ function HistBin(start, end, abstractionLevel){
 
 		return gull;
 	}
+
+	this.init();
 }

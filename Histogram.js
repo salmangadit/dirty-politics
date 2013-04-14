@@ -3,8 +3,6 @@ function Histogram(abstraction){
 	this.binsList = new Array();
 	this.abstractionLevel = abstraction;
 
-	this.init(abstraction);
-
 	this.init = function(abstraction){
 		if (abstraction == 3){
 			this.binSize == 4;
@@ -93,7 +91,7 @@ function Histogram(abstraction){
 					data.watchesTV = (Math.random() < this.binsList[i].watchesTV ? true: false);
 					data.isReligious = (Math.random() < this.binsList[i].isReligious ? true: false);
 					data.isGay = (Math.random() < this.binsList[i].isGay ? true: false);
-					data.isTraveler: = (Math.random() < this.binsList[i].isTraveler ? true: false);
+					data.isTraveler = (Math.random() < this.binsList[i].isTraveler ? true: false);
 					data.isSlut = (Math.random() < this.binsList[i].isSlut ? true: false);
 					data.isMale = (Math.random() < this.binsList[i].isMale ? true: false);
 
@@ -151,7 +149,7 @@ function Histogram(abstraction){
 					data.watchesTV = (Math.random() < this.binsList[i].watchesTV ? true: false);
 					data.isReligious = (Math.random() < this.binsList[i].isReligious ? true: false);
 					data.isGay = (Math.random() < this.binsList[i].isGay ? true: false);
-					data.isTraveler: = (Math.random() < this.binsList[i].isTraveler ? true: false);
+					data.isTraveler = (Math.random() < this.binsList[i].isTraveler ? true: false);
 					data.isSlut = (Math.random() < this.binsList[i].isSlut ? true: false);
 					data.isMale = (Math.random() < this.binsList[i].isMale ? true: false);
 
@@ -188,10 +186,19 @@ function Histogram(abstraction){
 	  	 }
 	}
 
-	this.compressData = function(data){
-		for (var i=0; i<data.length; i++){
-			var binIndex = this.findBinForPerceptionValue(data[i].perception);
-			this.binsList[binIndex].addToBin(data[i]);
+	this.compressData = function(data, city){
+		if (this.abstractionLevel == 2){
+			for (var i=0; i<data.length; i++){
+				var binIndex = this.findBinForPerceptionValue(data[i].perception);
+				this.binsList[binIndex].addToBin(data[i]);
+			}
+		} else {
+			//For level 2 to 3 compression, it will be a histogram now, not data set
+			//Merge bin with info given
+			for (var i = 0; i< data.binsList.length; i+2){
+				this.binsList[i].mergeBin(data.binsList[i], city);
+				this.binsList[i].mergeBin(data.binsList[i+1], city);
+			}
 		}
 	}
 
@@ -201,4 +208,6 @@ function Histogram(abstraction){
 				return i;
 		}
 	}
+
+	this.init(abstraction);
 }
