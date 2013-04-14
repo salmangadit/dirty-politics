@@ -7,6 +7,8 @@ function heroObject()
 
     // Traits - will only be useful for enemies
     this.perception = -10; //the alma mater of this game!
+    this.gullibility = 0.5;
+
     this.isMale = true;
     this.isHonest = true;
     this.isPotStirrer = true;
@@ -15,6 +17,9 @@ function heroObject()
     this.isGay = true;
     this.isTraveler = true;
     this.isSlut = true;
+
+    this.location;
+    this.neighbourhood;
 
     // Menu items
     // Global
@@ -320,36 +325,38 @@ function heroObject()
             }
         }
 
-        for (iter in scenery)
-        {
-            // if we already have a collision there's no need to continue
-            // checking the other rocks
-            if (this.collision)
+        if (this.type != "npc"){
+            for (iter in scenery)
             {
-                break;
-            }
-            else
-            {
-                // check to see if we have a collision event with the
-                // current rock
-                if (this.checkCollision(scenery[iter]))
+                // if we already have a collision there's no need to continue
+                // checking the other rocks
+                if (this.collision)
                 {
-                        //Clear the map and generate new map
-                        if (scenery[iter].type == "door"){
-                            var name = mapGen.parentMapName;
-                            mapGen.parentMapName = "";
+                    break;
+                }
+                else
+                {
+                    // check to see if we have a collision event with the
+                    // current rock
+                    if (this.checkCollision(scenery[iter]))
+                    {
+                            //Clear the map and generate new map
+                            if (scenery[iter].type == "door"){
+                                var name = mapGen.parentMapName;
+                                mapGen.parentMapName = "";
 
-                            mapGen.generate(name);
-                        }
-                        else{
-                            mapGen.parentMapName = mapGen.currMapName;
-                            mapGen.parentPosX = prevX;
-                            mapGen.parentPosY = prevY;
-                            mapGen.generate(scenery[iter].type);
-                        }
+                                mapGen.generate(name);
+                            }
+                            else{
+                                mapGen.parentMapName = mapGen.currMapName;
+                                mapGen.parentPosX = prevX;
+                                mapGen.parentPosY = prevY;
+                                mapGen.generate(scenery[iter].type);
+                            }
 
-                        //this.internalY = this.y;
-                        this.collision = true;
+                            //this.internalY = this.y;
+                            this.collision = true;
+                    }
                 }
             }
         }

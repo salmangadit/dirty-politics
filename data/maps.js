@@ -178,7 +178,7 @@ var maps =
 
 			"0" :"gHggHggHggHggHggHggHggHggHgg---------g--g----",
 			"1" :"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-g-----------g-",
-			"2" :"-P-g--1----gg------g----g---OO---------------",
+			"2" :"-P-g-------gg------g----g---OO---------------",
 			"3" :"gHggHggHggHggHggHggHggHggHggOO----gg---------",
 			"4" :"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-----gg--------",
 			"5" :"g---g----------e-g----------OO-------b---g---",
