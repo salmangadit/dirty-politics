@@ -23,7 +23,7 @@ function heroObject()
 
     // Menu items
     // Global
-    this.globalMenu = [];
+    this.globalMenu = ["item1", "item2"];
 
     // Special
     this.specialMenu = [];

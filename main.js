@@ -47,7 +47,10 @@ var MAX_SCREEN_HEIGHT = 480;
 
 function init() {
 	mapGen.generate("cityA");
+	var items =  ["item1", "item2"];
 	menu.init();
+	menu.addMenuItems(items);
+	menu.drawMenu();
 	graph.init();
 	minimap.init();
 	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
@@ -171,8 +174,6 @@ function gameLoop() {
 			npc[curNPC].update(elapsed / screenUpdateTime);
 
 		// draw the enemy to the screen again
-
-			
 		}
 		
 		if(npc[curNPC] != null){
@@ -184,8 +185,6 @@ function gameLoop() {
 			perceptionContext.font = "10px Consolas";
         	perceptionContext.fillText(Math.round(npc[curNPC].perception*10)/10,perc_x+7,perc_y+15);
 		}
-
-				
 
 		index++;
 	}
