@@ -111,6 +111,13 @@ var canvasPieTimer = {
         draw.arc(drawX, drawY, radius, 0, Math.PI*2, true);
         draw.fillStyle = this.bgColour;
         draw.fill();
+        draw.fillStyle = 'black';
+        draw.font = "30px Consolas";
+        draw.fillText(this.totalDays-(this.timeElapsed/ this.oneDay),25,50);
+        draw.fillStyle = 'black';
+        draw.font = "10px Consolas";
+        draw.fillText("Days to election",15,60);
+        this.wedgeSize = (this.timeElapsed / this.timeLimit) * Math.PI * 2;
 
         return canvas;
     },

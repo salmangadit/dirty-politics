@@ -41,6 +41,7 @@ var menu = new MenuGenerator();
 var message = new Messager();
 var graph = new MileageGraph();
 var minimap = new MiniMap();
+
 var abstractor;
 
 var MAX_SCREEN_WIDTH = 480;
@@ -48,7 +49,8 @@ var MAX_SCREEN_HEIGHT = 480;
 
 function init() {
 	mapGen.generate("cityA");
-	var items =  ["item1", "item2"];
+	var items =  ["Shake Hands","Mr.Red is a gentleman!", "Mr.Red is a great liar","Promise $1000 per month"
+                  ];
 	menu.init();
 	menu.addMenuItems(items);
 	menu.drawMenu();
@@ -63,12 +65,12 @@ function init() {
 	gameLoop();
 
 	document.addEventListener('keydown', function(event) {
-		
-		// check if the key being pressed is one of the arrow keys -- 
-		// 80 is the p key (punch), 75 is k (kick), 82 is r (rescue)
-		if ((event.keyCode < 41 && event.keyCode > 36) || event.keyCode == 80 || 
-			event.keyCode == 75 || event.keyCode == 82 || event.keyCode == 68 || 
-			event.keyCode == 79	|| event.keyCode == 67) {
+
+		/* check if the key being pressed is one of the arrow keys --
+		*   37 =lEFT, 38=UP,39=RIGHT, 40=DOWN
+		*   32=SPACE, 87=W(up),83=S(down)
+		*/
+		if ((event.keyCode < 41 && event.keyCode > 36)||event.keyCode == 32||event.keyCode==87||event.keyCode==83 ) {
 			// block the default browser action for the arrow keys
 			event.preventDefault();
 
@@ -78,15 +80,46 @@ function init() {
 			if (hero.keys.indexOf(event.keyCode) == -1)
 				//hero.keys.push(event.keyCode);
 				hero.keys[0] = (event.keyCode);
-		}
+
+            /*****************************************************
+             * Added by renga for menu choices
+             * Should be moved to main loop
+             */
+             if(event.keyCode==87)
+             {
+                 // move the pointer up
+                     menu.previousItem();
+             }
+   			 if(event.keyCode==83)
+             {
+                 // move the pointer down
+             	menu.nextItem();
+             }
+            if(event.keyCode==32){
+                console.log("key pressed");
+            for(var i=0;i<npc.length;i++)
+            {
+                //check the distance between player and npc,if at least 2 cells away then execute the action
+                //if 2 npcs close to gether just choose one of the npc
+              //Which is first on the list
+                if(checkPlayerFromNpc(hero,npc[i]) )
+                {
+
+                    console.log("execute action");
+                    break;
+                }
+            }
+            }
+        }
 	});
 
 	document.addEventListener('keyup', function(event) {
 		
 		
-		// check if the key being pressed is one of the arrow keys -- 
-		// 80 is the p key (punch), 75 is k (kick), 82 is r (rescue)
-		if ((event.keyCode < 41 && event.keyCode > 36) || event.keyCode == 80 || event.keyCode == 75 || event.keyCode == 82 || event.keyCode == 68) {
+		/* check if the key being pressed is one of the arrow keys --
+        *   37 =lEFT, 38=UP,39=RIGHT, 40=DOWN
+            *   32=SPACE, 87=W(up),83=S(down)*/
+		if ((event.keyCode < 41 && event.keyCode > 36) ||event.keyCode == 32||event.keyCode==87||event.keyCode==83) {
 			event.preventDefault();
 
 			// check to see if this key is already in the array
@@ -94,10 +127,29 @@ function init() {
 			//curKey = $.inArray(event.keyCode, hero.keys);
 			if (hero.keys.indexOf(event.keyCode) > -1 && !hero.keepMoving) 
 				hero.keys.splice(hero.keys.indexOf(event.keyCode), 1);
+
+
 		}
 	});
 }
 
+function checkPlayerFromNpc(player,npc) {
+    var checkdistance=32*2;
+
+    var x_p1 = npc.x;
+    var y_p1 = npc.y;
+    var x_p2 = player.x;
+    var y_p2 = player.y;
+
+    var distanceSquared = Math.pow((x_p1-x_p2),2) + Math.pow((y_p1-y_p2),2);
+
+    var distance = Math.sqrt(distanceSquared);
+
+    if(distance<=checkdistance)
+        return true;
+    else
+        return false;
+}
 function gameLoop() {
 	// To get the frame rate
 	requestAnimFrame(gameLoop);
@@ -118,7 +170,10 @@ function gameLoop() {
 	perceptionCanvas.width = gameW;
 	perceptionCanvas.height = gameH;
 
-	var index = 0;	
+
+
+
+    var index = 0;
 	for (curNPC in npc) {
 		if (npc[curNPC].destroyed) {
 			// Update the player learning that enemy has been destroyed
