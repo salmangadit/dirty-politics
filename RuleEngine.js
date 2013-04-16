@@ -6,16 +6,16 @@ function RuleEngine(){
 		var ruleType = rules[rule].type;
 		var probSuccess = rules[rule].probSuccess;
 
-		if (rule == "direct"){
+		if (ruleType == "direct"){
 			this.direct(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
-		} else if (rule == "oneToOne"){
+		} else if (ruleType == "oneToOne"){
 			this.oneToOne(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
-		} else if (rule == "neighbourhood"){
+		} else if (ruleType == "neighbourhood"){
 			this.neighbourhood(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
-		} else if (rule == "intraMap"){
+		} else if (ruleType == "intraMap"){
 			this.intraMap(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
 		}
@@ -53,7 +53,7 @@ function RuleEngine(){
         	isSuccess = (Math.random() < probSuccess ? true: false);
         	if (traitsArray.length == 0){
         		npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
-        			(-1*effectFailure*npc[i].gullibility));
+        			(effectFailure*npc[i].gullibility));
         	} else {
         		var resultBool = true;
 
@@ -63,7 +63,7 @@ function RuleEngine(){
 
         		if (resultBool){
         			npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
-        			(-1*effectFailure*npc[i].gullibility));
+        			(effectFailure*npc[i].gullibility));
         		}
         	}
         }
@@ -130,7 +130,7 @@ function RuleEngine(){
 					//Apply perception shift with gullibilities and move them to appropriate bins
 					isSuccess = (Math.random() < probSuccess ? true: false);
 					var curr_perc = abstractChosen.binsList[i].binAverage;
-					var deltaPerception = (isSuccess ? effectSuccess*gull[j] : (-1*effectFailure*gull[j]));
+					var deltaPerception = (isSuccess ? effectSuccess*gull[j] : (effectFailure*gull[j]));
 					
 					var new_perc = curr_perc + deltaPerception;
 
@@ -176,14 +176,14 @@ function RuleEngine(){
 		var peeps = new Array();
 
         for (curNPC in npc) {
-            if (npc[curNPC].gridX == this.gridX && npc[curNPC].gridY == this.gridY){
+            if (npc[curNPC].gridX == actionNPC.gridX && npc[curNPC].gridY == actionNPC.gridY){
                 break;
-            } else if ((npc[curNPC].gridX == this.gridX-1 || npc[curNPC].gridX == this.gridX+1) 
-                && (npc[curNPC].gridY == this.gridY)){
-                peeps.add(npc[curNPC]);
-            } else if ((npc[curNPC].gridY == this.gridY-1 || npc[curNPC].gridY == this.gridY+1) 
-                && (npc[curNPC].gridX == this.gridX)){
-                peeps.add(npc[curNPC]);
+            } else if ((npc[curNPC].gridX >= actionNPC.gridX-1 && npc[curNPC].gridX <= actionNPC.gridX+1) 
+                && (npc[curNPC].gridY == actionNPC.gridY)){
+                peeps.push(npc[curNPC]);
+            } else if ((npc[curNPC].gridY >= actionNPC.gridY-1 && npc[curNPC].gridY <= actionNPC.gridY+1) 
+                && (npc[curNPC].gridX == actionNPC.gridX)){
+                peeps.push(npc[curNPC]);
             }
         }
 
@@ -206,21 +206,10 @@ function RuleEngine(){
 				}
 			}
         	isSuccess = (Math.random() < probSuccess ? true: false);
-        	if (traitsArray.length == 0){
-        		peeps[i].perception += (isSuccess ? effectSuccess*peeps[i].gullibility :
-        			(-1*effectFailure*peeps[i].gullibility));
-        	} else {
-        		var resultBool = true;
 
-        		for (var j = 0; j<traitsArray.length; j++){
-        			resultBool = resultBool && (peeps[i][traitsArray[j]]);
-        		}
+        	peeps[i].perception += (isSuccess ? effectSuccess*peeps[i].gullibility :
+        			(effectFailure*peeps[i].gullibility));
 
-        		if (resultBool){
-        			peeps[i].perception += (isSuccess ? effectSuccess*peeps[i].gullibility :
-        			(-1*effectFailure*peeps[i].gullibility));
-        		}
-        	}
         }		
 	}
 
@@ -243,7 +232,7 @@ function RuleEngine(){
 			for (var j = 0; j < housesPerBin; j++){
 				//Apply perception shift with gullibilities and move them to appropriate bins
 				var curr_perc = abstract2.binsList[i].binAverage;
-				var deltaPerception = (isSuccess ? effectSuccess*gull[j] : (-1*effectFailure*gull[j]));
+				var deltaPerception = (isSuccess ? effectSuccess*gull[j] : (effectFailure*gull[j]));
 				
 				var new_perc = curr_perc + deltaPerception;
 

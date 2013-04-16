@@ -3,7 +3,7 @@ var rules =
 	"truth":{
 		"effectSuccess":3,
 		"cost":15,
-		"probSucess":0.8,
+		"probSuccess":0.8,
 		"effectFailure":-3,
 		"type":"oneToOne",
 		"location":"",
@@ -12,7 +12,7 @@ var rules =
 	"lie":{
 		"effectSuccess":3,
 		"cost":15,
-		"probSucess":0.5,
+		"probSuccess":0.5,
 		"effectFailure":-4,
 		"type":"oneToOne",
 		"location":"",
@@ -21,7 +21,7 @@ var rules =
 	"promise":{
 		"effectSuccess":2,
 		"cost":15,
-		"probSucess":0.6,
+		"probSuccess":0.6,
 		"effectFailure":-2,
 		"type":"oneToOne",
 		"location":"",
@@ -30,7 +30,7 @@ var rules =
 	"flirt":{
 		"effectSuccess":1,
 		"cost":10,
-		"probSucess":"special",
+		"probSuccess":"special",
 		"effectFailure":-1,
 		"type":"oneToOne",
 		"location":"",
@@ -39,7 +39,7 @@ var rules =
 	"sleepWith":{
 		"effectSuccess":4,
 		"cost":120,
-		"probSucess":"special",
+		"probSuccess":"special",
 		"effectFailure":-4,
 		"type":"oneToOne",
 		"location":"",
@@ -48,7 +48,7 @@ var rules =
 	"attendService":{
 		"effectSuccess":3,
 		"cost":120,
-		"probSucess":1,
+		"probSuccess":1,
 		"effectFailure":0,
 		"type":"direct",
 		"location":"",
@@ -57,7 +57,7 @@ var rules =
 	"breakBread":{
 		"effectSuccess":1,
 		"cost":30,
-		"probSucess":1,
+		"probSuccess":1,
 		"effectFailure":0,
 		"type":"intraMap",
 		"location":"church",
@@ -66,7 +66,7 @@ var rules =
 	"boostEconomy":{
 		"effectSuccess":1,
 		"cost":180,
-		"probSucess":"special",
+		"probSuccess":"special",
 		"effectFailure":0,
 		"type":"intraMap",
 		"location":"cc",
@@ -75,7 +75,7 @@ var rules =
 	"slanderAdspot":{
 		"effectSuccess":1,
 		"cost":120,
-		"probSucess":"special",
+		"probSuccess":"special",
 		"effectFailure":-1,
 		"type":"direct",
 		"location":"",
@@ -84,7 +84,7 @@ var rules =
 	"religiousAdspot":{
 		"effectSuccess":1,
 		"cost":120,
-		"probSucess":"special",
+		"probSuccess":"special",
 		"effectFailure":-2,
 		"type":"direct",
 		"location":"",
@@ -93,7 +93,7 @@ var rules =
 	"gayRightsAdspot":{
 		"effectSuccess":1,
 		"cost":120,
-		"probSucess":"special",
+		"probSuccess":"special",
 		"effectFailure":-3,
 		"type":"direct",
 		"location":"",
@@ -102,7 +102,7 @@ var rules =
 	"slander":{
 		"effectSuccess":1,
 		"cost":120,
-		"probSucess":"special",
+		"probSuccess":"special",
 		"effectFailure":-2,
 		"type":"direct",
 		"location":"house",
@@ -111,7 +111,7 @@ var rules =
 	"buyShopping":{
 		"effectSuccess":1,
 		"cost":30,
-		"probSucess":"special",
+		"probSuccess":"special",
 		"effectFailure":-1,
 		"type":"intraMap",
 		"location":"house",
@@ -120,7 +120,7 @@ var rules =
 	"buyDrinks":{
 		"effectSuccess":2,
 		"cost":60,
-		"probSucess":1,
+		"probSuccess":1,
 		"effectFailure":0,
 		"type":"intraMap",
 		"location":"bar",

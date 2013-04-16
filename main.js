@@ -42,6 +42,7 @@ var menu = new MenuGenerator();
 var message = new Messager();
 var graph = new MileageGraph();
 var minimap = new MiniMap();
+var ruleEngine = new RuleEngine();
 
 var parentMapName; 
 
@@ -60,8 +61,11 @@ function init() {
     canvasPieTimer.init(100,"hudCanvas");
 
     abstractor = new Abstractor();
+
     //var abstracthistogram=new DrawHistogram("debugCanvas");
     //abstracthistogram.updatehistogram();
+
+    ruleEngine.executeRule("flirt", hero);
 	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 
