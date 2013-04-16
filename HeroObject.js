@@ -23,7 +23,8 @@ function heroObject()
 
     // Menu items
     // Global
-    this.globalMenu = ["item1", "item2"];
+    this.globalMenu =  ["Shake Hands","Mr.Red is a gentleman!", "Mr.Red is a great liar","Promise $1000 per month" ];
+
 
     // Special
     this.specialMenu = [];
@@ -92,7 +93,7 @@ function heroObject()
 
         if (this.perception >= 10){
             this.perception = 9.99;
-        } else if (this.perception < =-10){
+        } else if (this.perception <=-10){
             this.perception = -9.99;
         }
 

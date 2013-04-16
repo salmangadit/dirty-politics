@@ -99,7 +99,8 @@ function MapGenerator(){
 					grid[i][j] = 0;
 				}
 
-				if (gameObjects[objIndex].type == "collidable") {
+				if (gameObjects[objIndex].type == "collidable")
+                {
 					// Create a new static object
 					collidables[collidableCount] = new staticObject();
 					// load in the width and height
@@ -120,7 +121,8 @@ function MapGenerator(){
 						collidables[this.index].render();
 					};
 					collidableCount++;
-				} else if (gameObjects[objIndex].type == "scenery") {
+				} else if (gameObjects[objIndex].type == "scenery")
+                {
 					// Create a new static object
 					scenery[sceneryCount] = new staticObject();
 					// load in the width and height

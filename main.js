@@ -25,6 +25,7 @@ var utilities = new Array();
 var npc = new Array();
 var dataOnNPC;
 
+
 var abstract3 = new Histogram(3);
 var abstract2 = new Histogram(2);
 
@@ -51,11 +52,9 @@ var MAX_SCREEN_HEIGHT = 480;
 
 function init() {
 	mapGen.generate("cityA");
-	var items =  ["Shake Hands","Mr.Red is a gentleman!", "Mr.Red is a great liar","Promise $1000 per month"
-                  ];
+
 	menu.init();
-	menu.addMenuItems(items);
-	menu.drawMenu();
+
 	graph.init();
 	minimap.init();
 	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
@@ -63,16 +62,16 @@ function init() {
 
     abstractor = new Abstractor();
 
+
 	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 
 	document.addEventListener('keydown', function(event) {
-
 		/* check if the key being pressed is one of the arrow keys --
 		*   37 =lEFT, 38=UP,39=RIGHT, 40=DOWN
-		*   32=SPACE, 87=W(up),83=S(down)
+		*   32=SPACE, 87=W(up),83=S(down) 69=E
 		*/
-		if ((event.keyCode < 41 && event.keyCode > 36)||event.keyCode == 32||event.keyCode==87||event.keyCode==83 ) {
+		if ((event.keyCode < 41 && event.keyCode > 36)||event.keyCode == 32||event.keyCode==87||event.keyCode==83||event.keyCode==69 ) {
 			// block the default browser action for the arrow keys
 			event.preventDefault();
 
@@ -87,31 +86,32 @@ function init() {
              * Added by renga for menu choices
              * Should be moved to main loop
              */
-             if(event.keyCode==87)
-             {
+             if(event.keyCode==87){
                  // move the pointer up
-                     menu.previousItem();
+                  menu.previousItem();
              }
-   			 if(event.keyCode==83)
-             {
+   			 if(event.keyCode==83) {
                  // move the pointer down
              	menu.nextItem();
              }
             if(event.keyCode==32){
-                console.log("key pressed");
+
             for(var i=0;i<npc.length;i++)
             {
                 //check the distance between player and npc,if at least 2 cells away then execute the action
                 //if 2 npcs close to gether just choose one of the npc
-              //Which is first on the list
-                if(checkPlayerFromNpc(hero,npc[i]) )
-                {
+              //Whichever is first on the list
+                if(checkPlayerFromNpc(hero,npc[i])&&checkPlayerFacingNPC(hero,npc[i]) )
+                    {
+                        menu.addMenuItems(hero.globalMenu);
+                        menu.drawMenu();
+                        break;
+                    }
+            }
+            }
+            if(event.keyCode==69){console.log("execute action");}
 
-                    console.log("execute action");
-                    break;
-                }
-            }
-            }
+
         }
 	});
 
@@ -133,6 +133,17 @@ function init() {
 
 		}
 	});
+}
+function checkPlayerFacingNPC(player,npc){
+    if(player.facingWhichDirection=="up"&&npc.facingWhichDirection=="down")
+    {return true;}
+    else if(player.facingWhichDirection=="left"&&npc.facingWhichDirection=="right")
+    {return true;}
+    else if(player.facingWhichDirection=="right"&&npc.facingWhichDirection=="left")
+    {return true;}
+    else if(player.facingWhichDirection=="down"&&npc.facingWhichDirection=="up")
+    {return true;}
+    return false;
 }
 
 function checkPlayerFromNpc(player,npc) {
