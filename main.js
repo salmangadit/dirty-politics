@@ -18,7 +18,8 @@ var perceptionContext;
 var perceptionImage;
 
 var gameObjects = null;
-var hero = null
+var hero = null;
+var enemy = null;
 var collidables = new Array();
 var scenery = new Array();
 var utilities = new Array();
@@ -42,7 +43,8 @@ var menu = new MenuGenerator();
 var message = new Messager();
 var graph = new MileageGraph();
 var minimap = new MiniMap();
-
+var ruleEngine = new RuleEngine();
+var aiEngine = new AIEngine();
 
 var parentMapName;
 var abstractor;
@@ -60,12 +62,19 @@ function init() {
 
     abstractor = new Abstractor();
 
+<<<<<<< HEAD
 
     var abstracthistogram=new DrawHistogram("debugCanvas");
     abstracthistogram.updatehistogram();
 
 //    ruleEngine.executeRule("attendService", hero);
 
+=======
+    // var abstracthistogram=new DrawHistogram("debugCanvas");
+    // abstracthistogram.updatehistogram();
+
+    //ruleEngine.executeRule("attendService", hero);
+>>>>>>> Started AI Engine
 	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 
@@ -193,8 +202,6 @@ function gameLoop() {
 	perceptionCanvas.height = gameH;
 
 
-
-
     var index = 0;
 	for (curNPC in npc) {
 		if (npc[curNPC].destroyed) {
@@ -266,6 +273,11 @@ function gameLoop() {
 		}
 
 		index++;
+	}
+
+	if (enemy != null){
+		enemy.update(elapsed / screenUpdateTime);
+		enemy.render();
 	}
 
 	lastUpdate = now;

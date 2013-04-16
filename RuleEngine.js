@@ -1,6 +1,7 @@
 // Engine takes in variables and modifies the perception
 function RuleEngine(){
 	this.rule;
+	
 	this.executeRule = function(rule, actionNPC){
 		this.rule = rule;
 		var ruleType = rules[rule].type;

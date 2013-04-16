@@ -235,6 +235,11 @@ function MapGenerator(){
 						this.parentPosY = -1;
 					}
 				}
+
+				if (aiEngine.spawnAI){
+					aiEngine.initialiseAtPosition(0,0);
+					aiEngine.spawnAI = false;
+				}
 			}
 		}
 		this.rows = grid.length;
