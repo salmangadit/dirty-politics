@@ -30,7 +30,7 @@ var canvasPieTimer = {
     // 1day =72000
     totalDays:60,
 
-    timeLimit : 1200000,
+    timeLimit : 1800000,
 
     oneDay:0,
 
@@ -76,7 +76,7 @@ var canvasPieTimer = {
 
         this.prayEndTime=13*this.oneHour;
 
-            // set the canvas size for the object - used again later
+        // set the canvas size for the object - used again later
         this.canvasSize = canvasSize;
 
         // Create a canvas element
@@ -85,7 +85,7 @@ var canvasPieTimer = {
         this.wedgeSize = (this.timeInterval / this.timeLimit) * Math.PI * 2;
 
         // update the timer every x of a second
-      this.canvasInterval = setInterval('canvasPieTimer.updatePie()', this.oneHour);
+        this.canvasInterval = setInterval('canvasPieTimer.updatePie()', this.oneHour);
     },
     /*
      * create a canvas element of specific size
@@ -97,27 +97,27 @@ var canvasPieTimer = {
         canvas.id = id;
         // canvas.width = canvasSize;
         // canvas.height = canvasSize;
-     
+
         canvas.style.border = "none";
         // get the size of the outer circle
         var drawX = drawY = radius = this.canvasSize / 2;
 
         // draw the outer circle
         var draw = canvas.getContext("2d");
-      
+
 
         draw.globalAlpha = 1;
         draw.beginPath();
         draw.arc(drawX, drawY, radius, 0, Math.PI*2, true);
         draw.fillStyle = this.bgColour;
         draw.fill();
+
         draw.fillStyle = 'black';
         draw.font = "30px Consolas";
-        draw.fillText(this.totalDays-(this.timeElapsed/ this.oneDay),25,50);
+        draw.fillText(this.totalDays,25,50);
         draw.fillStyle = 'black';
         draw.font = "10px Consolas";
         draw.fillText("Days to election",15,60);
-        this.wedgeSize = (this.timeElapsed / this.timeLimit) * Math.PI * 2;
 
         return canvas;
     },
@@ -130,43 +130,46 @@ var canvasPieTimer = {
         {
             this.gameOver();
         }
+
+
         // point(s) to start the drawing, half the canvas size
         var drawX = drawY = radius = this.canvasSize / 2;
 
         // Calculate the end angle
-        var endAngle = this.startAngle + this.wedgeSize;
 
         this.timeElapsed = this.timeElapsed + this.oneHour;
 
 
         if(this.timeElapsed%this.prayStartTime==0&&this.newDay==true)
         {
-        this.pray=true;
-        this.newDay=false;
+            this.pray=true;
+            this.newDay=false;
         }
 
         if(this.timeElapsed%this.prayEndTime==0)
         {this.pray=false;}
         if(this.timeElapsed%this.oneDay==0)
         {
+            this.wedgeSize = (this.timeElapsed / this.timeLimit) * Math.PI * 2;
+            var endAngle = this.startAngle + this.wedgeSize;
 
-         var draw = this.canvas.getContext("2d");
-         draw.clearRect(0,0,100,100);
-         draw.beginPath();
-         draw.moveTo(drawX,drawY);
-         draw.arc(drawX, drawY, radius, this.startAngle, endAngle, false);
-         draw.closePath();
-         draw.fillStyle = this.fillColour;
-         draw.fill();
+            var draw = this.canvas.getContext("2d");
+            draw.clearRect(0,0,100,100);
+            draw.beginPath();
+            draw.moveTo(drawX,drawY);
+            draw.arc(drawX, drawY, radius, this.startAngle, endAngle, false);
+            draw.closePath();
+            draw.fillStyle = this.fillColour;
+            draw.fill();
 
-         draw.fillStyle = 'black';
-         draw.font = "30px Consolas";
-         draw.fillText(this.totalDays-(this.timeElapsed/ this.oneDay),25,50);
-         draw.fillStyle = 'black';
-         draw.font = "10px Consolas";
-         draw.fillText("Days to election",15,60);
-        this.wedgeSize = (this.timeElapsed / this.timeLimit) * Math.PI * 2;
-        this.newDay=true;
+            draw.fillStyle = 'black';
+            draw.font = "30px Consolas";
+            draw.fillText(this.totalDays-(this.timeElapsed/ this.oneDay),25,50);
+            draw.fillStyle = 'black';
+            draw.font = "10px Consolas";
+            draw.fillText("Days to election",15,60);
+
+            this.newDay=true;
         }
     },
     addanDay:function(){

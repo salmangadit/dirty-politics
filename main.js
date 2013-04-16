@@ -42,12 +42,10 @@ var menu = new MenuGenerator();
 var message = new Messager();
 var graph = new MileageGraph();
 var minimap = new MiniMap();
-var ruleEngine = new RuleEngine();
 
-var parentMapName; 
 
+var parentMapName;
 var abstractor;
-
 var MAX_SCREEN_WIDTH = 480;
 var MAX_SCREEN_HEIGHT = 480;
 
@@ -62,10 +60,12 @@ function init() {
 
     abstractor = new Abstractor();
 
-    //var abstracthistogram=new DrawHistogram("debugCanvas");
-    //abstracthistogram.updatehistogram();
 
-    ruleEngine.executeRule("attendService", hero);
+    var abstracthistogram=new DrawHistogram("debugCanvas");
+    abstracthistogram.updatehistogram();
+
+//    ruleEngine.executeRule("attendService", hero);
+
 	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 
