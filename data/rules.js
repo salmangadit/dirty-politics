@@ -6,8 +6,6 @@ var rules =
 		"probSucess":0.8,
 		"effectFailure":-3,
 		"type":"oneToOne",
-		"traitsArray":[
-		],
 		"location":"",
 		"level":1
 	}

@@ -3,16 +3,17 @@ function RuleEngine(){
 
 	this.executeRule = function(rule, actionNPC){
 		var ruleType = rules[rule].type;
+		var probSuccess = rules[rule].probSuccess;
 
 		if (rule == ruleType){
 			this.direct(rules[rule].location, actionNPC, rules[rule].level, 
-				rules[rule].effectSuccess, rules[rule].effectFailure, rules[rule].traitsArray, rules[rule].probSuccess);
+				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
 		} else if (rule == ruleType){
 			this.oneToOne(rules[rule].location, actionNPC, rules[rule].level, 
-				rules[rule].effectSuccess, rules[rule].effectFailure, rules[rule].traitsArray, rules[rule].probSuccess);
+				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
 		} else if (rule == ruleType){
 			this.neighbourhood(rules[rule].location, actionNPC, rules[rule].level, 
-				rules[rule].effectSuccess, rules[rule].effectFailure, rules[rule].traitsArray, rules[rule].probSuccess);
+				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
 		}
 	}
 
@@ -23,7 +24,7 @@ function RuleEngine(){
 	// 4. else deltaPerception =  effectFailure * gullibility
 
 	// DIRECT: One point of spread direct to a certain type of trait or location? Depending on level effect varies
-	this.direct = function(location, actionNPC, level, effectSuccess, effectFailure, traitsArray, probSuccess){
+	this.direct = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
 		var isSuccess = (Math.random() < probSuccess ? true: false);
 		if (!isSuccess){
 			return 99;
@@ -33,8 +34,8 @@ function RuleEngine(){
 	}
 
 	// ONE TO ONE: Always on atomic level with direct interaction. Can later be mapped for NPC-NPC interaction
-	this.oneToOne = function(location, actionNPC, level, effectSuccess, effectFailure, traitsArray, probSuccess){
-		var isSuccess = (Math.random() < probSuccess ? true: false);
+	this.oneToOne = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
+		var isSuccess;
 
 		//Check people around
 		var peeps = new Array();
@@ -52,6 +53,24 @@ function RuleEngine(){
         }
 
         for (var i =0; i< peeps.length; i++){
+        	var mileageDiff = abstractor.getPlayerPerception() - abstractor.getOpponentPerception();
+			if (probSuccess == "special"){
+				switch (rule){
+					case "flirt": 
+					case "sleepWith":
+						if (mileageDiff > 2 && peeps[i].isSlut){
+							probSuccess = 1;
+						} else if (mileageDiff < 2 && peeps[i].isSlut){
+							probSuccess = 0.8;
+						} else if (mileageDiff > 2 && !peeps[i].isSlut){
+							probSuccess = 0.3;
+						} else {
+							probSuccess = 0;
+						}
+						break;
+				}
+			}
+        	isSuccess = (Math.random() < probSuccess ? true: false);
         	if (traitsArray.length == 0){
         		peeps[i].perception += (isSuccess ? effectSuccess*peeps[i].gullibility :
         			(-1*effectFailure*peeps[i].gullibility));
@@ -72,7 +91,7 @@ function RuleEngine(){
 
 	// INTRA NEIGHBOURHOOD: Spreading in a radial direction within a neighbourhood of houses in a decreasing effect
 	// Consider applying gaussian or exponential trends
-	this.neighbourhood = function(location, actionNPC, level, effectSuccess, effectFailure, traitsArray, probSuccess){
+	this.neighbourhood = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
 		var isSuccess = (Math.random() < probSuccess ? true: false);
 		if (!isSuccess){
 			return 99;
