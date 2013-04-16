@@ -30,7 +30,7 @@ var canvasPieTimer = {
     // 1day =72000
     totalDays:60,
 
-    timeLimit : 3600000,
+    timeLimit : 1200000,
 
     oneDay:0,
 
