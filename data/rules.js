@@ -9,6 +9,96 @@ var rules =
 		"location":"",
 		"level":1
 	},
+	"lie":{
+		"effectSuccess":3,
+		"cost":15,
+		"probSucess":0.5,
+		"effectFailure":-4,
+		"type":"oneToOne",
+		"location":"",
+		"level":1
+	},
+	"promise":{
+		"effectSuccess":2,
+		"cost":15,
+		"probSucess":0.6,
+		"effectFailure":-2,
+		"type":"oneToOne",
+		"location":"",
+		"level":1
+	},
+	"flirt":{
+		"effectSuccess":1,
+		"cost":10,
+		"probSucess":"special",
+		"effectFailure":-1,
+		"type":"oneToOne",
+		"location":"",
+		"level":1
+	},
+	"sleepWith":{
+		"effectSuccess":4,
+		"cost":120,
+		"probSucess":"special",
+		"effectFailure":-4,
+		"type":"oneToOne",
+		"location":"",
+		"level":1
+	},
+	"attendService":{
+		"effectSuccess":3,
+		"cost":120,
+		"probSucess":1,
+		"effectFailure":0,
+		"type":"direct",
+		"location":"",
+		"level":3
+	},
+	"breakBread":{
+		"effectSuccess":1,
+		"cost":30,
+		"probSucess":1,
+		"effectFailure":0,
+		"type":"intraMap",
+		"location":"church",
+		"level":1
+	},
+	"boostEconomy":{
+		"effectSuccess":1,
+		"cost":180,
+		"probSucess":"special",
+		"effectFailure":0,
+		"type":"intraMap",
+		"location":"cc",
+		"level":1
+	},
+	"slanderAdspot":{
+		"effectSuccess":1,
+		"cost":120,
+		"probSucess":"special",
+		"effectFailure":-1,
+		"type":"direct",
+		"location":"",
+		"level":2
+	},
+	"religiousAdspot":{
+		"effectSuccess":1,
+		"cost":120,
+		"probSucess":"special",
+		"effectFailure":-2,
+		"type":"direct",
+		"location":"",
+		"level":2
+	},
+	"gayRightsAdspot":{
+		"effectSuccess":1,
+		"cost":120,
+		"probSucess":"special",
+		"effectFailure":-3,
+		"type":"direct",
+		"location":"",
+		"level":2
+	},
 	"slander":{
 		"effectSuccess":1,
 		"cost":120,
@@ -17,5 +107,23 @@ var rules =
 		"type":"direct",
 		"location":"house",
 		"level":2
+	},
+	"buyShopping":{
+		"effectSuccess":1,
+		"cost":30,
+		"probSucess":"special",
+		"effectFailure":-1,
+		"type":"intraMap",
+		"location":"house",
+		"level":2
+	},
+	"buyDrinks":{
+		"effectSuccess":2,
+		"cost":60,
+		"probSucess":1,
+		"effectFailure":0,
+		"type":"intraMap",
+		"location":"bar",
+		"level":1
 	}
 }

@@ -6,14 +6,17 @@ function RuleEngine(){
 		var ruleType = rules[rule].type;
 		var probSuccess = rules[rule].probSuccess;
 
-		if (rule == ruleType){
+		if (rule == "direct"){
 			this.direct(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
-		} else if (rule == ruleType){
+		} else if (rule == "oneToOne"){
 			this.oneToOne(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
-		} else if (rule == ruleType){
+		} else if (rule == "neighbourhood"){
 			this.neighbourhood(rules[rule].location, actionNPC, rules[rule].level, 
+				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
+		} else if (rule == "intraMap"){
+			this.intraMap(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
 		}
 	}
@@ -24,9 +27,51 @@ function RuleEngine(){
 	// 3. If successful, deltaPerception = effectSuccess * gullibility
 	// 4. else deltaPerception =  effectFailure * gullibility
 
+	//INTRA MAP: All characters on map meeting probability requirements feel effect
+	this.intraMap = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
+		var isSuccess;
+
+        for (var i =0; i< npc.length; i++){
+			if (probSuccess == "special"){
+				switch (this.rule){
+					case "boostEconomy": 
+						if (npc[i].gullibility > 0.5){
+							probSuccess = 0.7;
+						} else {
+							probSuccess = 0.2;
+						}
+						break;
+					case "buyShopping": 
+						if (npc[i].isHonest){
+							probSuccess = 0.2;
+						} else {
+							probSuccess = 0.8;
+						}
+						break;
+				}
+			}
+        	isSuccess = (Math.random() < probSuccess ? true: false);
+        	if (traitsArray.length == 0){
+        		npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
+        			(-1*effectFailure*npc[i].gullibility));
+        	} else {
+        		var resultBool = true;
+
+        		for (var j = 0; j<traitsArray.length; j++){
+        			resultBool = resultBool && (npc[i][traitsArray[j]]);
+        		}
+
+        		if (resultBool){
+        			npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
+        			(-1*effectFailure*npc[i].gullibility));
+        		}
+        	}
+        }
+	}
+
 	// DIRECT: One point of spread direct to a certain type of trait or location? Depending on level effect varies
 	this.direct = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
-		var isSuccess = (Math.random() < probSuccess ? true: false);
+		var isSuccess;
 		var abstractChosen = (level == 2) ? abstract2 : abstract3;
 		var chosenLocation = (level == 2) ? location : "world";
 
@@ -45,8 +90,45 @@ function RuleEngine(){
 					Math.random() > abstractChosen.binsList[i].watchesTV){
 					continue;
 				} else {
-
+					var tv = Math.random() < abstractChosen.binsList[i].watchesTV? true:false;
+					var relig = Math.random() < abstractChosen.binsList[i].isReligious? true:false;
+					var gay = Math.random() < abstractChosen.binsList[i].isGay? true:false;
+					if (probSuccess == "special"){
+						switch (this.rule){
+							case "slanderAdspot":
+								if ((abstractor.getOpponentPerception() > abstractor.getPlayerPerception())
+									&& tv){
+									probSuccess = 0.5;
+								} else if (tv){
+									probSuccess = 0.7;
+								} else {
+									probSuccess = 0;
+								}
+								break;
+							case "religiousAdspot":
+								if (relig && tv){
+									probSuccess = 0.8;
+								} else if (tv){
+									probSuccess = 0.6;
+								} else {
+									probSuccess = 0;
+								}
+								break;
+							case "gayRightsAdspot":
+								if (relig && tv){
+									probSuccess = 0;
+								} else if (gay && tv){
+									probSuccess = 1;
+								} else if (tv){
+									probSuccess = 0.5;
+								} else {
+									probSuccess = 0;
+								}
+								break;
+						}
+					}
 					//Apply perception shift with gullibilities and move them to appropriate bins
+					isSuccess = (Math.random() < probSuccess ? true: false);
 					var curr_perc = abstractChosen.binsList[i].binAverage;
 					var deltaPerception = (isSuccess ? effectSuccess*gull[j] : (-1*effectFailure*gull[j]));
 					
