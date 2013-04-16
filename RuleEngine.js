@@ -35,40 +35,39 @@ function RuleEngine(){
 	// ONE TO ONE: Always on atomic level with direct interaction. Can later be mapped for NPC-NPC interaction
 	this.oneToOne = function(location, actionNPC, level, effectSuccess, effectFailure, traitsArray, probSuccess){
 		var isSuccess = (Math.random() < probSuccess ? true: false);
-		if (!isSuccess){
-			return 99;
-		} else {
-			//Check people around
-			var peeps = new Array();
 
-	        for (curNPC in npc) {
-	            if (npc[curNPC].gridX == this.gridX && npc[curNPC].gridY == this.gridY){
-	                break;
-	            } else if ((npc[curNPC].gridX == this.gridX-1 || npc[curNPC].gridX == this.gridX+1) 
-	                && (npc[curNPC].gridY == this.gridY)){
-	                peeps.add(npc[curNPC]);
-	            } else if ((npc[curNPC].gridY == this.gridY-1 || npc[curNPC].gridY == this.gridY+1) 
-	                && (npc[curNPC].gridX == this.gridX)){
-	                peeps.add(npc[curNPC]);
-	            }
-	        }
+		//Check people around
+		var peeps = new Array();
 
-	        for (var i =0; i< peeps.length; i++){
-	        	if (traitsArray.length == 0){
-	        		peeps[i].perception += (effectSuccess*peeps[i].gullibility);
-	        	} else {
-	        		var resultBool = true;
+        for (curNPC in npc) {
+            if (npc[curNPC].gridX == this.gridX && npc[curNPC].gridY == this.gridY){
+                break;
+            } else if ((npc[curNPC].gridX == this.gridX-1 || npc[curNPC].gridX == this.gridX+1) 
+                && (npc[curNPC].gridY == this.gridY)){
+                peeps.add(npc[curNPC]);
+            } else if ((npc[curNPC].gridY == this.gridY-1 || npc[curNPC].gridY == this.gridY+1) 
+                && (npc[curNPC].gridX == this.gridX)){
+                peeps.add(npc[curNPC]);
+            }
+        }
 
-	        		for (var j = 0; j<traitsArray.length; j++){
-	        			resultBool = resultBool && (peeps[i][traitsArray[j]]);
-	        		}
+        for (var i =0; i< peeps.length; i++){
+        	if (traitsArray.length == 0){
+        		peeps[i].perception += (isSuccess ? effectSuccess*peeps[i].gullibility :
+        			(-1*effectFailure*peeps[i].gullibility));
+        	} else {
+        		var resultBool = true;
 
-	        		if (resultBool){
-	        			peeps[i].perception += (effectSuccess*peeps[i].gullibility);
-	        		}
-	        	}
-	        }		
-    	}
+        		for (var j = 0; j<traitsArray.length; j++){
+        			resultBool = resultBool && (peeps[i][traitsArray[j]]);
+        		}
+
+        		if (resultBool){
+        			peeps[i].perception += (isSuccess ? effectSuccess*peeps[i].gullibility :
+        			(-1*effectFailure*peeps[i].gullibility));
+        		}
+        	}
+        }		
 	}
 
 	// INTRA NEIGHBOURHOOD: Spreading in a radial direction within a neighbourhood of houses in a decreasing effect
