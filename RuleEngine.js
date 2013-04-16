@@ -2,23 +2,23 @@
 function RuleEngine(){
 	this.rule;
 	
-	this.executeRule = function(rule, actionNPC){
+	this.executeRule = function(rule, actionNPC, currLevel){
 		this.rule = rule;
 		var ruleType = rules[rule].type;
 		var probSuccess = rules[rule].probSuccess;
 
 		if (ruleType == "direct"){
 			this.direct(rules[rule].location, actionNPC, rules[rule].level, 
-				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
+				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess, currLevel);
 		} else if (ruleType == "oneToOne"){
 			this.oneToOne(rules[rule].location, actionNPC, rules[rule].level, 
-				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
+				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess, currLevel);
 		} else if (ruleType == "neighbourhood"){
 			this.neighbourhood(rules[rule].location, actionNPC, rules[rule].level, 
-				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
+				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess, currLevel);
 		} else if (ruleType == "intraMap"){
 			this.intraMap(rules[rule].location, actionNPC, rules[rule].level, 
-				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess);
+				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess, currLevel);
 		}
 	}
 
@@ -29,38 +29,111 @@ function RuleEngine(){
 	// 4. else deltaPerception =  effectFailure * gullibility
 
 	//INTRA MAP: All characters on map meeting probability requirements feel effect
-	this.intraMap = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
+	this.intraMap = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess, currLevel){
+		if (actionNPC.type == "enemy"){
+			effectSuccess *= -1;
+			effectFailure *= -1;
+		}
+
 		var isSuccess;
 
-        for (var i =0; i< npc.length; i++){
-			if (probSuccess == "special"){
-				switch (this.rule){
-					case "boostEconomy": 
-						if (npc[i].gullibility > 0.5){
-							probSuccess = 0.7;
-						} else {
-							probSuccess = 0.2;
-						}
-						break;
-					case "buyShopping": 
-						if (npc[i].isHonest){
-							probSuccess = 0.2;
-						} else {
-							probSuccess = 0.8;
-						}
-						break;
+		if (!currLevel || currLevel == 1){
+	        for (var i =0; i< npc.length; i++){
+				if (probSuccess == "special"){
+					switch (this.rule){
+						case "boostEconomy": 
+							if (npc[i].gullibility > 0.5){
+								probSuccess = 0.7;
+							} else {
+								probSuccess = 0.2;
+							}
+							break;
+						case "buyShopping": 
+							if (npc[i].isHonest){
+								probSuccess = 0.2;
+							} else {
+								probSuccess = 0.8;
+							}
+							break;
+					}
 				}
-			}
-        	isSuccess = (Math.random() < probSuccess ? true: false);
-        	
-    		npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
-        			(effectFailure*npc[i].gullibility));
-        
+	        	isSuccess = (Math.random() < probSuccess ? true: false);
+	        	
+	    		npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
+	        			(effectFailure*npc[i].gullibility));
+    		}
+        } else {
+        	var abstractChosen = (currLevel == 2 ? abstract2 : abstract3);
+        	for (var i =0 ; i<abstractChosen.binsList.length; i++){
+        		var housesPerBin = parseInt(abstractChosen.binsList[i].mapper[actionNPC.location]);
+        		var gull = abstractChosen.binsList[i].getDecompressedGullibilities(0, 1, housesPerBin);
+        		for (var j = 0; j < housesPerBin; j++){
+					if (probSuccess == "special"){
+						switch (this.rule){
+							case "boostEconomy": 
+							if (npc[i].gullibility > 0.5){
+								probSuccess = 0.7;
+							} else {
+								probSuccess = 0.2;
+							}
+							break;
+						case "buyShopping": 
+							if (npc[i].isHonest){
+								probSuccess = 0.2;
+							} else {
+								probSuccess = 0.8;
+							}
+							break;
+						}
+					}
+
+					//Apply perception shift with gullibilities and move them to appropriate bins
+					isSuccess = (Math.random() < probSuccess ? true: false);
+					var curr_perc = abstractChosen.binsList[i].binAverage;
+					var deltaPerception = (isSuccess ? effectSuccess*gull[j] : (effectFailure*gull[j]));
+					
+					var new_perc = curr_perc + deltaPerception;
+
+					var binIndex = abstractChosen.findBinForPerceptionValue(new_perc);
+
+					if (binIndex != i){
+						var data = new DataObj();
+
+						// Trait ratios
+						data.isHonest = (Math.random() < abstractChosen.binsList[i].isHonest ? true: false);
+						data.isPotStirrer = (Math.random() < abstractChosen.binsList[i].isPotStirrer ? true: false);
+						data.watchesTV = (Math.random() < abstractChosen.binsList[i].watchesTV ? true: false);
+						data.isReligious = (Math.random() < abstractChosen.binsList[i].isReligious ? true: false);
+						data.isGay = (Math.random() < abstractChosen.binsList[i].isGay ? true: false);
+						data.isTraveler = (Math.random() < abstractChosen.binsList[i].isTraveler ? true: false);
+						data.isSlut = (Math.random() < abstractChosen.binsList[i].isSlut ? true: false);
+						data.isMale = (Math.random() < abstractChosen.binsList[i].isMale ? true: false);
+
+						// Trait distribution functions
+						data.gullibility = gull[j];
+						data.perception= (Math.random()) + (abstractChosen.binsList[i].binEnd - 1);
+
+						var divisionRatio = abstractChosen.binsList[i].higherCount / abstractChosen.binsList[i].binHeight;
+						
+						if (data.perception > abstractChosen.binsList[i].binAverage){
+							abstractChosen.binsList[i].higherCount--;
+						}
+
+						data.location = location; 
+						abstractChosen.binsList[i].binHeight--;
+						abstractChosen.binsList[binIndex].addToBin(data);
+					}
+				}
+        	}
         }
 	}
 
 	// DIRECT: One point of spread direct to a certain type of trait or location? Depending on level effect varies
-	this.direct = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
+	this.direct = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess, currLevel){
+		if (actionNPC.type == "enemy"){
+			effectSuccess *= -1;
+			effectFailure *= -1;
+		}
 		var isSuccess;
 		var abstractChosen = (level == 2) ? abstract2 : abstract3;
 		var chosenLocation = (level == 2) ? location : "world";
@@ -159,53 +232,125 @@ function RuleEngine(){
 	}
 
 	// ONE TO ONE: Always on atomic level with direct interaction. Can later be mapped for NPC-NPC interaction
-	this.oneToOne = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
+	this.oneToOne = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess, currLevel){
+		if (actionNPC.type == "enemy"){
+			effectSuccess *= -1;
+			effectFailure *= -1;
+		}
 		var isSuccess;
 
-		//Check people around
-		var peeps = new Array();
+		if (!currLevel){
+			//Check people around
+			var peeps = new Array();
 
-        for (curNPC in npc) {
-            if (npc[curNPC].gridX == actionNPC.gridX && npc[curNPC].gridY == actionNPC.gridY){
-                break;
-            } else if ((npc[curNPC].gridX >= actionNPC.gridX-1 && npc[curNPC].gridX <= actionNPC.gridX+1) 
-                && (npc[curNPC].gridY == actionNPC.gridY)){
-                peeps.push(npc[curNPC]);
-            } else if ((npc[curNPC].gridY >= actionNPC.gridY-1 && npc[curNPC].gridY <= actionNPC.gridY+1) 
-                && (npc[curNPC].gridX == actionNPC.gridX)){
-                peeps.push(npc[curNPC]);
-            }
-        }
+	        for (curNPC in npc) {
+	            if (npc[curNPC].gridX == actionNPC.gridX && npc[curNPC].gridY == actionNPC.gridY){
+	                break;
+	            } else if ((npc[curNPC].gridX >= actionNPC.gridX-1 && npc[curNPC].gridX <= actionNPC.gridX+1) 
+	                && (npc[curNPC].gridY == actionNPC.gridY)){
+	                peeps.push(npc[curNPC]);
+	            } else if ((npc[curNPC].gridY >= actionNPC.gridY-1 && npc[curNPC].gridY <= actionNPC.gridY+1) 
+	                && (npc[curNPC].gridX == actionNPC.gridX)){
+	                peeps.push(npc[curNPC]);
+	            }
+	        }
 
-        for (var i =0; i< peeps.length; i++){
-        	var mileageDiff = abstractor.getPlayerPerception() - abstractor.getOpponentPerception();
+	        for (var i =0; i< peeps.length; i++){
+	        	var mileageDiff = abstractor.getPlayerPerception() - abstractor.getOpponentPerception();
+				if (probSuccess == "special"){
+					switch (this.rule){
+						case "flirt": 
+						case "sleepWith":
+							if (mileageDiff > 2 && peeps[i].isSlut){
+								probSuccess = 1;
+							} else if (mileageDiff < 2 && peeps[i].isSlut){
+								probSuccess = 0.8;
+							} else if (mileageDiff > 2 && !peeps[i].isSlut){
+								probSuccess = 0.3;
+							} else {
+								probSuccess = 0;
+							}
+							break;
+					}
+				}
+	        	isSuccess = (Math.random() < probSuccess ? true: false);
+
+	        	peeps[i].perception += (isSuccess ? effectSuccess*peeps[i].gullibility :
+	        			(effectFailure*peeps[i].gullibility));
+
+	        }	
+	    } else {
+	    	var abstractChosen = (currLevel == 2 ? abstract2 : abstract3);
+	    	var binChosen = (currLevel == 2 ? Math.floor((Math.random() * 4) + 5):Math.floor((Math.random()*2) + 3));
+    		
+    		var gull = abstractChosen.binsList[binChosen].getDecompressedGullibilities(0, 1, 1);
+		
 			if (probSuccess == "special"){
 				switch (this.rule){
-					case "flirt": 
-					case "sleepWith":
-						if (mileageDiff > 2 && peeps[i].isSlut){
-							probSuccess = 1;
-						} else if (mileageDiff < 2 && peeps[i].isSlut){
-							probSuccess = 0.8;
-						} else if (mileageDiff > 2 && !peeps[i].isSlut){
-							probSuccess = 0.3;
-						} else {
-							probSuccess = 0;
-						}
-						break;
+					case "boostEconomy": 
+					if (gull[0] > 0.5){
+						probSuccess = 0.7;
+					} else {
+						probSuccess = 0.2;
+					}
+					break;
+				case "buyShopping": 
+					if (Math.random() < abstractChosen.binsList[binChosen].isHonest ? true:false){
+						probSuccess = 0.2;
+					} else {
+						probSuccess = 0.8;
+					}
+					break;
 				}
 			}
-        	isSuccess = (Math.random() < probSuccess ? true: false);
 
-        	peeps[i].perception += (isSuccess ? effectSuccess*peeps[i].gullibility :
-        			(effectFailure*peeps[i].gullibility));
+			//Apply perception shift with gullibilities and move them to appropriate bins
+			isSuccess = (Math.random() < probSuccess ? true: false);
+			var curr_perc = abstractChosen.binsList[binChosen].binAverage;
+			var deltaPerception = (isSuccess ? effectSuccess*gull[0] : (effectFailure*gull[0]));
+			
+			var new_perc = curr_perc + deltaPerception;
 
-        }		
+			var binIndex = abstractChosen.findBinForPerceptionValue(new_perc);
+
+			if (binIndex != binChosen){
+				var data = new DataObj();
+
+				// Trait ratios
+				data.isHonest = (Math.random() < abstractChosen.binsList[binChosen].isHonest ? true: false);
+				data.isPotStirrer = (Math.random() < abstractChosen.binsList[binChosen].isPotStirrer ? true: false);
+				data.watchesTV = (Math.random() < abstractChosen.binsList[binChosen].watchesTV ? true: false);
+				data.isReligious = (Math.random() < abstractChosen.binsList[binChosen].isReligious ? true: false);
+				data.isGay = (Math.random() < abstractChosen.binsList[binChosen].isGay ? true: false);
+				data.isTraveler = (Math.random() < abstractChosen.binsList[binChosen].isTraveler ? true: false);
+				data.isSlut = (Math.random() < abstractChosen.binsList[binChosen].isSlut ? true: false);
+				data.isMale = (Math.random() < abstractChosen.binsList[binChosen].isMale ? true: false);
+
+				// Trait distribution functions
+				data.gullibility = gull[j];
+				data.perception= (Math.random()) + (abstractChosen.binsList[binChosen].binEnd - 1);
+
+				var divisionRatio = abstractChosen.binsList[binChosen].higherCount / abstractChosen.binsList[binChosen].binHeight;
+				
+				if (data.perception > abstractChosen.binsList[binChosen].binAverage){
+					abstractChosen.binsList[binChosen].higherCount--;
+				}
+
+				data.location = location; 
+				abstractChosen.binsList[binChosen].binHeight--;
+				abstractChosen.binsList[binIndex].addToBin(data);
+			}
+			
+	    }	
 	}
 
 	// INTRA NEIGHBOURHOOD: Spreading in a radial direction within a neighbourhood of houses in a decreasing effect
 	// Consider applying gaussian or exponential trends
 	this.neighbourhood = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
+		if (actionNPC.type == "enemy"){
+			effectSuccess *= -1;
+			effectFailure *= -1;
+		}
 		var isSuccess = (Math.random() < probSuccess ? true: false);
 		var neighbourhoodRatio;
 
