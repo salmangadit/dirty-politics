@@ -5,13 +5,33 @@ function AIEngine(){
 	this.enemyLevelToPlayer = 1;
 
 	var firstTenDays = ["cityC", "cityA", "cityB", "cityA", "cityC", "cityB", 
-	"cityA", "cityC", "cityA", "cityC", "cityB", "cityA", "cityB"];
+	"cityA", "cityC", "cityA", "cityC", "cityB", "cityA", "cityB", "cityA", "cityC", "cityB", 
+	"cityA", "cityC", "cityA", "cityC"];
+
+	var simpleActs = ["promise", "flirt", "breakBread", "boostEconomy", "slanderAdspot", "buyShopping", "buyDrinks"];
+
+	var bigTickets = ["truth", "lie", "sleepWith", "attendService", "religiousAdspot", "gayRightsAdspot"];
 
 	// Things to note about AI
 	// First 10 days he is roaming around just chatting up people. Make sure this is possible all 3 abstracts
 	// If he is in the same map as player, physically render and having chatting people up. Movements can be random.
 	// Think for building entry also
 	// Adspot flash on day 5 (all still rather random)
+	this.run = function(){
+		var halfDays = parseInt(2*(canvasPieTimer.timeElapsed/ canvasPieTimer.oneDay));
+
+		if (halfDays < 20){
+			var location = firstTenDays[halfDays];
+			this.moveToLocation(location);
+
+			// Do simple things in the first ten days
+
+		}
+	}
+
+
+
+
 	this.initialiseAtPosition = function(x,y){
 		enemy = new heroObject();
 		enemy.width = 32;

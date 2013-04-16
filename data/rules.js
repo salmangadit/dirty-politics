@@ -82,7 +82,7 @@ var rules =
 		"level":2
 	},
 	"religiousAdspot":{
-		"effectSuccess":1,
+		"effectSuccess":3,
 		"cost":120,
 		"probSuccess":"special",
 		"effectFailure":-2,
@@ -91,21 +91,12 @@ var rules =
 		"level":2
 	},
 	"gayRightsAdspot":{
-		"effectSuccess":1,
+		"effectSuccess":2,
 		"cost":120,
 		"probSuccess":"special",
 		"effectFailure":-3,
 		"type":"direct",
 		"location":"",
-		"level":2
-	},
-	"slander":{
-		"effectSuccess":1,
-		"cost":120,
-		"probSuccess":"special",
-		"effectFailure":-2,
-		"type":"direct",
-		"location":"house",
 		"level":2
 	},
 	"buyShopping":{
