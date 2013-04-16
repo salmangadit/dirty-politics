@@ -46,6 +46,9 @@ function HistBin(start, end, abstractionLevel){
 	}
 
 	this.fitsInBin = function(perception){
+		if (perception > 10) perception = 9.99;
+		if (perception < -10) perception = -9.99;
+		
 		if (perception >= this.binStart && perception < this.binEnd){
 			return true;
 		}

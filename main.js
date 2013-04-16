@@ -65,7 +65,7 @@ function init() {
     //var abstracthistogram=new DrawHistogram("debugCanvas");
     //abstracthistogram.updatehistogram();
 
-    ruleEngine.executeRule("flirt", hero);
+    ruleEngine.executeRule("attendService", hero);
 	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 

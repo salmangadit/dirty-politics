@@ -46,9 +46,9 @@ var rules =
 		"level":1
 	},
 	"attendService":{
-		"effectSuccess":3,
+		"effectSuccess":4,
 		"cost":120,
-		"probSuccess":1,
+		"probSuccess":0.75,
 		"effectFailure":0,
 		"type":"direct",
 		"location":"",

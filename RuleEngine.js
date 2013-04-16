@@ -51,21 +51,10 @@ function RuleEngine(){
 				}
 			}
         	isSuccess = (Math.random() < probSuccess ? true: false);
-        	if (traitsArray.length == 0){
-        		npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
+        	
+    		npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
         			(effectFailure*npc[i].gullibility));
-        	} else {
-        		var resultBool = true;
-
-        		for (var j = 0; j<traitsArray.length; j++){
-        			resultBool = resultBool && (npc[i][traitsArray[j]]);
-        		}
-
-        		if (resultBool){
-        			npc[i].perception += (isSuccess ? effectSuccess*npc[i].gullibility :
-        			(effectFailure*npc[i].gullibility));
-        		}
-        	}
+        
         }
 	}
 
@@ -75,7 +64,7 @@ function RuleEngine(){
 		var abstractChosen = (level == 2) ? abstract2 : abstract3;
 		var chosenLocation = (level == 2) ? location : "world";
 
-		for (var i =0 ; i<abstractChosen.binsList; i++){
+		for (var i =0 ; i<abstractChosen.binsList.length; i++){
 			var housesPerBin;
 			if (chosenLocation == "world"){
 				housesPerBin = (abstractChosen.binsList[i].binHeight);
