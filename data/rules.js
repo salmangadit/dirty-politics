@@ -7,7 +7,8 @@ var rules =
 		"effectFailure":-3,
 		"type":"oneToOne",
 		"location":"",
-		"level":1
+		"level":1,
+		"message":"Opponent spilled some of your secrets to gain support!"
 	},
 	"lie":{
 		"effectSuccess":3,
@@ -16,7 +17,8 @@ var rules =
 		"effectFailure":-4,
 		"type":"oneToOne",
 		"location":"",
-		"level":1
+		"level":1,
+		"message":"Opponent slandered you in public!"
 	},
 	"promise":{
 		"effectSuccess":2,
@@ -25,7 +27,8 @@ var rules =
 		"effectFailure":-2,
 		"type":"oneToOne",
 		"location":"",
-		"level":1
+		"level":1,
+		"message":"Opponent made false promises to gain mile-age!"
 	},
 	"flirt":{
 		"effectSuccess":1,
@@ -35,6 +38,7 @@ var rules =
 		"type":"oneToOne",
 		"location":"",
 		"level":1
+		"message":"Opponent flirted with some of the ladies to attract them!"
 	},
 	"sleepWith":{
 		"effectSuccess":4,
@@ -43,7 +47,8 @@ var rules =
 		"effectFailure":-4,
 		"type":"oneToOne",
 		"location":"",
-		"level":1
+		"level":1,
+		"message":"Opponent slept with housewives to garner support!"
 	},
 	"attendService":{
 		"effectSuccess":4,
@@ -52,7 +57,8 @@ var rules =
 		"effectFailure":0,
 		"type":"direct",
 		"location":"",
-		"level":3
+		"level":3,
+		"message":"Opponent attended service in church. Amen."
 	},
 	"breakBread":{
 		"effectSuccess":1,
@@ -61,7 +67,8 @@ var rules =
 		"effectFailure":0,
 		"type":"intraMap",
 		"location":"church",
-		"level":1
+		"level":1,
+		"message":"Opponent broke bread for the clergy!"
 	},
 	"boostEconomy":{
 		"effectSuccess":1,
@@ -70,7 +77,8 @@ var rules =
 		"effectFailure":0,
 		"type":"intraMap",
 		"location":"cc",
-		"level":1
+		"level":1,
+		"message":"Opponent started a campaign to boost the economy!"
 	},
 	"slanderAdspot":{
 		"effectSuccess":1,
@@ -79,7 +87,8 @@ var rules =
 		"effectFailure":-1,
 		"type":"direct",
 		"location":"",
-		"level":2
+		"level":2,
+		"message":"Opponent ran a ad slandering you!"
 	},
 	"religiousAdspot":{
 		"effectSuccess":3,
@@ -88,7 +97,8 @@ var rules =
 		"effectFailure":-2,
 		"type":"direct",
 		"location":"",
-		"level":2
+		"level":2,
+		"message":"Opponent ran an adspot to target religious viewers!"
 	},
 	"gayRightsAdspot":{
 		"effectSuccess":2,
@@ -97,7 +107,8 @@ var rules =
 		"effectFailure":-3,
 		"type":"direct",
 		"location":"",
-		"level":2
+		"level":2,
+		"message":"Opponent ran an adspot supporting gay rights!"
 	},
 	"buyShopping":{
 		"effectSuccess":1,
@@ -106,7 +117,8 @@ var rules =
 		"effectFailure":-1,
 		"type":"intraMap",
 		"location":"house",
-		"level":2
+		"level":2,
+		"message":"Opponent did shopping for some lovely ladies at the mall!"
 	},
 	"buyDrinks":{
 		"effectSuccess":2,
@@ -115,6 +127,7 @@ var rules =
 		"effectFailure":0,
 		"type":"intraMap",
 		"location":"bar",
-		"level":1
+		"level":1,
+		"message":"Opponent bought a round of beers for everyone! And paid for them!"
 	}
 }
