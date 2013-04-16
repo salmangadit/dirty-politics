@@ -42,6 +42,8 @@ var message = new Messager();
 var graph = new MileageGraph();
 var minimap = new MiniMap();
 
+var parentMapName; 
+
 var abstractor;
 
 var MAX_SCREEN_WIDTH = 480;

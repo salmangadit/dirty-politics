@@ -350,6 +350,7 @@ function heroObject()
                             if (scenery[iter].type == "door"){
                                 var name = mapGen.parentMapName;
                                 mapGen.parentMapName = "";
+                                parentMapName = "";
 
                                  //Decompress next room info
                                 var dataToCompress = dataOnNPC;
@@ -362,6 +363,7 @@ function heroObject()
                                 mapGen.generate(name);
                             } else if (scenery[iter].type == "cityA" || scenery[iter].type == "cityB" || scenery[iter].type == "cityC" ){
                                 mapGen.parentMapName = mapGen.currMapName;
+                                parentMapName =  "";
                                 mapGen.parentPosX = prevX;
                                 mapGen.parentPosY = prevY;
 
@@ -385,6 +387,7 @@ function heroObject()
                             }
                             else{
                                 mapGen.parentMapName = mapGen.currMapName;
+                                parentMapName = mapGen.currMapName;
                                 mapGen.parentPosX = prevX;
                                 mapGen.parentPosY = prevY;
 

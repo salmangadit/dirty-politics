@@ -93,10 +93,55 @@ function RuleEngine(){
 	// Consider applying gaussian or exponential trends
 	this.neighbourhood = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
 		var isSuccess = (Math.random() < probSuccess ? true: false);
-		if (!isSuccess){
-			return 99;
+		var neighbourhoodRatio;
+
+		if (actionNPC.location == "cityA" || actionNPC.location == "cityB" || actionNPC.location == "cityC"){
+			neighbourhoodRatio = parseInt(rawData[actionNPC.location].neighbourhood1count)/parseInt(rawData[actionNPC.location].totalHouses);
 		} else {
-			
+			neighbourhoodRatio = parseInt(rawData[parentMapName].neighbourhood1count)/parseInt(rawData[parentMapName].totalHouses);
+		}
+
+		for (var i =0 ; i<abstract2.binsList; i++){
+			var housesPerBin = parseInt(abstract2.binsList[i].mapper["house"]*neighbourhoodRatio);
+
+			var gull = abstract2.binsList[i].getDecompressedGullibilities(0, 1, housesPerBin);
+			for (var j = 0; j < housesPerBin; j++){
+				//Apply perception shift with gullibilities and move them to appropriate bins
+				var curr_perc = abstract2.binsList[i].binAverage;
+				var deltaPerception = (isSuccess ? effectSuccess*gull[j] : (-1*effectFailure*gull[j]));
+				
+				var new_perc = curr_perc + deltaPerception;
+
+				var binIndex = abstract2.findBinForPerceptionValue(new_perc);
+
+				if (binIndex != i){
+					var data = new DataObj();
+
+					// Trait ratios
+					data.isHonest = (Math.random() < abstract2.binsList[i].isHonest ? true: false);
+					data.isPotStirrer = (Math.random() < abstract2.binsList[i].isPotStirrer ? true: false);
+					data.watchesTV = (Math.random() < abstract2.binsList[i].watchesTV ? true: false);
+					data.isReligious = (Math.random() < abstract2.binsList[i].isReligious ? true: false);
+					data.isGay = (Math.random() < abstract2.binsList[i].isGay ? true: false);
+					data.isTraveler = (Math.random() < abstract2.binsList[i].isTraveler ? true: false);
+					data.isSlut = (Math.random() < abstract2.binsList[i].isSlut ? true: false);
+					data.isMale = (Math.random() < abstract2.binsList[i].isMale ? true: false);
+
+					// Trait distribution functions
+					data.gullibility = gull[j];
+					data.perception= (Math.random()) + (abstract2.binsList[i].binEnd - 1);
+
+					var divisionRatio = abstract2.binsList[i].higherCount / abstract2.binsList[i].binHeight;
+					
+					if (data.perception > abstract2.binsList[i].binAverage){
+						abstract2.binsList[i].higherCount--;
+					}
+
+					data.location = "house"; 
+					abstract2.binsList[i].binHeight--;
+					abstract2.binsList[binIndex].addToBin(data);
+				}
+			}
 		}
 	}
 }
