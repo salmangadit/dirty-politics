@@ -1,7 +1,8 @@
 // Engine takes in variables and modifies the perception
 function RuleEngine(){
-
+	this.rule;
 	this.executeRule = function(rule, actionNPC){
+		this.rule = rule;
 		var ruleType = rules[rule].type;
 		var probSuccess = rules[rule].probSuccess;
 
@@ -26,10 +27,62 @@ function RuleEngine(){
 	// DIRECT: One point of spread direct to a certain type of trait or location? Depending on level effect varies
 	this.direct = function(location, actionNPC, level, effectSuccess, effectFailure, probSuccess){
 		var isSuccess = (Math.random() < probSuccess ? true: false);
-		if (!isSuccess){
-			return 99;
-		} else {
+		var abstractChosen = (level == 2) ? abstract2 : abstract3;
+		var chosenLocation = (level == 2) ? location : "world";
 
+		for (var i =0 ; i<abstractChosen.binsList; i++){
+			var housesPerBin;
+			if (chosenLocation == "world"){
+				housesPerBin = (abstractChosen.binsList[i].binHeight);
+			} else {
+				housesPerBin = parseInt(abstractChosen.binsList[i].mapper[location]);
+			}
+
+			var gull = abstractChosen.binsList[i].getDecompressedGullibilities(0, 1, housesPerBin);
+			for (var j = 0; j < housesPerBin; j++){
+				//See if it hits a match for whoever is watching TV
+				if (chosenLocation == "world"? Math.random() > abstractChosen.binsList[i].isReligious : 
+					Math.random() > abstractChosen.binsList[i].watchesTV){
+					continue;
+				} else {
+
+					//Apply perception shift with gullibilities and move them to appropriate bins
+					var curr_perc = abstractChosen.binsList[i].binAverage;
+					var deltaPerception = (isSuccess ? effectSuccess*gull[j] : (-1*effectFailure*gull[j]));
+					
+					var new_perc = curr_perc + deltaPerception;
+
+					var binIndex = abstractChosen.findBinForPerceptionValue(new_perc);
+
+					if (binIndex != i){
+						var data = new DataObj();
+
+						// Trait ratios
+						data.isHonest = (Math.random() < abstractChosen.binsList[i].isHonest ? true: false);
+						data.isPotStirrer = (Math.random() < abstractChosen.binsList[i].isPotStirrer ? true: false);
+						data.watchesTV = (Math.random() < abstractChosen.binsList[i].watchesTV ? true: false);
+						data.isReligious = (Math.random() < abstractChosen.binsList[i].isReligious ? true: false);
+						data.isGay = (Math.random() < abstractChosen.binsList[i].isGay ? true: false);
+						data.isTraveler = (Math.random() < abstractChosen.binsList[i].isTraveler ? true: false);
+						data.isSlut = (Math.random() < abstractChosen.binsList[i].isSlut ? true: false);
+						data.isMale = (Math.random() < abstractChosen.binsList[i].isMale ? true: false);
+
+						// Trait distribution functions
+						data.gullibility = gull[j];
+						data.perception= (Math.random()) + (abstractChosen.binsList[i].binEnd - 1);
+
+						var divisionRatio = abstractChosen.binsList[i].higherCount / abstractChosen.binsList[i].binHeight;
+						
+						if (data.perception > abstractChosen.binsList[i].binAverage){
+							abstractChosen.binsList[i].higherCount--;
+						}
+
+						data.location = location; 
+						abstractChosen.binsList[i].binHeight--;
+						abstractChosen.binsList[binIndex].addToBin(data);
+					}
+				}
+			}
 		}
 	}
 
@@ -55,7 +108,7 @@ function RuleEngine(){
         for (var i =0; i< peeps.length; i++){
         	var mileageDiff = abstractor.getPlayerPerception() - abstractor.getOpponentPerception();
 			if (probSuccess == "special"){
-				switch (rule){
+				switch (this.rule){
 					case "flirt": 
 					case "sleepWith":
 						if (mileageDiff > 2 && peeps[i].isSlut){
