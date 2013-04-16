@@ -12,9 +12,6 @@ function MenuGenerator(){
         menuCanvas.width = 300;
         menuCanvas.height = 200;
 
-        menuContext.font = "30px Consolas";
-        menuContext.fillText("Menu",xPos,yPos);
-        yPos += 40;
     }
 
     this.addMenuItems = function(items){
@@ -25,13 +22,17 @@ function MenuGenerator(){
     }
 
 	this.drawMenuItem = function(item){
-		xPos = 50;
+
 		menuContext.font = "18px Consolas";
 		menuContext.fillText(item,xPos,yPos);
 		yPos += 20;
 	}
 
 	this.drawMenu = function(){
+        menuContext.font = "20px Comic Sans";
+        menuContext.fillText("Menu",xPos,yPos);
+        xPos = 50;
+        yPos += 40;
 		for (var i=0; i<itemsStored.length; i++){
 			this.drawMenuItem(itemsStored[i]);
 		}
@@ -75,10 +76,7 @@ function MenuGenerator(){
 		xPos = 120;
 		yPos = 30;
 		menuCanvas.width = 300;
-		menuCanvas.height = 400;
-
-		menuContext.font = "30px Consolas";
-		menuContext.fillText("Menu",xPos,yPos);
+		menuCanvas.height = 200;
 
 		itemsStored = [];
 	}

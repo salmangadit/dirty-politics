@@ -50,19 +50,18 @@ var abstractor;
 var MAX_SCREEN_WIDTH = 480;
 var MAX_SCREEN_HEIGHT = 480;
 
+
 function init() {
 	mapGen.generate("cityA");
-
 	menu.init();
-
 	graph.init();
 	minimap.init();
 	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
     canvasPieTimer.init(100,"hudCanvas");
 
     abstractor = new Abstractor();
-
-
+    //var abstracthistogram=new DrawHistogram("debugCanvas");
+    //abstracthistogram.updatehistogram();
 	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 
@@ -103,13 +102,20 @@ function init() {
               //Whichever is first on the list
                 if(checkPlayerFromNpc(hero,npc[i])&&checkPlayerFacingNPC(hero,npc[i]) )
                     {
+                        menu.clearMenu();
                         menu.addMenuItems(hero.globalMenu);
                         menu.drawMenu();
                         break;
                     }
             }
             }
-            if(event.keyCode==69){console.log("execute action");}
+            if(event.keyCode==69){
+
+                menu.clearMenu();
+                console.log("execute action");
+
+
+                }
 
 
         }
@@ -145,7 +151,6 @@ function checkPlayerFacingNPC(player,npc){
     {return true;}
     return false;
 }
-
 function checkPlayerFromNpc(player,npc) {
     var checkdistance=32*2;
 

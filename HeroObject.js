@@ -52,7 +52,7 @@ function heroObject()
 
     this.keepMoving = false;
     this.lastMovedDirection = 0;
-    this.facingWhichDirection = "";
+    this.facingWhichDirection = "down";
 
     this.render = function()
     {

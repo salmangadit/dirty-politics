@@ -24,6 +24,7 @@
     <script type="text/javascript" language="javascript" src="MenuGenerator.js"></script>
     <script type="text/javascript" language="javascript" src="MapGenerator.js"></script>
     <script type="text/javascript" language="javascript" src="countdown.js"></script>
+    <script type="text/javascript" language="javascript" src="DrawHistogram.js"></script>
     <script type="text/javascript" language="javascript" src="main.js"></script>
 
     <script type="text/javascript">
@@ -51,6 +52,7 @@
         #debugCanvas
         {
             z-index:6;
+            position:relative;
             margin-left: 500px;
             margin-top: 0px;
 
@@ -59,7 +61,7 @@
         {
 
             position:relative;
-            margin-top: 140px;
+            margin-top: -65px;
 
         }
         #messageCanvas
@@ -131,11 +133,14 @@
 </head>
 <BODY onload="javascript:if (typeof(init) != 'undefined') init();"  >
 
-<div class="div-table" >
-    <div class="div-table-col">
+<div class="div-table"  >
+
+    <div class="div-table-col" class="obj" >
         <canvas id="menuCanvas">Your browser does not support HTML5</canvas>
-        <canvas id="debugCanvas">Your browser does not support HTML5</canvas>
+        <canvas id="debugCanvas" width="650" height="400">Your browser does not support HTML5</canvas>
+
     </div>
+
         <div id="canvasWrapper"  style='width: 480px; height: 480px;overflow: hidden'>
             <canvas id="messageCanvas" class="noborder">Your browser does not support HTML5</canvas>
             <canvas id="baseCanvas">Your browser does not support HTML5</canvas>
