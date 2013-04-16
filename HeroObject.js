@@ -90,6 +90,12 @@ function heroObject()
             this.keys[0] = this.lastMovedDirection;
         }
 
+        if (this.perception >= 10){
+            this.perception = 9.99;
+        } else if (this.perception < =-10){
+            this.perception = -9.99;
+        }
+
         if (this.type == "npc" && this.prevPerception != this.perception){
             if (this.perception < -2){
                 if (this.isMale){

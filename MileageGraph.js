@@ -50,7 +50,7 @@ function MileageGraph(){
 		hudContext.beginPath();
 		hudContext.moveTo(HORIZ_LOW, VERT_LOW);
 		for (var i =0; i < this.dataPoints1.length; i++){
-			hudContext.strokeStyle="#FF0000";
+			hudContext.strokeStyle="#0000FF";
 			hudContext.lineTo(HORIZ_LOW + x_disp*(i+1), VERT_LOW-(this.dataPoints1[i]*y_disp));
 			hudContext.stroke();
 			hudContext.moveTo(HORIZ_LOW + x_disp*(i+1), VERT_LOW-(this.dataPoints1[i]*y_disp));
@@ -63,7 +63,7 @@ function MileageGraph(){
 		hudContext.beginPath();
 		hudContext.moveTo(HORIZ_LOW, VERT_LOW);
 		for (var i =0; i < this.dataPoints2.length; i++){
-			hudContext.strokeStyle="#0000FF";
+			hudContext.strokeStyle="#FF0000";
 			hudContext.lineTo(HORIZ_LOW + x_disp*(i+1), VERT_LOW-(this.dataPoints2[i]*y_disp));
 			hudContext.stroke();
 			hudContext.moveTo(HORIZ_LOW + x_disp*(i+1), VERT_LOW-(this.dataPoints2[i]*y_disp));

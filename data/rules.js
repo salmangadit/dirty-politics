@@ -7,6 +7,8 @@ var rules =
 		"effectFailure":-3,
 		"type":"oneToOne",
 		"traitsArray":[
-		]
+		],
+		"location":"",
+		"level":1
 	}
 }
