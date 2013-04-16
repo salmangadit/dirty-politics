@@ -62,19 +62,17 @@ function init() {
 
     abstractor = new Abstractor();
 
-<<<<<<< HEAD
-
     var abstracthistogram=new DrawHistogram("debugCanvas");
     abstracthistogram.updatehistogram();
 
 //    ruleEngine.executeRule("attendService", hero);
 
-=======
+
     // var abstracthistogram=new DrawHistogram("debugCanvas");
     // abstracthistogram.updatehistogram();
 
     //ruleEngine.executeRule("attendService", hero);
->>>>>>> Started AI Engine
+
 	//setInterval(gameLoop, screenUpdateTime);
 	gameLoop();
 
