@@ -15,4 +15,7 @@ function DataObj() {
 
 	this.neighbourhood;
 	this.location;
+
+	this.x;
+	this.y;
 }

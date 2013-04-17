@@ -55,6 +55,7 @@ var canvasPieTimer = {
     fillColour : "red",
     bgColour : "green",
 
+    numberofDaysPassed:0,
     /*
      * start the process
      */
@@ -170,6 +171,8 @@ var canvasPieTimer = {
             draw.fillText("Days to election",15,60);
 
             this.newDay=true;
+
+            this.numberofDaysPassed++;
         }
     },
     addanDay:function(){

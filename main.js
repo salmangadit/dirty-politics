@@ -17,6 +17,8 @@ var perceptionCanvas;
 var perceptionContext;
 var perceptionImage;
 
+var persistenceQueue = new Array();
+
 var gameObjects = null;
 var hero = null;
 var enemy = null;
@@ -46,6 +48,7 @@ var minimap = new MiniMap();
 var ruleEngine = new RuleEngine();
 var aiEngine = new AIEngine();
 var abstracthistogram;
+var npcproperty;
 
 var parentMapName;
 var abstractor;
@@ -63,6 +66,7 @@ function init() {
 
     abstractor = new Abstractor();
     abstracthistogram=new DrawHistogram("debugCanvas");
+    npcproperty=new NpcProperty("npcPropertyCanvas");
 
     //    ruleEngine.executeRule("attendService", hero);
     // var abstracthistogram=new DrawHistogram("debugCanvas");
@@ -176,12 +180,34 @@ function checkPlayerFromNpc(player,npc) {
     else
         return false;
 }
+
+function checkPersistenceQueue(){
+	var now = new Date().getTime();
+	for (var i=0; i<persistenceQueue.length; i++){
+		if ((now - persistenceQueue[i].timeStamp) > 10000){
+			//Compress and pop
+			if (persistenceQueue[i].levelToCompressInto == 2){
+				abstractor.compressIntoSecondLevel(persistenceQueue[i].npc);
+			} else {
+				abstractor.compressIntoThirdLevel(persistenceQueue[i].npc, persistenceQueue[i].parentMapName);
+			}
+
+			persistenceQueue.splice(i,1);
+			i--;
+		}
+	}
+}
+
 function gameLoop() {
 	// To get the frame rate
 	requestAnimFrame(gameLoop);
-    if(debug){abstracthistogram.updatehistogram(); }
+    if(debug){
+        abstracthistogram.updatehistogram();
+        npcproperty. clearwriteNPCProperties();
+        for(var i=0;i<npc.length;i++){  npcproperty.writeNPCProperties(npc[i]);}
+    }
 
-	aiEngine.run();
+	//aiEngine.run();
 
 	var now = Date.now();
 	// calculate how long as passed since our last iteration
@@ -198,7 +224,8 @@ function gameLoop() {
 	
 	perceptionCanvas.width = gameW;
 	perceptionCanvas.height = gameH;
-    aiEngine.run();
+    
+    checkPersistenceQueue();
 
     var index = 0;
 	for (curNPC in npc) {
@@ -284,8 +311,10 @@ function gameLoop() {
 
 function debugFunction(){
    if(debug==true)
-   { debug=false;
-    abstracthistogram.clearhistogram();
+
+   {  debug=false;
+       npcproperty. clearwriteNPCProperties();
+       abstracthistogram.clearhistogram();
    }
     else
    {debug=true;}

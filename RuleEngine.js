@@ -327,7 +327,7 @@ function RuleEngine(){
 				data.isMale = (Math.random() < abstractChosen.binsList[binChosen].isMale ? true: false);
 
 				// Trait distribution functions
-				data.gullibility = gull[j];
+				data.gullibility = gull[0];
 				data.perception= (Math.random()) + (abstractChosen.binsList[binChosen].binEnd - 1);
 
 				var divisionRatio = abstractChosen.binsList[binChosen].higherCount / abstractChosen.binsList[binChosen].binHeight;
