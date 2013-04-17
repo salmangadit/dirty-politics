@@ -117,7 +117,7 @@ this.drawBarChart=function( startX, chartHeight, markDataIncrementsIn) {
     }
          this.context.font = 'Bold 7pt Comic Sans'
         // Add some data markers to the y-axis
-        var numMarkers = abstract2.binsList.length;
+        var numMarkers = abstract3.binsList.length;
         this.context.textAlign = "right";
         this.context.fillStyle = "#000";
         var markerValue = 0;

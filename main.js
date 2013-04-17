@@ -62,8 +62,8 @@ function init() {
 
     abstractor = new Abstractor();
 
-    // var abstracthistogram=new DrawHistogram("debugCanvas");
-    // abstracthistogram.updatehistogram();
+    var abstracthistogram=new DrawHistogram("debugCanvas");
+    abstracthistogram.updatehistogram();
 
 //    ruleEngine.executeRule("attendService", hero);
 
