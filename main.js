@@ -27,7 +27,8 @@ var scenery = new Array();
 var utilities = new Array();
 var npc = new Array();
 var dataOnNPC;
-
+var npcIndex = new Array();
+var groupup = 1;
 
 var abstract3 = new Histogram(3);
 var abstract2 = new Histogram(2);
@@ -293,10 +294,33 @@ function gameLoop() {
 			perceptionContext.font = "10px Consolas";
         	perceptionContext.fillText(Math.round(npc[curNPC].perception*10)/10,perc_x+7,perc_y+15);
 		}
+		//unused movement stuff
+		//if(npc[curNPC].moveType === "idle") {
+			//npc[curNPC].targetGrid[0] = npc[curNPC].idleGrid[0] + 1;
+			//npc[curNPC].targetGrid[1] = npc[curNPC].idleGrid[1] + 1;
+			//npc[curNPC].gridX++ ;
+			//npc[curNPC].gridY++ ;
+		//}
+		// if(groupup != 0) {
+			// groupup++
+			// npc[curNPC].targetGrid[0] = ;
+			// if (groupup == npc.length-30) {
+				// groupup = 0;
 
-		index++;
+			// }
+			
+		// }
+		// if (curNPC < 20) {
+			// npc[curNPC].targetGrid[0] = npc[parseInt(curNPC)+10].idleGrid[0];
+			// npc[curNPC].targetGrid[1] = npc[parseInt(curNPC)+10].idleGrid[1];
+		// }
+		// index++;
 	}
 
+	for (var n = 0; n < npc.length-1; n=n+2) {
+		npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
+		npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
+	}
 	if (enemy != null){
 		var tempGrid = new Array();
 		var path;
@@ -355,6 +379,22 @@ function debugFunction(){
    }
     else
    {debug=true;}
+}
+
+function compareX(a,b) {
+	if (a.X < b.X)
+		return -1;
+	if (a.X > b.X)
+		return 1;
+	return 0;
+}
+
+function compareY(a,b) {
+	if (a.Y < b.Y)
+		return -1;
+	if (a.Y > b.Y)
+		return 1;
+	return 0;
 }
 
 // For the windows request animation frame thing
