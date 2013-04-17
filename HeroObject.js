@@ -40,6 +40,8 @@ function heroObject()
     this.previousX;
     this.previousY;
 
+    this.targetGrid = new Array(this.gridX,this.gridY);
+
     this.keys = new Array();
     this.lastRender = Date.now();
     this.animSpeed = 250;

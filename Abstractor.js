@@ -87,6 +87,7 @@ function Abstractor(){
 				dataOnNPC[i].y = npc[i].y;
 				npc[i].gridX = npc[i].x / npc[i].width;
 				npc[i].gridY = npc[i].y / npc[i].height;
+				npc[i].targetGrid = new Array(npc[i].gridX, npc[i].gridY);
 
 				locationsArray.splice(pos, 1);
 

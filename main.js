@@ -216,7 +216,7 @@ function gameLoop() {
 
 	canvas.width = gameW;
 	canvas.height = gameH;
-
+	var path = new Array();
 	// Update the hero based upon how long it took for the game loop
 	hero.update(elapsed / screenUpdateTime);
 	hero.render();
@@ -233,53 +233,50 @@ function gameLoop() {
 			// Update the player learning that enemy has been destroyed
 			npc.splice(curNPC, 1);
 		} else {
-			// //testing out of the targetGrid system
-			// var tempGrid = new Array();
+			var tempGrid = new Array();
 
-			// for (var x = 0; x < rows; x++){
-			// 	tempGrid[x] = new Array();
-			// 	for (var y = 0; y < columns; y++ ){
-			// 		tempGrid[x][y] = grid[x][y];
-			// 	}
-			// }
+			for (var x = 0; x < mapGen.columns; x++){
+				tempGrid[x] = new Array();
+				for (var y = 0; y < mapGen.rows; y++ ){
+					tempGrid[x][y] = grid[y][x];
+				}
+			}
 
-			// for (var i =0; i<npc.length; i++){
-			// 	if (npc[curNPC] != npc[i]){
-			// 		tempGrid[npc[i].gridY][npc[i].gridX] = 1;
-			// 	}
-			// }
+			for (var i =0; i<npc.length; i++){
+				if (npc[curNPC] != npc[i]){
+					tempGrid[npc[i].gridY][npc[i].gridX] = 1;
+				}
+			}
 
-			// for (var i = 0; i < ladies.length; i++) {
-			// 		tempGrid[ladies[i].gridY][ladies[i].gridX] = 1;
-			// }
-
+			//if ((npc[curNPC].gridX != npc[curNPC].targetGrid[0]) && (npc[curNPC].gridY != npc[curNPC].targetGrid[1])){
 			// //tempGrid[hero.gridY][hero.gridX] = 1;
-			// path[index] = a_star(new Array(npc[curNPC].gridX, npc[curNPC].gridY),
-			// npc[curNPC].targetGrid, tempGrid, columns, rows, false);
+			path[index] = a_star(new Array(npc[curNPC].gridX, npc[curNPC].gridY),
+				npc[curNPC].targetGrid, tempGrid, mapGen.rows, mapGen.columns, false);
 
-			// //path[index] = a_star(new Array(npc[curNPC].gridX, npc[curNPC].gridY), npc[curNPC].targetGrid, tempGrid, columns, rows, false);
+			// 	// //path[index] = a_star(new Array(npc[curNPC].gridX, npc[curNPC].gridY), npc[curNPC].targetGrid, tempGrid, columns, rows, false);
 
-			// var nextPoint = path[index][1];
+				var nextPoint = path[index][1];
 
-			// if (nextPoint) {
-			// 	if (nextPoint.x > npc[curNPC].gridX && !npc[curNPC].keepMoving) {
-			// 		npc[curNPC].keys[0] = 39;
-			// 		npc[curNPC].lastKeyChange = Date.now();
-			// 	} else if (nextPoint.x < npc[curNPC].gridX && !npc[curNPC].keepMoving) {
-			// 		npc[curNPC].keys[0] = 37;
-			// 		npc[curNPC].lastKeyChange = Date.now();
-			// 	} else if (nextPoint.y > npc[curNPC].gridY && !npc[curNPC].keepMoving) {
-			// 		npc[curNPC].keys[0] = 40;
-			// 		npc[curNPC].lastKeyChange = Date.now();
-			// 	} else if (nextPoint.y < npc[curNPC].gridY && !npc[curNPC].keepMoving) {
-			// 		npc[curNPC].keys[0] = 38;
-			// 		npc[curNPC].lastKeyChange = Date.now();
-			// 	}
-			// }
+				if (nextPoint) {
+					if (nextPoint.x > npc[curNPC].gridX && !npc[curNPC].keepMoving) {
+						npc[curNPC].keys[0] = 39;
+						npc[curNPC].lastKeyChange = Date.now();
+					} else if (nextPoint.x < npc[curNPC].gridX && !npc[curNPC].keepMoving) {
+						npc[curNPC].keys[0] = 37;
+						npc[curNPC].lastKeyChange = Date.now();
+					} else if (nextPoint.y > npc[curNPC].gridY && !npc[curNPC].keepMoving) {
+						npc[curNPC].keys[0] = 40;
+						npc[curNPC].lastKeyChange = Date.now();
+					} else if (nextPoint.y < npc[curNPC].gridY && !npc[curNPC].keepMoving) {
+						npc[curNPC].keys[0] = 38;
+						npc[curNPC].lastKeyChange = Date.now();
+					}
+				}
 
-			// if (path[index].length == 2){
-			// 	npc[curNPC].keys.splice(0, 1);
-			// }
+				if (path[index].length == 2){
+					npc[curNPC].keys.splice(0, 1);
+				}
+			//}
 			
 			// Update the enemy based upon how long it took for the game loop
 			npc[curNPC].update(elapsed / screenUpdateTime);
@@ -301,6 +298,46 @@ function gameLoop() {
 	}
 
 	if (enemy != null){
+		var tempGrid = new Array();
+		var path;
+		for (var x = 0; x < mapGen.columns; x++){
+			tempGrid[x] = new Array();
+			for (var y = 0; y < mapGen.rows; y++ ){
+				tempGrid[x][y] = grid[y][x];
+			}
+		}
+
+		for (var i =0; i<npc.length; i++){
+			tempGrid[npc[i].gridY][npc[i].gridX] = 1;
+		}
+
+		// //tempGrid[hero.gridY][hero.gridX] = 1;
+		path = a_star(new Array(enemy.gridX, enemy.gridY),
+			enemy.targetGrid, tempGrid, mapGen.columns, mapGen.rows, false);
+
+		// //path[index] = a_star(new Array(npc[curNPC].gridX, npc[curNPC].gridY), npc[curNPC].targetGrid, tempGrid, mapGen.rows, mapGen.columns, false);
+
+		var nextPoint = path[index][1];
+
+		if (nextPoint) {
+			if (nextPoint.x > enemy.gridX && !enemy.keepMoving) {
+				npc[curNPC].keys[0] = 39;
+				npc[curNPC].lastKeyChange = Date.now();
+			} else if (nextPoint.x < enemy.gridX && !enemy.keepMoving) {
+				npc[curNPC].keys[0] = 37;
+				npc[curNPC].lastKeyChange = Date.now();
+			} else if (nextPoint.y > enemy.gridY && !enemy.keepMoving) {
+				npc[curNPC].keys[0] = 40;
+				npc[curNPC].lastKeyChange = Date.now();
+			} else if (nextPoint.y < enemy.gridY && !enemy.keepMoving) {
+				npc[curNPC].keys[0] = 38;
+				npc[curNPC].lastKeyChange = Date.now();
+			}
+		}
+
+		if (path[index].length == 2){
+			enemy.keys.splice(0, 1);
+		}
 		enemy.update(elapsed / screenUpdateTime);
 		enemy.render();
 	}

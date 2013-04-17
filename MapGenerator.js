@@ -93,7 +93,7 @@ function MapGenerator(){
 			for (var j=0; j<this.map.grid[i].length; j++){
 				var objIndex = this.map.grid[i][j];
 				this.columns = this.map.grid[i].length;
-				if (gameObjects[objIndex].type == "collidable") {
+				if (gameObjects[objIndex].type == "collidable"||gameObjects[objIndex].type == "scenery") {
 					grid[i][j] = 1;
 				} else {
 					grid[i][j] = 0;
