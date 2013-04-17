@@ -354,12 +354,40 @@ function heroObject()
                                 parentMapName = "";
 
                                  //Decompress next room info
-                                var dataToCompress = dataOnNPC;
-                                var dataSet = abstractor.decompressFromSecondLevel("city");
-                                abstractor.renderNPCsforDataSet(dataSet, name);
+                                var dataToCompress = dataOnNPC
+                                var persistenceQueueObject;
 
+                                var existingIndex = checkPersistenceQueue(mapGen.currMapName, name, mapGen.parentPosX, mapGen.parentPosY);
+
+                                if (existingIndex == -1){
+                                    persistenceQueueObject = new PersistenceQueueObject();
+                                } else {
+                                    persistenceQueueObject = persistenceQueue[existingIndex];
+                                }
+                                persistenceQueueObject.npc = npc;
+                                persistenceQueueObject.dataOnNPC = dataOnNPC;
+                                persistenceQueueObject.timeStamp = new Date().getTime();
+                                persistenceQueueObject.levelToCompressInto = 2;
+                                persistenceQueueObject.location = mapGen.currMapName;
+                                persistenceQueueObject.city = name;
+                                persistenceQueueObject.parentPosX = mapGen.parentPosX;
+                                persistenceQueueObject.parentPosY = mapGen.parentPosY;
+
+                                persistenceQueue.push(persistenceQueueObject);
+
+                                //Check persistence queue first if it has the info to decompress otherwise 
+                                // freshly decompress
+                                var index = checkPersistenceQueue("city", name, mapGen.parentPosX, mapGen.parentPosY);
+
+                                if (index == -1){
+                                    var dataSet = abstractor.decompressFromSecondLevel("city");
+                                    abstractor.renderNPCsforDataSet(dataSet, name, false);
+                                } else {
+                                    abstractor.renderNPCsforDataSet(persistenceQueue[index].dataOnNPC, name, true, persistenceQueue[index].npc);
+                                }
+                                
                                 //Compress this room info back
-                                abstractor.compressIntoSecondLevel(dataToCompress);
+                                // abstractor.compressIntoSecondLevel(dataToCompress);
 
                                 mapGen.generate(name);
                             } else if (scenery[iter].type == "cityA" || scenery[iter].type == "cityB" || scenery[iter].type == "cityC" ){
@@ -369,6 +397,7 @@ function heroObject()
                                 mapGen.parentPosY = prevY;
 
                                 var atomicData = dataOnNPC;
+
                                 //Compress street in
                                 abstractor.compressIntoSecondLevel(atomicData);
 
@@ -379,7 +408,7 @@ function heroObject()
 
                                 //Abstract 2 is now generated. Time to test one level lower.
                                 var dataSet = abstractor.decompressFromSecondLevel("city");
-                                abstractor.renderNPCsforDataSet(dataSet, scenery[iter].type);
+                                abstractor.renderNPCsforDataSet(dataSet, scenery[iter].type,false);
 
                                 //Compress this room info back
                                 abstractor.compressIntoThirdLevel(dataToCompress, mapGen.parentMapName);
@@ -394,11 +423,40 @@ function heroObject()
 
                                 //Decompress next room info
                                 var dataToCompress = dataOnNPC;
-                                var dataSet = abstractor.decompressFromSecondLevel(scenery[iter].type);
-                                abstractor.renderNPCsforDataSet(dataSet, scenery[iter].type);
+                                var persistenceQueueObject;
+
+                                var existingIndex = checkPersistenceQueue("city", name, mapGen.parentPosX, mapGen.parentPosY);
+
+                                if (existingIndex == -1){
+                                    persistenceQueueObject = new PersistenceQueueObject();
+                                } else {
+                                    persistenceQueueObject = persistenceQueue[existingIndex];
+                                }
+
+                                persistenceQueueObject.npc = npc;
+                                persistenceQueueObject.dataOnNPC = dataOnNPC;
+                                persistenceQueueObject.timeStamp = new Date().getTime();
+                                persistenceQueueObject.levelToCompressInto = 2;
+                                persistenceQueueObject.location = "city";
+                                persistenceQueueObject.city = mapGen.currMapName;
+                                persistenceQueueObject.parentPosX = mapGen.parentPosX;
+                                persistenceQueueObject.parentPosY = mapGen.parentPosY;
+                                persistenceQueue.push(persistenceQueueObject);
+
+                                //Check persistence queue first if it has the info to decompress otherwise 
+                                // freshly decompress
+                                var index = checkPersistenceQueue(scenery[iter].type, mapGen.currMapName, mapGen.parentPosX, mapGen.parentPosY);
+
+                                if (index == -1){
+                                    var dataSet = abstractor.decompressFromSecondLevel(scenery[iter].type);
+                                    abstractor.renderNPCsforDataSet(dataSet, scenery[iter].type,false);
+                                } else {
+                                    abstractor.renderNPCsforDataSet(persistenceQueue[index].dataOnNPC, name, true, persistenceQueue[index].npc);
+                                }
+                                
 
                                 //Compress this room info back
-                                abstractor.compressIntoSecondLevel(dataToCompress);
+                                //abstractor.compressIntoSecondLevel(dataToCompress);
 
                                 mapGen.generate(scenery[iter].type);
                             }
@@ -409,7 +467,16 @@ function heroObject()
                 }
             }
         }
-
-
     };
+
+    function checkPersistenceQueue(location, city, parentPosX, parentPosY){
+        for (var i = 0; i< persistenceQueue.length; i++){
+            if (persistenceQueue[i].location == location && persistenceQueue[i].city == city
+                && persistenceQueue[i].parentPosX == parentPosX && persistenceQueue[i].parentPosY == parentPosY){
+                return i;
+            }
+        }
+
+        return -1;
+    }
 };
