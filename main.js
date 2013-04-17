@@ -311,7 +311,9 @@ function gameLoop() {
 
 function debugFunction(){
    if(debug==true)
-   {   npcproperty. clearwriteNPCProperties();
+
+   {  debug=false;
+       npcproperty. clearwriteNPCProperties();
        abstracthistogram.clearhistogram();
    }
     else
