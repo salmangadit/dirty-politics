@@ -317,7 +317,7 @@ function gameLoop() {
 
 		// //path[index] = a_star(new Array(npc[curNPC].gridX, npc[curNPC].gridY), npc[curNPC].targetGrid, tempGrid, mapGen.rows, mapGen.columns, false);
 
-		var nextPoint = path[index][1];
+		var nextPoint = path[1];
 
 		if (nextPoint) {
 			if (nextPoint.x > enemy.gridX && !enemy.keepMoving) {
@@ -335,7 +335,7 @@ function gameLoop() {
 			}
 		}
 
-		if (path[index].length == 2){
+		if (path.length == 2){
 			enemy.keys.splice(0, 1);
 		}
 		enemy.update(elapsed / screenUpdateTime);
