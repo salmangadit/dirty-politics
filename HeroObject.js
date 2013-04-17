@@ -24,8 +24,7 @@ function heroObject()
 
     // Menu items
     // Global
-    this.globalMenu =  ["Shake Hands","Mr.Red is a gentleman!", "Mr.Red is a great liar","Promise $1000 per month" ];
-
+    this.globalMenu =  ["Say truths about opponent","Make up lies about opponent", "Make a promise"];
 
     // Special
     this.specialMenu = [];

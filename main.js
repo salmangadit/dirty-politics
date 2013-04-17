@@ -116,19 +116,25 @@ function init() {
                 if(checkPlayerFromNpc(hero,npc[i])&&checkPlayerFacingNPC(hero,npc[i]) )
                     {
                         menu.clearMenu();
-                        menu.addMenuItems(hero.globalMenu);
+                        menu.addMenuItems(npc[i].globalMenu);
+                        menu.addMenuItems(npc[i].specialMenu); 
                         menu.drawMenu();
                         break;
                     }
             }
             }
             if(event.keyCode==69){
+                var selectedItem = menu.selectItem();
 
-                menu.clearMenu();
-                console.log("execute action");
+              	for (var i in rules){
+              		if (rules[i].title == selectedItem){
+              			ruleEngine.executeRule(i, hero, 1);
+              		}
+              	}
 
+              	menu.clearMenu();
 
-                }
+            }
 
 
         }

@@ -233,6 +233,26 @@ function Histogram(abstraction){
 		}
 	}
 
+	this.playerPerception = function(){
+		if (this.abstractionLevel == 2){
+			var perceptionSum = 0;
+			perceptionSum += this.binsList[5].binHeight*1;
+			perceptionSum += this.binsList[6].binHeight*3;
+			perceptionSum += this.binsList[7].binHeight*5;
+			perceptionSum += this.binsList[8].binHeight*7;
+			perceptionSum += this.binsList[9].binHeight*9;
+
+			return perceptionSum;
+		} else {
+			var perceptionSum = 0;
+			perceptionSum += this.binsList[2].higherCount*1;
+			perceptionSum += this.binsList[3].binHeight*4;
+			perceptionSum += this.binsList[4].binHeight*8;
+
+			return perceptionSum;
+		}
+	}
+
 	this.averageOpponentPerception = function(){
 		if (this.abstractionLevel == 2){
 			var perceptionSum = 0;
@@ -252,6 +272,26 @@ function Histogram(abstraction){
 
 			return perceptionSum/((this.binsList[2].binHeight - this.binsList[2].higherCount) + 
 				this.binsList[0].binHeight + this.binsList[1].binHeight);
+		}
+	}
+
+	this.opponentPerception = function(){
+		if (this.abstractionLevel == 2){
+			var perceptionSum = 0;
+			perceptionSum += this.binsList[0].binHeight*1;
+			perceptionSum += this.binsList[1].binHeight*3;
+			perceptionSum += this.binsList[2].binHeight*5;
+			perceptionSum += this.binsList[3].binHeight*7;
+			perceptionSum += this.binsList[4].binHeight*9;
+
+			return perceptionSum;
+		} else {
+			var perceptionSum = 0;
+			perceptionSum += (this.binsList[2].binHeight - this.binsList[2].higherCount);
+			perceptionSum += this.binsList[0].binHeight*4;
+			perceptionSum += this.binsList[1].binHeight*8;
+
+			return perceptionSum;
 		}
 	}
 

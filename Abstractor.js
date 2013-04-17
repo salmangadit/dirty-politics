@@ -17,6 +17,24 @@ function Abstractor(){
 		return (a1+a2+a3)/3;
 	}
 
+	this.getPlayerVotes = function(){
+		var a3 = abstract3.playerPerception();
+		var a2 = abstract2.playerPerception();
+
+		var a1sum = 0;
+		var a1count = 0;
+		for (var i =0; i< dataOnNPC.length; i++){
+			if (dataOnNPC[i].perception > 2){
+				a1sum += dataOnNPC[i].perception;
+				a1count++;
+			}
+		}
+
+		var a1 = a1sum;
+
+		return (a1+a2+a3);
+	}
+
 	this.getOpponentPerception = function(){
 		var a3 = abstract3.averageOpponentPerception();	
 		var a2 = abstract2.averagePlayerPerception();
@@ -32,6 +50,22 @@ function Abstractor(){
 
 		var a1 = a1sum/a1count;
 		return (a1+a2+a3)/3;
+	}
+
+	this.getOpponentVotes = function(){
+		var a3 = abstract3.opponentPerception();	
+		var a2 = abstract2.opponentPerception();
+
+		var a1sum = 0;
+		var a1count = 0;
+		for (var i =0; i< dataOnNPC.length; i++){
+			if (dataOnNPC[i].perception < -2){
+				a1sum += (-1*dataOnNPC[i].perception);
+			}
+		}
+
+		var a1 = a1sum;
+		return (a1+a2+a3);
 	}
 
 	this.compressIntoSecondLevel = function(data){
@@ -51,6 +85,7 @@ function Abstractor(){
 	}
 
 	this.renderNPCsforDataSet = function(data, location, persistent, npcInfo){
+		var specialDone = false;
 		if (persistent){
 			npc = [];
 			dataOnNPC = data;
@@ -138,10 +173,87 @@ function Abstractor(){
 				};
 
 				npc[i].type = "npc";
+
+				//Populate special menu
+				if (!specialDone){
+					if (this.getSpecialMenu(npc[i], location)){
+						specialDone = true;
+					}
+				}
+
 			}
 			npcIndex.sort(compareX);
 			npcIndex.sort(compareY);
 		}
+	}
+
+	
+
+	this.getSpecialMenu = function(thenpc, location){
+		var finishedSpecial = false;
+		if (location == "house" && !(thenpc.isMale)){
+			thenpc.specialMenu.push(rules["flirt"].title);
+			thenpc.specialMenu.push(rules["sleepWith"].title);
+		} else if (location == "mall"){
+			thenpc.specialMenu.push(rules["buyShopping"].title);
+		} else if (!finishedSpecial){
+			switch (location){
+				case "church":
+					var idx = thenpc.image.index;
+					npc[idx].image = new Image();
+					npc[idx].image.index = idx;
+					npc[idx].image.src = 'images/characters/specialNPC32x32.png';
+					npc[idx].specialMenu.push(rules["attendService"].title);
+					npc[idx].specialMenu.push(rules["breakBread"].title);
+					npc[idx].image.onload = function() {
+						npc[this.index].render();
+					};
+					npc[idx].type = "special";
+					break;
+					break;
+				case "cc":
+					var idx = thenpc.image.index;
+					npc[idx].image = new Image();
+					npc[idx].image.index = idx;
+					npc[idx].image.src = 'images/characters/specialNPC32x32.png';
+					npc[idx].specialMenu.push(rules["boostEconomy"].title);
+					npc[idx].image.onload = function() {
+						npc[this.index].render();
+					};
+					npc[idx].type = "special";
+					break;
+				case "bar":
+					var idx = thenpc.image.index;
+					npc[idx].image = new Image();
+					npc[idx].image.index = idx;
+					npc[idx].image.src = 'images/characters/specialNPC32x32.png';
+					npc[idx].specialMenu.push(rules["buyDrinks"].title);
+					npc[idx].image.onload = function() {
+						npc[this.index].render();
+					};
+					npc[idx].type = "special";
+					break;
+				case "mediastation":
+					var idx = thenpc.image.index;
+					npc[idx].image = new Image();
+					npc[idx].image.index = idx;
+					npc[idx].image.src = 'images/characters/specialNPC32x32.png';
+					npc[idx].specialMenu.push(rules["slanderAdspot"].title);
+					npc[idx].specialMenu.push(rules["religiousAdspot"].title);
+					npc[idx].specialMenu.push(rules["gayRightsAdspot"].title);
+					npc[idx].image.onload = function() {
+						npc[this.index].render();
+					};
+					npc[idx].type = "special";
+					break;
+				default:
+					break;
+			}
+
+			finishedSpecial = true;
+		}
+
+		return finishedSpecial;
 	}
 
 	//First generation of abstractions

@@ -79,5 +79,11 @@ function MenuGenerator(){
 		menuCanvas.height = 200;
 
 		itemsStored = [];
+		currItemNum = 1;
+		menuMax = 0;
+	}
+
+	this.selectItem = function(){
+		return itemsStored[currItemNum];
 	}
 }

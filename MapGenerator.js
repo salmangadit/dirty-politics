@@ -59,8 +59,8 @@ function MapGenerator(){
 		
 		var wrapper = document.getElementById('canvasWrapper');
 
-		messageCanvas.width = (gameW > wrapper.clientWidth ? wrapper.clientWidth : gameW);
-		messageCanvas.height = (gameH > wrapper.clientHeight ? wrapper.clientHeight : gameH);
+		messageCanvas.width = gameW;//(gameW > wrapper.clientWidth ? wrapper.clientWidth : gameW);
+		messageCanvas.height = gameH;//(gameH > wrapper.clientHeight ? wrapper.clientHeight : gameH);
 
 		perceptionCanvas.width = gameW;
 		perceptionCanvas.height = gameH;

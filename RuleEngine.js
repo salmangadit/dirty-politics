@@ -239,7 +239,7 @@ function RuleEngine(){
 		}
 		var isSuccess;
 
-		if (!currLevel){
+		if (!currLevel || currLevel==1){
 			//Check people around
 			var peeps = new Array();
 

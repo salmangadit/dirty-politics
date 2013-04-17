@@ -13,12 +13,12 @@ function MileageGraph(){
 
     this.update = function(){
     	hudContext.clearRect(140,0,100,100);
-    	this.dataPoints1.push(abstractor.getPlayerPerception());
+    	this.dataPoints1.push(abstractor.getPlayerVotes());
     	if (this.dataPoints1.length > 15){
     		this.dataPoints1.splice(0,1);
     	}
 
-    	this.dataPoints2.push(abstractor.getOpponentPerception());
+    	this.dataPoints2.push(abstractor.getOpponentVotes());
     	if (this.dataPoints2.length > 15){
     		this.dataPoints2.splice(0,1);
     	}
@@ -45,7 +45,7 @@ function MileageGraph(){
 
 		//Plot graph 1
 		var x_disp = (HORIZ_HIGH-HORIZ_LOW)/this.dataPoints1.length; 
-		var y_disp = (VERT_LOW-VERT_HIGH)/10;
+		var y_disp = (VERT_LOW-VERT_HIGH)/1500;
 
 		hudContext.beginPath();
 		hudContext.moveTo(HORIZ_LOW, VERT_LOW);
@@ -58,7 +58,7 @@ function MileageGraph(){
 
 		//Plot graph 2
 		var x_disp = (HORIZ_HIGH-HORIZ_LOW)/this.dataPoints2.length; 
-		var y_disp = (VERT_LOW-VERT_HIGH)/10;
+		var y_disp = (VERT_LOW-VERT_HIGH)/1500;
 
 		hudContext.beginPath();
 		hudContext.moveTo(HORIZ_LOW, VERT_LOW);

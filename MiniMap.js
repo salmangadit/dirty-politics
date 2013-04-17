@@ -9,9 +9,11 @@ function MiniMap(){
 	var IMG_START_X = 280;
 	var IMG_START_Y = 0;
 
-	var cityARatio = "10:1"
-	var cityBRatio = "1:10"
-	var cityCRatio = "2:5"
+	//var total = abstractor.getPlayerVotes()+abstractor.getOpponentVotes();
+
+	var cityARatio = "10:1";
+	var cityBRatio = "1:10";
+	var cityCRatio = "2:5";
 
 	this.init = function(){
         hudCanvas = document.getElementById("hudCanvas");
