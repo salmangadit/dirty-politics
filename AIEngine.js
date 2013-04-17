@@ -24,7 +24,10 @@ function AIEngine(){
 	// Think for building entry also
 	// Adspot flash on day 5 (all still rather random)
 	this.run = function(){
-		halfDays = parseInt(2*(canvasPieTimer.timeElapsed/ canvasPieTimer.oneDay));
+
+		halfDays = canvasPieTimer.numberofDaysPassed*2;
+
+
 		ratioDays = parseInt(ratio*(canvasPieTimer.timeElapsed/ canvasPieTimer.oneDay));
 
 		if (halfDays < 20){
@@ -52,7 +55,8 @@ function AIEngine(){
 				message.flash(rules[action].message);
 				ruleEngine.executeRule(action, enemy, this.enemyLevelToPlayer);
 
-			} else if (playerStateRatio > .5){
+			}
+            else if (playerStateRatio > .5){
 				var eventType = Math.random() < .75? 1 : 2;
 				var probableEvent = Math.floor(Math.random()*(eventType == 1? bigTickets.length : simpleActs.length));
 				var action = eventType == 1? bigTickets[probableEvent] : simpleActs[probableEvent];
@@ -63,7 +67,8 @@ function AIEngine(){
 				ruleEngine.executeRule(action, enemy, this.enemyLevelToPlayer);
 
 
-			} else if (playerStateRatio >.25){
+			}
+            else if (playerStateRatio >.25){
 				var eventType = Math.random() < .5? 1 : 2;
 				var probableEvent = Math.floor(Math.random()*(eventType == 1? bigTickets.length : simpleActs.length));
 				var action = eventType == 1? bigTickets[probableEvent] : simpleActs[probableEvent];
@@ -72,7 +77,8 @@ function AIEngine(){
 					message.flash(rules[action].message);
 				}
 				ruleEngine.executeRule(action, enemy, this.enemyLevelToPlayer);
-			} else {
+			}
+            else {
 				var eventType = Math.random() < .25? 1 : 2;
 				var probableEvent = Math.floor(Math.random()*(eventType == 1? bigTickets.length : simpleActs.length));
 				var action = eventType == 1? bigTickets[probableEvent] : simpleActs[probableEvent];

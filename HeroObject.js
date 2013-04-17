@@ -65,7 +65,6 @@ function heroObject()
 		// context.font = "10px Consolas";
 		// context.fillText("In " + mapGen.currMapName,wrapper.scrollLeft + 5,wrapper.scrollTop + 10);
     };
-
     this.checkCollision = function(obj)
     {
         if ((this.x < (obj.x + obj.width - 1) && Math.floor(this.x + this.width - 1) > obj.x)
@@ -74,7 +73,6 @@ function heroObject()
             return true;
         }
     };
-
     this.update = function(elapsed)
     {
        // store out the current x and y coordinates

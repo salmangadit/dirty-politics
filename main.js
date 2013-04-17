@@ -181,8 +181,6 @@ function gameLoop() {
 	requestAnimFrame(gameLoop);
     if(debug){abstracthistogram.updatehistogram(); }
 
-	aiEngine.run();
-
 	var now = Date.now();
 	// calculate how long as passed since our last iteration
 	var elapsed = now - lastUpdate;
