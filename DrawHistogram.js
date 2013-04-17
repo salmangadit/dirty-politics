@@ -31,13 +31,17 @@ this.updatehistogram=function()
 
     }
 
+this.clearhistogram=function()
+{
+    this.context.clearRect ( 0 , 0 , this.canvasWidth , this.canvasHeight );
+}
+
 // drawBarChart - draws a bar chart with the specified data
 this.drawBarChart=function( startX, chartHeight, markDataIncrementsIn) {
 
     /********************************************************
      * Setup and Title
      */
-
     // set line width of this context to draw the 2 axis
     this.context.lineWidth = "1.0";
     var startY = 380;
@@ -48,11 +52,11 @@ this.drawBarChart=function( startX, chartHeight, markDataIncrementsIn) {
     this.context.lineWidth = "0.0";
     // write the title of the bar chart Abstract 2
     this.context.textAlign = "center";
-    this.context.fillStyle = get_random_color();
+    this.context.fillStyle = "8EE630";
     this.context.font = 'italic 20pt Comic Sans';
 
     this.context.fillText("Abstraction-2", 100,20, 80);
-    this.context.fillStyle = get_random_color();
+    this.context.fillStyle = "FF5B03";
 
     // write the title of the bar chart Abstract 2
     this.context.fillText("Abstraction-3", 400,20, 80);
@@ -73,7 +77,7 @@ this.drawBarChart=function( startX, chartHeight, markDataIncrementsIn) {
             //store the maximum height of the entire of histogram
             tempBinHeight=binHeight;
             if (tempBinHeight>maxValue) maxValue = tempBinHeight;
-        this.context.fillStyle = get_random_color();
+        this.context.fillStyle = "1853F5";
         //drawRectangle(context, startX + (i * barWidth) + i, (chartHeight - height), barWidth, height, true);
         drawRectangle(this.context, startX + (i * binSize*multiplier) + i, (chartHeight - tempBinHeight*multiplier), binSize*multiplier, tempBinHeight*multiplier, true);
         this.context.textAlign = "left";
@@ -88,8 +92,6 @@ this.drawBarChart=function( startX, chartHeight, markDataIncrementsIn) {
     this.context.fillStyle = "#000";
     var markerValue = 0;
     for (var i=0; i<numMarkers; i++) {
-
-
         this.context.fillText( abstract2.binsList[i].binHeight,  startX+10+ (i * binSize*multiplier) + i, (chartHeight - abstract2.binsList[i].binHeight*multiplier)-3, 50);
         markerValue += markDataIncrementsIn;
     }
@@ -107,7 +109,7 @@ this.drawBarChart=function( startX, chartHeight, markDataIncrementsIn) {
         //store the maximum height of the entire of histogram
         tempBinHeight=binHeight;
         if (tempBinHeight>maxValue) maxValue = tempBinHeight;
-        this.context.fillStyle = get_random_color();
+        this.context.fillStyle="E6308E"
         //drawRectangle(context, startX + (i * barWidth) + i, (chartHeight - height), barWidth, height, true);
         drawRectangle(this.context, startX + (i * binSize*multiplier) + i, (chartHeight - tempBinHeight*multiplier), binSize*multiplier, tempBinHeight*multiplier, true);
         this.context.textAlign = "left";
@@ -115,6 +117,7 @@ this.drawBarChart=function( startX, chartHeight, markDataIncrementsIn) {
         this.context.fillText(binStart, startX + (i * binSize*multiplier) + i, chartHeight+10 , 200);
 
     }
+
          this.context.font = 'Bold 7pt Comic Sans'
         // Add some data markers to the y-axis
         var numMarkers = abstract3.binsList.length;
@@ -146,12 +149,5 @@ function drawRectangle(contextO, x, y, w, h, fill) {
     contextO.stroke();
     if (fill) contextO.fill();
 }
-function get_random_color() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-        for (var i = 0; i < 6; i++ ) {
-            color += letters[Math.round(Math.random() * 15)];
-        }
-        return color;
-    }
+
 }

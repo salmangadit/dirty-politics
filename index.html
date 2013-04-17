@@ -36,94 +36,122 @@
         }
     </script>
 
-    <style type="text/css">
-        #canvasWrapper
-        {
-            position:absolute;
-        }
-        #canvasWrapper canvas
-        {
-            position:absolute;
-        }
-        #menuCanvas
-        {
-            z-index:3;
-            margin-left: 500px;
-            margin-top: 0px;
+        <style type="text/css">
+            #canvasWrapper
+            {
+                position:absolute;
+            }
+            #canvasWrapper canvas
+            {
+                position:absolute;
+            }
+            #menuCanvas
+            {
+                z-index:3;
+                margin-left: 500px;
+                margin-top: 0px;
 
-        }
-        #debugCanvas
-        {
-            z-index:6;
-            position:relative;
-            margin-left: 500px;
-            margin-top: 0px;
+            }
+            #debugCanvas
+            {
+                z-index:6;
+                position:relative;
+                margin-left: 500px;
+                margin-top: 0px;
 
-        }
-        #hudCanvas
-        {
+            }
+            #hudCanvas
+            {
 
-            position:relative;
-            margin-top: -65px;
+                position:relative;
+                margin-top: -65px;
 
-        }
-        #messageCanvas
-        {
-            z-index:4;
-        }
-        #perceptionCanvas
-        {
-            z-index:3;
-        }
-        #baseCanvas
-        {
-            z-index:1;
-        }
-        #mainCanvas
-        {
-            z-index:2;
-        }
-        #logger
-        {
-            position:absolute;
-            float: right;
-        }
-        #maplocCanvas
-        {
-            position:absolute;
-            z-index:5;
-            left: 270px;
-            top: 550px;
-            border: 0px;
-        }
-        .div-table{
-            display:table;
-            float:left;
-            width:auto;
-
-
-        }
-        .div-table-row{
-            display:table-row;
-
-            width:auto;
-            clear:both;
-        }
-        .div-table-col{
-            float:left;/*fix for  buggy browsers*/
-            display:table-column;
-            width:auto;
+            }
+            #messageCanvas
+            {
+                z-index:4;
+            }
+            #perceptionCanvas
+            {
+                z-index:3;
+            }
+            #baseCanvas
+            {
+                z-index:1;
+            }
+            #mainCanvas
+            {
+                z-index:2;
+            }
+            #logger
+            {
+                position:absolute;
+                float: right;
+            }
+            #maplocCanvas
+            {
+                position:absolute;
+                z-index:5;
+                left: 270px;
+                top: 550px;
+                border: 0px;
+            }
+            .div-table{
+                display:table;
+                float:left;
+                width:auto;
 
 
-        }
-        header h1 {
-            text-align: center;
-            margin: 50%;
-            float:left;
-            font-size: 20px;
-        }
+            }
+            .div-table-row{
+                display:table-row;
 
-    </style>
+                width:auto;
+                clear:both;
+            }
+            .div-table-col{
+                float:left;/*fix for  buggy browsers*/
+                display:table-column;
+                width:auto;
+
+
+            }
+            header h1 {
+                text-align: center;
+                margin: 50%;
+                float:left;
+                font-size: 20px;
+            }
+
+            .debugbutton {
+                -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+                -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+                box-shadow:inset 0px 1px 0px 0px #ffffff;
+                background-color:#ededed;
+                -moz-border-radius:15px;
+                -webkit-border-radius:15px;
+                border-radius:15px;
+                border:5px solid #06663b;
+                display:inline-block;
+                color:#777777;
+                font-family:Comic Sans MS;
+                font-size:34px;
+                font-weight:bold;
+                padding:6px 24px;
+                text-decoration:none;
+                text-shadow:1px 1px 0px #ffffff;
+                position:relative;
+                margin-left: 500px;
+            }.debugbutton:hover {
+                 background-color:#dfdfdf;
+             }.debugbutton:active {
+                  position:relative;
+                  top:1px;
+              }
+
+
+
+        </style>
 
     <style type="text/css">
         canvas { border: 1px solid black; }
@@ -143,6 +171,8 @@
         <canvas id="menuCanvas">Your browser does not support HTML5</canvas>
         <canvas id="debugCanvas" width="650" height="400">Your browser does not support HTML5</canvas>
 
+
+
     </div>
 
         <div id="canvasWrapper"  style='width: 480px; height: 480px;overflow: hidden'>
@@ -155,7 +185,7 @@
 
         <canvas id="hudCanvas">Your browser does not support HTML5</canvas>
         <canvas id="maplocCanvas">Your browser does not support HTML5</canvas>
-
+    <button onclick="debugFunction()" class="debugbutton"> DEBUG MODE</button>
 </div>
 </div>
 

@@ -45,12 +45,13 @@ var graph = new MileageGraph();
 var minimap = new MiniMap();
 var ruleEngine = new RuleEngine();
 var aiEngine = new AIEngine();
+var abstracthistogram;
 
 var parentMapName;
 var abstractor;
 var MAX_SCREEN_WIDTH = 480;
 var MAX_SCREEN_HEIGHT = 480;
-
+var debug=false;
 
 function init() {
 	mapGen.generate("cityA");
@@ -61,13 +62,9 @@ function init() {
     canvasPieTimer.init(100,"hudCanvas");
 
     abstractor = new Abstractor();
+    abstracthistogram=new DrawHistogram("debugCanvas");
 
-    var abstracthistogram=new DrawHistogram("debugCanvas");
-    abstracthistogram.updatehistogram();
-
-//    ruleEngine.executeRule("attendService", hero);
-
-
+    //    ruleEngine.executeRule("attendService", hero);
     // var abstracthistogram=new DrawHistogram("debugCanvas");
     // abstracthistogram.updatehistogram();
 
@@ -182,6 +179,7 @@ function checkPlayerFromNpc(player,npc) {
 function gameLoop() {
 	// To get the frame rate
 	requestAnimFrame(gameLoop);
+    if(debug){abstracthistogram.updatehistogram(); }
 
 	var now = Date.now();
 	// calculate how long as passed since our last iteration
@@ -198,7 +196,7 @@ function gameLoop() {
 	
 	perceptionCanvas.width = gameW;
 	perceptionCanvas.height = gameH;
-
+    aiEngine.run();
 
     var index = 0;
 	for (curNPC in npc) {
@@ -279,6 +277,16 @@ function gameLoop() {
 	}
 
 	lastUpdate = now;
+}
+
+
+function debugFunction(){
+   if(debug==true)
+   { debug=false;
+    abstracthistogram.clearhistogram();
+   }
+    else
+   {debug=true;}
 }
 
 // For the windows request animation frame thing
