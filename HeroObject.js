@@ -17,6 +17,7 @@ function heroObject()
     this.isGay = true;
     this.isTraveler = true;
     this.isSlut = true;
+	this.moveType = "idle";
 
     this.location = "cityA";
     this.neighbourhood;
@@ -36,6 +37,7 @@ function heroObject()
     this.y;
     this.gridX = parseInt(this.x/this.width);
     this.gridY = parseInt(this.y/this.height);
+	this.idleGrid = new Array(this.gridX, this.gridY);
 
     this.previousX;
     this.previousY;

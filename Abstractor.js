@@ -87,6 +87,10 @@ function Abstractor(){
 				dataOnNPC[i].y = npc[i].y;
 				npc[i].gridX = npc[i].x / npc[i].width;
 				npc[i].gridY = npc[i].y / npc[i].height;
+				npc[i].idleGrid[0] = npc[i].gridX;
+				npc[i].idleGrid[1] = npc[i].gridY;
+				var objs = {X: npc[i].gridX, Y:npc[i].gridY, ind:i};
+				npcIndex[i] = objs;
 				npc[i].targetGrid = new Array(npc[i].gridX, npc[i].gridY);
 
 				locationsArray.splice(pos, 1);
@@ -134,7 +138,9 @@ function Abstractor(){
 				};
 
 				npc[i].type = "npc";
-			}	
+			}
+			npcIndex.sort(compareX);
+			npcIndex.sort(compareY);
 		}
 	}
 
