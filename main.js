@@ -48,6 +48,7 @@ var minimap = new MiniMap();
 var ruleEngine = new RuleEngine();
 var aiEngine = new AIEngine();
 var abstracthistogram;
+var npcproperty;
 
 var parentMapName;
 var abstractor;
@@ -65,6 +66,7 @@ function init() {
 
     abstractor = new Abstractor();
     abstracthistogram=new DrawHistogram("debugCanvas");
+    npcproperty=new NpcProperty("npcPropertyCanvas");
 
     //    ruleEngine.executeRule("attendService", hero);
     // var abstracthistogram=new DrawHistogram("debugCanvas");
@@ -199,7 +201,11 @@ function checkPersistenceQueue(){
 function gameLoop() {
 	// To get the frame rate
 	requestAnimFrame(gameLoop);
-    if(debug){abstracthistogram.updatehistogram(); }
+    if(debug){
+        abstracthistogram.updatehistogram();
+        npcproperty. clearwriteNPCProperties();
+        for(var i=0;i<npc.length;i++){  npcproperty.writeNPCProperties(npc[i]);}
+    }
 
 	//aiEngine.run();
 
@@ -305,8 +311,8 @@ function gameLoop() {
 
 function debugFunction(){
    if(debug==true)
-   { debug=false;
-    abstracthistogram.clearhistogram();
+   {   npcproperty. clearwriteNPCProperties();
+       abstracthistogram.clearhistogram();
    }
     else
    {debug=true;}
