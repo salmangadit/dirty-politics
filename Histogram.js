@@ -204,9 +204,9 @@ function Histogram(abstraction){
 		} else {
 			//For level 2 to 3 compression, it will be a histogram now, not data set
 			//Merge bin with info given
-			for (var i = 0; i< this.binsList.length; i+=2){
-				this.binsList[i].mergeBin(data.binsList[i], city);
-				this.binsList[i].mergeBin(data.binsList[i+1], city);
+			for (var i = 0; i< this.binsList.length; i++){
+				this.binsList[i].mergeBin(data.binsList[i*2], city);
+				this.binsList[i].mergeBin(data.binsList[(i*2)+1], city);
 			}
 		}
 	}
