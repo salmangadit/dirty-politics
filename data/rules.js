@@ -37,7 +37,7 @@ var rules =
 		"effectFailure":-1,
 		"type":"oneToOne",
 		"location":"",
-		"level":1
+		"level":1,
 		"message":"Opponent flirted with some of the ladies to attract them!"
 	},
 	"sleepWith":{

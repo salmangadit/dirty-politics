@@ -88,19 +88,24 @@ function AIEngine(){
 	}
 
 	this.initialiseAtPosition = function(x,y){
-		enemy = new heroObject();
-		enemy.width = 32;
-		enemy.height = 32;
 		enemy.x = x;
 		enemy.y = y;
 		enemy.gridX = enemy.x / enemy.width;
 		enemy.gridY = enemy.y / enemy.height;
+		enemy.type = "enemy";
+		enemy.render();
+	}
+
+	this.init = function(){
+		enemy = new heroObject();
+		enemy.width = 32;
+		enemy.height = 32;
 		enemy.image = new Image();
 		// set it's image to the proper src URL
 		enemy.image.src = 'images/characters/rival32x32.png';
 		// once the image has completed loading, render it to the screen
 		enemy.image.onload = function() {
-			enemy.render();
+			//enemy.render();
 			//enemy.render();
 		};
 
@@ -126,6 +131,8 @@ function AIEngine(){
 		this.currentLocation = "city";
 		this.currentCity = location;
 	}
+
+	this.init();
 
 
 }
