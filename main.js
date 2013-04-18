@@ -29,6 +29,7 @@ var npc = new Array();
 var dataOnNPC;
 var npcIndex = new Array();
 var npcMoved = new Array();
+var npcFollowers = 0;
 var groupup = 1;
 
 var abstract3 = new Histogram(3);
@@ -236,6 +237,7 @@ function gameLoop() {
     checkPersistenceQueue();
 
     var index = 0;
+	npcFollowers = 0;
 	for (curNPC in npc) {
 		if (npc[curNPC].destroyed) {
 			// Update the player learning that enemy has been destroyed
@@ -301,6 +303,14 @@ function gameLoop() {
 			perceptionContext.font = "10px Consolas";
         	perceptionContext.fillText(Math.round(npc[curNPC].perception*10)/10,perc_x+7,perc_y+15);
 		}
+		
+		if ((npc[curNPC].gridX >= (hero.gridX-2)) && (npc[curNPC].gridX <= (hero.gridX+2)) && (npc[curNPC].gridY >= (hero.gridY-2)) && (npc[curNPC].gridY <= (hero.gridY+2))){
+			if (npc[curNPC].perception >= 5) {
+				npc[curNPC].targetGrid[0] = hero.gridX + npcFollowers;
+				npc[curNPC].targetGrid[1] = hero.gridY + npcFollowers;
+			}
+			npcFollowers++;
+		} 
 		//unused movement stuff
 		//if(npc[curNPC].moveType === "idle") {
 			//npc[curNPC].targetGrid[0] = npc[curNPC].idleGrid[0] + 1;
@@ -409,7 +419,7 @@ function gathertoplayer() {
 
 	for (curNPC in npc) {
 		console.log("looping");
-		if ((npc[curNPC].gridX >= (hero.gridX-5)) && (npc[curNPC].gridX <= (hero.gridX+5)) && (npc[curNPC].gridY >= (hero.gridY-5)) && (npc[curNPC].gridY <= (hero.gridY+5))){
+		if ((npc[curNPC].gridX >= (hero.gridX-3)) && (npc[curNPC].gridX <= (hero.gridX+3)) && (npc[curNPC].gridY >= (hero.gridY-3)) && (npc[curNPC].gridY <= (hero.gridY+3))){
 			peeps.push(npc[curNPC]);
 		} 
 	}
@@ -429,7 +439,6 @@ function gathertoplayer() {
 		peeps[i].targetGrid[1] = parseInt(hero.gridY) + posy;
 		//console.log(posx);
 	}
-	
 }
 
 // For the windows request animation frame thing
