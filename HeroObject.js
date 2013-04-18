@@ -488,6 +488,21 @@ function heroObject()
 						if (scenery[iter].type != "cityA" && scenery[iter].type != "cityB" && scenery[iter].type != "cityC" && scenery[iter].type != "door") {
 							this.movedTo = scenery[iter].type;
 							npcMoved.push(this);
+							var data = new DataObj();
+							data.isHonest = this.isHonest;
+							data.isPotStirrer = this.isPotStirrer;
+							data.watchesTV = this.watchesTV;
+							data.isReligious = this.isReligious;
+							data.isGay = this.isGay;
+							data.isTraveler = this.isTraveler;
+							data.isSlut = this.isSlut;
+							data.isMale = this.isMale;
+							data.perception = this.perception;
+							data.gullibility = this.gullibility;
+							data.x = this.x;
+							data.y = this.y;
+							var index = abstract2.findBinForPerceptionValue(data.perception);
+							abstract2.binsList[index].addToBin(data);
 							this.destroyed = true;
 						}
 					}

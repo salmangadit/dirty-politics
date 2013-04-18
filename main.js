@@ -313,8 +313,9 @@ function gameLoop() {
 				npc[curNPC].moveType = "follow";
 				npc[curNPC].targetGrid[0] = hero.gridX + npcFollowers;
 				npc[curNPC].targetGrid[1] = hero.gridY + npcFollowers;
+				npcFollowers++;
 			}
-			npcFollowers++;
+			
 		}
 
 		//unused movement stuff
@@ -351,12 +352,14 @@ function gameLoop() {
 		}
 	}
 	for (var n = 0; n < npc.length-2; n=n+2) {
-		if (typeof npc[npcIndex[n].ind] === 'undefined') {
-		}
-		else if (npc[npcIndex[n].ind].moveType == "idle") {
+		if (npcIndex[n].ind < npc.length) {
 			npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
 			npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
 		}
+		// else if (npc[npcIndex[n].ind].moveType == "idle") {
+			// npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
+			// npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
+		// }
 	}
 	if (enemy != null){
 		var tempGrid = new Array();
