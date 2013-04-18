@@ -133,6 +133,7 @@ function init() {
               	for (var i in rules){
               		if (rules[i].title == selectedItem){
               			ruleEngine.executeRule(i, hero, 1);
+                          canvasPieTimer.addtime(rules[i].cost);
               		}
               	}
 

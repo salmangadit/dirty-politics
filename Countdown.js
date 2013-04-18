@@ -140,17 +140,13 @@ var canvasPieTimer = {
 
         this.timeElapsed = this.timeElapsed + this.oneHour;
 
-
-        if(this.timeElapsed%this.prayStartTime==0&&this.newDay==true)
-        {
-            this.pray=true;
-            this.newDay=false;
-        }
+        if(this.timeElapsed%this.prayStartTime==0)
+        {this.pray=true;}
 
         if(this.timeElapsed%this.prayEndTime==0)
         {this.pray=false;}
-        if(this.timeElapsed%this.oneDay==0)
-        {
+
+
             this.wedgeSize = (this.timeElapsed / this.timeLimit) * Math.PI * 2;
             var endAngle = this.startAngle + this.wedgeSize;
 
@@ -165,35 +161,40 @@ var canvasPieTimer = {
 
             draw.fillStyle = 'black';
             draw.font = "30px Consolas";
-            draw.fillText(this.totalDays-(this.timeElapsed/ this.oneDay),25,50);
+            this.numberofDaysPassed =Math.round((this.totalDays-(this.timeElapsed/ this.oneDay)));
+            draw.fillText(this.numberofDaysPassed ,25,50);
             draw.fillStyle = 'black';
             draw.font = "10px Consolas";
             draw.fillText("Days to election",15,60);
 
-            this.newDay=true;
 
-            this.numberofDaysPassed++;
-			DaysPassed = this.numberofDaysPassed;
-        }
+
+
+
+
     },
-    addanDay:function(){
-        this.timeElapsed=+this.oneDay;
+    addtime:function(howmuch){
+
+       switch(howmuch)
+       {
+           case 15:this.timeElapsed=Math.round(this.timeElapsed+(this.oneMinute*15));
+                    break;
+           case 10: this.timeElapsed= Math.round(this.timeElapsed+(this.oneMinute*10));
+                    break;
+           case 120: this.timeElapsed=Math.round(this.timeElapsed+(this.oneHour*2));
+                    break;
+           case 30:  this.timeElapsed=Math.round(this.timeElapsed=+(this.oneMinute*30));
+                    break;
+           case 60:  this.timeElapsed= Math.round(this.timeElapsed+(this.oneMinute*60));
+                    break;
+           case 180: this.timeElapsed= Math.round(this.timeElapsed+(this.oneHour*3));
+                    break;
+
+       }
+
     },
-    addhalfaday:function(){
-        this.timeElapsed=+this.oneDay/2;
-    },
-    addanFifteenMinute:function(){
-        this.timeElapsed=+this.oneMinute*15;
-    },
-    addanMinute:function(){
-        this.timeElapsed=+this.oneMinute;
-    },
-    addanHour:function(){
-        this.timeElapsed=+this.oneHour;
-    },
-    addhalfanhour:function(){
-        this.timeElapsed=+this.oneHour/2;
-    },
+
+
     isPrayTime:function(){
         return  this.pray;
     },
