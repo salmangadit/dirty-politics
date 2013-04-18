@@ -417,6 +417,7 @@ function heroObject()
                                 abstractor.compressIntoThirdLevel(dataToCompress, mapGen.parentMapName);
 
                                 mapGen.generate(scenery[iter].type);
+								npcMoved.length = 0;
                             }
                             else{
                                 mapGen.parentMapName = mapGen.currMapName;
@@ -452,8 +453,22 @@ function heroObject()
 
                                 if (index == -1){
                                     var dataSet = abstractor.decompressFromSecondLevel(scenery[iter].type);
+									if (typeof(npcMoved[iter]) != 'undefined'){
+											dataSet.push(npcMoved[iter]);
+										
+									}
                                     abstractor.renderNPCsforDataSet(dataSet, scenery[iter].type,false);
                                 } else {
+										if(typeof(npcMoved[iter]) != 'undefined') {
+											for (var x=0; x < npcMoved[iter].length; x++) {
+												persistenceQueue[index].dataOnNPC.push(npcMoved[iter]);
+											}
+										}
+									// if (scenery[iter].type != "house") {
+										// for (var x=0; x < npcMoved[scenery[iter].type].length; x++) {
+											// persistenceQueue[index].dataOnNPC.push(npcMoved[scenery[iter].type][x]);
+										// }
+									// }
                                     abstractor.renderNPCsforDataSet(persistenceQueue[index].dataOnNPC, name, true, persistenceQueue[index].npc);
                                 }
                                 
@@ -487,7 +502,6 @@ function heroObject()
                     {
 						if (scenery[iter].type != "cityA" && scenery[iter].type != "cityB" && scenery[iter].type != "cityC" && scenery[iter].type != "door") {
 							this.movedTo = scenery[iter].type;
-							npcMoved.push(this);
 							var data = new DataObj();
 							data.isHonest = this.isHonest;
 							data.isPotStirrer = this.isPotStirrer;
@@ -499,11 +513,12 @@ function heroObject()
 							data.isMale = this.isMale;
 							data.perception = this.perception;
 							data.gullibility = this.gullibility;
-							data.x = this.x;
-							data.y = this.y;
 							var index = abstract2.findBinForPerceptionValue(data.perception);
 							abstract2.binsList[index].addToBin(data);
 							this.destroyed = true;
+							data.x = ( maps[scenery[iter].type].attributes.width / 2 * 32 ) ;
+							data.y = ( maps[scenery[iter].type].attributes.height - 3) * 32;
+							npcMoved[iter] = data;
 						}
 					}
 				}

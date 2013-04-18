@@ -29,6 +29,7 @@ var npc = new Array();
 var dataOnNPC;
 var npcIndex = new Array();
 var npcMoved = new Array();
+//var npcMoved = {"cc":[], "church":[], "mall":[], "bar":[], "mediastation":[]};
 var npcFollowers = 0;
 var groupup = 1;
 var currentday = 0;
@@ -349,9 +350,9 @@ function gameLoop() {
 		for (curNPC in npc) {
 			var objs = {X: npc[curNPC].gridX, Y:npc[curNPC].gridY, ind:curNPC};
 			npcIndex[curNPC] = objs;
-			npcIndex.sort(compareX);
-			npcIndex.sort(compareY);
 		}
+		npcIndex.sort(compareX);
+		npcIndex.sort(compareY);
 	}
 	for (var n = 0; n < npc.length-2; n=n+2) {
 		if (npcIndex[n].ind < npc.length) {
