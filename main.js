@@ -324,10 +324,10 @@ function gameLoop() {
 		// index++;
 	}
 
-	for (var n = 0; n < npc.length-2; n=n+2) {
-		npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
-		npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
-	}
+	// for (var n = 0; n < npc.length-2; n=n+2) {
+		// npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
+		// npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
+	// }
 	if (enemy != null){
 		var tempGrid = new Array();
 		var path;
@@ -402,6 +402,34 @@ function compareY(a,b) {
 	if (a.Y > b.Y)
 		return 1;
 	return 0;
+}
+
+function gathertoplayer() {
+	var peeps = new Array();
+
+	for (curNPC in npc) {
+		console.log("looping");
+		if ((npc[curNPC].gridX >= (hero.gridX-5)) && (npc[curNPC].gridX <= (hero.gridX+5)) && (npc[curNPC].gridY >= (hero.gridY-5)) && (npc[curNPC].gridY <= (hero.gridY+5))){
+			peeps.push(npc[curNPC]);
+		} 
+	}
+	
+	for (var i=0; i<peeps.length; i++) {
+		var posx = 0;
+		var posy = 0;
+		if (i%2 == 0) {
+			posx = parseInt(i/2);
+			posy = parseInt(i/2)
+		} 
+		else {
+			posx = parseInt(-i/2);
+			posy = parseInt(-i/2);
+		}
+		peeps[i].targetGrid[0] = parseInt(hero.gridX) + posx;
+		peeps[i].targetGrid[1] = parseInt(hero.gridY) + posy;
+		//console.log(posx);
+	}
+	
 }
 
 // For the windows request animation frame thing

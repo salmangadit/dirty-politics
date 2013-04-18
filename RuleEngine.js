@@ -10,15 +10,20 @@ function RuleEngine(){
 		if (ruleType == "direct"){
 			this.direct(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess, currLevel);
+			gathertoplayer();
+			console.log("direct");
 		} else if (ruleType == "oneToOne"){
 			this.oneToOne(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess, currLevel);
+			gathertoplayer();
 		} else if (ruleType == "neighbourhood"){
 			this.neighbourhood(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess, currLevel);
+			gathertoplayer();			
 		} else if (ruleType == "intraMap"){
 			this.intraMap(rules[rule].location, actionNPC, rules[rule].level, 
 				rules[rule].effectSuccess, rules[rule].effectFailure, probSuccess, currLevel);
+			gathertoplayer();
 		}
 	}
 
