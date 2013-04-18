@@ -355,7 +355,7 @@ function gameLoop() {
 		npcIndex.sort(compareY);
 	}
 	for (var n = 0; n < npc.length-2; n=n+2) {
-		if (npcIndex[n].ind < npc.length) {
+		if (npcIndex[n].ind < npc.length && npcIndex[n+1].ind < npc.length) {
 			npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
 			npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
 			ruleEngine.executeRule("lie", npc[npcIndex[n].ind], 1);
