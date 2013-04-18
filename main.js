@@ -117,7 +117,7 @@ function init() {
                 //check the distance between player and npc,if at least 2 cells away then execute the action
                 //if 2 npcs close to gether just choose one of the npc
               //Whichever is first on the list
-                if(checkPlayerFromNpc(hero,npc[i])&&checkPlayerFacingNPC(hero,npc[i]) )
+                if(checkPlayerFromNpc(hero,npc[i]) )
                     {
                         menu.clearMenu();
                         menu.addMenuItems(npc[i].globalMenu);
