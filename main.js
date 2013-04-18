@@ -133,6 +133,7 @@ function init() {
               	for (var i in rules){
               		if (rules[i].title == selectedItem){
               			ruleEngine.executeRule(i, hero, 1);
+						gathertoplayer();
                           canvasPieTimer.addtime(rules[i].cost);
                           break;
               		}
@@ -344,6 +345,7 @@ function gameLoop() {
 	if (currentday != DaysPassed) {
 		npcIndex.length = 0;
 		currentday = DaysPassed;
+		console.log("moving");
 		for (curNPC in npc) {
 			var objs = {X: npc[curNPC].gridX, Y:npc[curNPC].gridY, ind:curNPC};
 			npcIndex[curNPC] = objs;
@@ -355,6 +357,7 @@ function gameLoop() {
 		if (npcIndex[n].ind < npc.length) {
 			npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
 			npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
+			ruleEngine.executeRule("lie", npc[npcIndex[n].ind], 1);
 		}
 		// else if (npc[npcIndex[n].ind].moveType == "idle") {
 			// npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;

@@ -166,6 +166,7 @@ var canvasPieTimer = {
             draw.fillStyle = 'black';
             draw.font = "10px Consolas";
             draw.fillText("Days to election",15,60);
+			DaysPassed = this.numberofDaysPassed;
 
     },
     addtime:function(howmuch){
