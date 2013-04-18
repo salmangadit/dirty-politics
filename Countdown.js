@@ -173,6 +173,7 @@ var canvasPieTimer = {
             this.newDay=true;
 
             this.numberofDaysPassed++;
+			DaysPassed = this.numberofDaysPassed;
         }
     },
     addanDay:function(){

@@ -31,6 +31,7 @@ var npcIndex = new Array();
 var npcMoved = new Array();
 var npcFollowers = 0;
 var groupup = 1;
+var currentday = 0;
 
 var abstract3 = new Histogram(3);
 var abstract2 = new Histogram(2);
@@ -52,6 +53,7 @@ var ruleEngine = new RuleEngine();
 var aiEngine = new AIEngine();
 var abstracthistogram;
 var npcproperty;
+var DaysPassed = 0;
 
 var parentMapName;
 var abstractor;
@@ -306,11 +308,13 @@ function gameLoop() {
 		
 		if ((npc[curNPC].gridX >= (hero.gridX-2)) && (npc[curNPC].gridX <= (hero.gridX+2)) && (npc[curNPC].gridY >= (hero.gridY-2)) && (npc[curNPC].gridY <= (hero.gridY+2))){
 			if (npc[curNPC].perception >= 5) {
+				npc[curNPC].moveType = "follow";
 				npc[curNPC].targetGrid[0] = hero.gridX + npcFollowers;
 				npc[curNPC].targetGrid[1] = hero.gridY + npcFollowers;
 			}
 			npcFollowers++;
-		} 
+		}
+
 		//unused movement stuff
 		//if(npc[curNPC].moveType === "idle") {
 			//npc[curNPC].targetGrid[0] = npc[curNPC].idleGrid[0] + 1;
@@ -333,11 +337,23 @@ function gameLoop() {
 		// }
 		// index++;
 	}
-
-	// for (var n = 0; n < npc.length-2; n=n+2) {
-		// npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
-		// npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
-	// }
+	
+	if (currentday != DaysPassed) {
+		npcIndex.length = 0;
+		currentday = DaysPassed;
+		for (curNPC in npc) {
+			var objs = {X: npc[curNPC].gridX, Y:npc[curNPC].gridY, ind:curNPC};
+			npcIndex[curNPC] = objs;
+			npcIndex.sort(compareX);
+			npcIndex.sort(compareY);
+		}
+	}
+	for (var n = 0; n < npc.length-2; n=n+2) {
+		if (npc[npcIndex[n].ind].moveType == "idle") {
+			npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
+			npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
+		}
+	}
 	if (enemy != null){
 		var tempGrid = new Array();
 		var path;
@@ -418,26 +434,27 @@ function gathertoplayer() {
 	var peeps = new Array();
 
 	for (curNPC in npc) {
-		console.log("looping");
 		if ((npc[curNPC].gridX >= (hero.gridX-3)) && (npc[curNPC].gridX <= (hero.gridX+3)) && (npc[curNPC].gridY >= (hero.gridY-3)) && (npc[curNPC].gridY <= (hero.gridY+3))){
 			peeps.push(npc[curNPC]);
+			npc[curNPC].moveType = "gather";
 		} 
 	}
 	
 	for (var i=0; i<peeps.length; i++) {
-		var posx = 0;
-		var posy = 0;
-		if (i%2 == 0) {
-			posx = parseInt(i/2);
-			posy = parseInt(i/2)
-		} 
-		else {
-			posx = parseInt(-i/2);
-			posy = parseInt(-i/2);
+		if (peeps[i].moveType == "gather") {
+			var posx = 0;
+			var posy = 0;
+			if (i%2 == 0) {
+				posx = parseInt(i/2);
+				posy = parseInt(i/2)
+			} 
+			else {
+				posx = parseInt(-i/2);
+				posy = parseInt(-i/2);
+			}
+			peeps[i].targetGrid[0] = parseInt(hero.gridX) + posx;
+			peeps[i].targetGrid[1] = parseInt(hero.gridY) + posy;
 		}
-		peeps[i].targetGrid[0] = parseInt(hero.gridX) + posx;
-		peeps[i].targetGrid[1] = parseInt(hero.gridY) + posy;
-		//console.log(posx);
 	}
 }
 
