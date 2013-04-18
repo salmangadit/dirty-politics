@@ -28,6 +28,7 @@ var utilities = new Array();
 var npc = new Array();
 var dataOnNPC;
 var npcIndex = new Array();
+var npcMoved = new Array();
 var groupup = 1;
 
 var abstract3 = new Histogram(3);
@@ -323,7 +324,7 @@ function gameLoop() {
 		// index++;
 	}
 
-	for (var n = 0; n < npc.length-1; n=n+2) {
+	for (var n = 0; n < npc.length-2; n=n+2) {
 		npc[npcIndex[n].ind].targetGrid[0] = npc[npcIndex[n+1].ind].gridX;
 		npc[npcIndex[n].ind].targetGrid[1] = npc[npcIndex[n+1].ind].gridY;
 	}

@@ -18,6 +18,7 @@ function heroObject()
     this.isTraveler = true;
     this.isSlut = true;
 	this.moveType = "idle";
+	this.movedTo = "";
 
     this.location = "cityA";
     this.neighbourhood;
@@ -329,6 +330,7 @@ function heroObject()
                         } else {
                             this.keepMoving = false;
                         }
+						
                 }
             }
         }
@@ -460,6 +462,10 @@ function heroObject()
                                 //abstractor.compressIntoSecondLevel(dataToCompress);
 
                                 mapGen.generate(scenery[iter].type);
+								for (curNPC in npc) {
+									console.log("shifting");
+									npc[curNPC].uncollide();
+								}
                             }
 
                             //this.internalY = this.y;
@@ -468,7 +474,75 @@ function heroObject()
                 }
             }
         }
+		if (this.type != "player") {
+		    for (iter in scenery)
+            {
+                if (this.collision)
+                {
+                    break;
+                }
+                else
+                {
+                    if (this.checkCollision(scenery[iter]))
+                    {
+						if (scenery[iter].type != "cityA" && scenery[iter].type != "cityB" && scenery[iter].type != "cityC" && scenery[iter].type != "door") {
+							this.movedTo = scenery[iter].type;
+							npcMoved.push(this);
+							this.destroyed = true;
+						}
+					}
+				}
+			}
+		}
     };
+	
+	this.uncollide = function() {
+		var error = 0;
+		for (test in collidables)
+		{
+			// if we already have a collision there's no need to continue
+			// checking the other rocks
+			if (this.collision)
+			{
+				break;
+			}
+			else
+			{
+				// check to see if we have a collision event with the
+				// current rock
+				while (this.checkCollision(collidables[test]))
+				{
+					error++;
+					this.collision = true;
+					if (error > 300) {
+						break;
+					}
+					if (this.type == "npc") {
+						if (this.gridX < 10) {
+							this.x++;
+							this.gridX = parseInt(this.x/this.width);
+							console.log("shifting1");
+						}
+						else if (this.gridX > 10) {
+							this.x--;
+							this.gridX = parseInt(this.x/this.width);
+							console.log("shifting2");
+						}
+						else if (this.gridY < 10) {
+							this.y++;
+							this.gridY = parseInt(this.y/this.height);
+							console.log("shifting3");
+						}
+						else if (this.gridY > 10) {
+							this.y--;
+							this.gridY = parseInt(this.y/this.height);
+							console.log("shifting4");
+						}
+					}
+				}
+			}
+		}
+	}
 
     function checkPersistenceQueue(location, city, parentPosX, parentPosY){
         for (var i = 0; i< persistenceQueue.length; i++){
