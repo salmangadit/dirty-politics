@@ -167,23 +167,20 @@ var canvasPieTimer = {
             draw.font = "10px Consolas";
             draw.fillText("Days to election",15,60);
 
-
-
-
-
-
     },
     addtime:function(howmuch){
-
+       console.log(howmuch);
        switch(howmuch)
        {
            case 15:this.timeElapsed=Math.round(this.timeElapsed+(this.oneMinute*15));
                     break;
            case 10: this.timeElapsed= Math.round(this.timeElapsed+(this.oneMinute*10));
                     break;
-           case 120: this.timeElapsed=Math.round(this.timeElapsed+(this.oneHour*2));
-                    break;
-           case 30:  this.timeElapsed=Math.round(this.timeElapsed=+(this.oneMinute*30));
+           case 120:console.log(this.timeElapsed);
+                    this.timeElapsed=Math.round(this.timeElapsed+(this.oneHour*2));
+                    console.log(this.timeElapsed);
+                     break;
+           case 30:  this.timeElapsed=Math.round(this.timeElapsed+(this.oneMinute*30));
                     break;
            case 60:  this.timeElapsed= Math.round(this.timeElapsed+(this.oneMinute*60));
                     break;
