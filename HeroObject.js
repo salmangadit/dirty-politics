@@ -513,6 +513,7 @@ function heroObject()
 							data.isMale = this.isMale;
 							data.perception = this.perception;
 							data.gullibility = this.gullibility;
+                            data.location = scenery[iter].type;
 							var index = abstract2.findBinForPerceptionValue(data.perception);
 							abstract2.binsList[index].addToBin(data);
 							this.destroyed = true;

@@ -296,7 +296,7 @@ function gameLoop() {
 			
 			// Update the enemy based upon how long it took for the game loop
 			npc[curNPC].update(elapsed / screenUpdateTime);
-
+			var a;
 		// draw the enemy to the screen again
 		}
 		
