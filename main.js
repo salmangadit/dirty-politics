@@ -73,7 +73,7 @@ function init() {
 	menu.init();
 	graph.init();
 	minimap.init();
-	message.flash('Oh snap - this flashy HUD is the SHIZZ!');
+	//message.flash('Oh snap - this flashy HUD is the SHIZZ!');
     canvasPieTimer.init(100,"hudCanvas");
 
     abstractor = new Abstractor();
