@@ -1,10 +1,6 @@
-/**
- * Created with JetBrains WebStorm.
- * User: renga
- * Date: 4/10/13
- * Time: 4:46 PM
- * To change this template use File | Settings | File Templates.
- */
+/**********************************************************************************************************************
+Done by 	Renga Swarmy	(A0073676)
+************************************************************************************************************************/
 
 var canvasPieTimer = {
 

@@ -1,10 +1,6 @@
-/**
- * Created with JetBrains WebStorm.
- * User: renga
- * Date: 4/16/13
- * Time: 1:13 PM
- * To change this template use File | Settings | File Templates.
- */
+/**********************************************************************************************************************
+Done by 	Renga Swarmy	(A0073676)
+************************************************************************************************************************/
 
 function DrawHistogram(canvasname) {
 

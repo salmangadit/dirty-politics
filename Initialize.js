@@ -1,3 +1,7 @@
+/**********************************************************************************************************************
+Done by Salman Gadit 	(U095146E)
+************************************************************************************************************************/
+
 function Initialize(){
 	//Generates primary data set for game
 	var TOTAL_PEOPLE = parseInt(rawData["house_capacity"])*(parseInt(rawData["cityA"].totalHouses) 
