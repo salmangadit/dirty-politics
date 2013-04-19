@@ -517,6 +517,9 @@ function heroObject()
 							var index = abstract2.findBinForPerceptionValue(data.perception);
 							abstract2.binsList[index].addToBin(data);
 							this.destroyed = true;
+                            for (var k=this.image.index; k<npc.length-1; k++){
+                                npc[k+1].image.index = k; 
+                            }
 							data.x = ( maps[scenery[iter].type].attributes.width / 2 * 32 ) ;
 							data.y = ( maps[scenery[iter].type].attributes.height - 3) * 32;
 							npcMoved[iter] = data;

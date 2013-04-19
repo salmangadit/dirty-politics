@@ -94,7 +94,7 @@ var rules =
 		"probSuccess":"special",
 		"effectFailure":-1,
 		"type":"direct",
-		"location":"",
+		"location":"house",
 		"level":2,
 		"message":"Opponent ran a ad slandering you!",
 		"title":"Send Ad with Slander"
@@ -105,7 +105,7 @@ var rules =
 		"probSuccess":"special",
 		"effectFailure":-2,
 		"type":"direct",
-		"location":"",
+		"location":"house",
 		"level":2,
 		"message":"Opponent ran an adspot to target religious viewers!",
 		"title":"Send Religious Ad"
@@ -116,7 +116,7 @@ var rules =
 		"probSuccess":"special",
 		"effectFailure":-3,
 		"type":"direct",
-		"location":"",
+		"location":"house",
 		"level":2,
 		"message":"Opponent ran an adspot supporting gay rights!",
 		"title":"Ad supporting gays"

@@ -165,7 +165,7 @@ function RuleEngine(){
 								} else if (tv){
 									probSuccess = 0.7;
 								} else {
-									probSuccess = 0;
+									probSuccess = 0.5;
 								}
 								break;
 							case "religiousAdspot":
@@ -174,7 +174,7 @@ function RuleEngine(){
 								} else if (tv){
 									probSuccess = 0.6;
 								} else {
-									probSuccess = 0;
+									probSuccess = 0.5;
 								}
 								break;
 							case "gayRightsAdspot":
@@ -185,7 +185,7 @@ function RuleEngine(){
 								} else if (tv){
 									probSuccess = 0.5;
 								} else {
-									probSuccess = 0;
+									probSuccess = 0.5;
 								}
 								break;
 						}
