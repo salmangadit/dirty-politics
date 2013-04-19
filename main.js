@@ -228,7 +228,7 @@ function gameLoop() {
         for(var i=0;i<npc.length;i++){  npcproperty.writeNPCProperties(npc[i]);}
     }
 
-	//aiEngine.run();
+	aiEngine.run();
 
 	var now = Date.now();
 	// calculate how long as passed since our last iteration
